@@ -1,0 +1,148 @@
+.navbar{
+    background: wheat;
+    width: 100%;
+    position: fixed;
+    top: 0;
+    z-index: 2;
+    padding: 40px;
+}
+
+.container{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+
+}
+
+.navbar__header{
+    font-size: 30px;
+    font-weight: 600;
+}
+
+input{
+    border-radius: 15px;
+    border : 1px solid;
+    padding: 5px;
+    font-size: 14px;
+}
+
+.items{
+    font-size: 14px;
+}
+
+.items ul{
+    display: flex;
+    gap : 100px;
+    list-style: none;
+    cursor: pointer;
+}
+
+.items ul li a{
+    color : black;
+    text-decoration: none;
+    font-size: 16px;
+    font-weight: 300;
+}
+
+.dropdown.active > .link,
+.link:hover{
+    color:rgba(0, 0, 0, 0.805);
+}
+
+.link{
+    background: none;
+    border: none;
+    text-decoration: none;
+    cursor: pointer;
+    padding: 0;
+    font-size: 16px;
+    font-weight: 300;
+    width: 100%;
+}
+
+.dropdown{
+    position: relative;
+}
+
+.dropdown__top{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+}
+
+.reset__button{
+    min-width: 80px;
+    max-height: 30px;
+    text-align: center;
+    font-weight: 500;
+    padding: 2px;
+    background: white;
+    color: rgb(13, 73, 157);
+    border: none;
+    border-radius: 5px;
+
+    margin-left: 20px;
+    cursor: pointer;
+}
+
+.dropdown__menu{
+    display: none;
+    flex-direction: column;
+    align-items: center;
+    gap: 25px;
+    position: absolute;
+    top: calc(100% + .75rem);
+    left : -400px;
+    background-color: #d99090;
+    color : #d99090;
+    padding: 2rem;
+    border-radius: .5rem;
+    box-shadow: 0 2px 5px 0 rgba(0, 0, 0, .1);
+    transform: translateY(-10px);
+    transition: opacity 150ms ease-in-out , transform 150ms ease-in-out;
+
+    width: 520px;
+    height: 270px;
+}
+
+.dropdown.active > .link + .dropdown__menu{
+    transform: translateY(0);
+    display: flex;
+}
+
+.dropdown__header{
+    color: rgb(255, 255, 255);
+    font-size: 16px;
+    font-weight: 500;
+}
+
+.all-buttons{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 5px;
+
+    max-width: 500px;
+    height: 250px;
+}
+
+.genre-button{ 
+    min-width: 80px;
+    max-height: 30px;
+    text-align: center;
+    font-weight: 500;
+    padding: 5px;
+    background: white;
+    color: rgb(13, 73, 157);
+    border: none;
+    border-radius: 5px;
+    transition: 0.2s;
+}
+
+.genre-button.active{
+    background: rgb(192, 24, 24);
+    color:#f5f5f5;
+}

@@ -1,0 +1,131 @@
+.details{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    width: 100%;
+    height: 100vh;
+}
+
+.details__container{
+    display: flex;
+    flex-direction: row-reverse;
+    justify-content: space-around;
+    align-items: center;
+    background: #e5373717;
+    width: 100%;
+    height: 500px;
+    margin-top:104.8px;
+    padding: 0px;
+}
+
+.card{
+    display: flex;
+    border : 3px solid #D99090;
+    box-shadow: 2px 3px 1px rgba(0, 0, 0, 0.685);
+    width: 300px;
+    height: 400px;
+}
+
+.card img{
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.movie__details{
+    display: flex;
+    flex-direction: column;
+    max-width: 400px;
+    min-height: 500px;
+    align-items: start;
+    justify-content: space-evenly;
+}
+
+.movie__details header{
+    font-size : 30px;
+    font-weight: 600;
+}
+
+.movie__details .release-date{
+    font-size: 18px;
+    font-weight: 500;
+}
+
+.overview{
+    display: flex;
+    flex-direction: column;
+    max-height: 200px;
+    justify-content: space-evenly;
+    overflow-y: auto;
+    scrollbar-width: thin;
+    scrollbar-color: #D99090 rgba(255, 255, 255, 0.403)
+}
+
+.overview header{
+    font-size: 20px;
+    font-weight: 400;
+}
+
+.overview p{
+    font-size: 16px;
+    font-weight: 200;
+    letter-spacing: 2px;
+    width: 100%;
+    min-width: 620px;
+    overflow: hidden;
+    overflow-y: auto;
+}
+
+.buttons__section-details{
+    display: flex;
+    width: 100%;
+    justify-content: center;
+    gap : 40px;
+}
+
+.buttons__section-details button{
+    flex: 1;
+    width: 100px;
+    height: 35px;
+    cursor: pointer;
+}
+
+.button-play{
+    color: white;
+    background: #D99090;
+    border: none;
+}
+
+.button-comments{
+    color: black;
+    background: none;
+    border:3px solid #d99090;
+}
+
+
+.rating__section{
+    display: flex;
+    flex-direction: column;
+    gap : 40px;
+    align-items: center;
+    justify-content: flex-start;
+    width: 100px;
+    height: 100%;
+    margin-top: 80px;
+}
+
+.rating__section header{
+    font-size: 30px;
+    font-weight: 600;
+}
+
+.rating__section .stars{
+    display: flex;
+    flex-direction: row;
+    gap : 10px;
+}
+
+.rating__section .stars img{
+    width: 24px;
+    height: 24px;
+}
