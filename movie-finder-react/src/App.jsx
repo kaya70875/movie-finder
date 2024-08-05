@@ -4,6 +4,7 @@ import MainContent from './components/MainContent';
 import Navbar from './components/Navbar';
 import MovieDetails from './components/sites/MovieDetails';
 import './style.css';
+import Favorites from './components/sites/Favorites';
 
 function AppWithLocation() {
   const [searchQuery, setSearchQuery] = useState('');
@@ -17,6 +18,7 @@ function AppWithLocation() {
           <Route path="/page/:page" element={<MainContent searchQuery={searchQuery} selectedGenres={selectedGenres}/>} />
           <Route exact path="/" element={<MainContent searchQuery={searchQuery} selectedGenres={selectedGenres}/>} />
           <Route path="/details/:id" element={<MovieDetails />} />
+          <Route path="/favorites" element={<Favorites />} />
         </Routes>
       </div>
     </div>

@@ -1,8 +1,9 @@
 import './MainContent.css'
 import useFetch from '../hooks/useFetch';
 import { useEffect, useState } from 'react';
-import { Link, useNavigate, useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import Pagination from './Pagination';
+import MovieCard from './MovieCard';
 
 export default function MainContent({searchQuery , selectedGenres}) {
   const { page } = useParams()
@@ -41,16 +42,7 @@ export default function MainContent({searchQuery , selectedGenres}) {
   return (
     <div className="main">
       <p className='results' id='queryResults'>{title}</p>
-      <div className="main__content">
-        {currentPosts.map(movie => (
-          movie.poster_path && (
-            <Link to={`/details/${movie.id}`} key={movie.id} className="item">
-              <img src={`https://image.tmdb.org/t/p/w500${movie.poster_path}`} alt={movie.title} />
-              <div className="item__overlay"></div>
-            </Link>
-          )
-        ))}
-      </div>
+      <MovieCard currentPosts={currentPosts}></MovieCard>
       <Pagination currentPage={currentPage} setCurrentPage={handlePageChange} results={data}></Pagination>
     </div>
   );

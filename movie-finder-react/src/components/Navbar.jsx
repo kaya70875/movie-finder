@@ -69,7 +69,7 @@ export default function Navbar({setSearchQuery , selectedGenres , setSelectedGen
                   </div>
                 </div>
               
-              <li><a href="">Project</a></li>
+              <li><Link to='/favorites'>Favorites</Link></li>
             </ul>
           </div>
         </div>
