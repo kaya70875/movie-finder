@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react'
 import axios from 'axios';
 
 const useFetch = (url) => {
-  const API_KEY = '7ca74ac48214bf10e89f24f82819ee0e';
+  const API_KEY = '';
   const BASE_URL = 'https://api.themoviedb.org/3';
 
   const [data , setData] = useState([]);
