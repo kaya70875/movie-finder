@@ -41,14 +41,21 @@
     justify-content: space-evenly;
 }
 
-.movie__details header{
+.movie__details .release-date{
+    font-size: 18px;
+    font-weight: 500;
+}
+
+.header__section header{
     font-size : 30px;
     font-weight: 600;
 }
 
-.movie__details .release-date{
-    font-size: 18px;
-    font-weight: 500;
+
+.header__section{
+    display: flex;
+    gap : 1.5rem;
+    min-width: 500px;
 }
 
 .overview{
@@ -111,7 +118,7 @@
     justify-content: flex-start;
     width: 100px;
     height: 100%;
-    margin-top: 80px;
+    margin-top: 120px;
 }
 
 .rating__section header{

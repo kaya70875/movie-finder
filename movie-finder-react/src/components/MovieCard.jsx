@@ -1,45 +1,11 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React, {useState } from 'react';
 import { Link } from 'react-router-dom';
 import './MainContent.css';
+import useFavorites from '../hooks/useFavorites';
 
 export default function MovieCard({ currentPosts }) {
-    const favButton = useRef();
     
-    const [favorites, setFavorites] = useState(() => {
-        const savedFavorites = JSON.parse(localStorage.getItem('favorites')) || [];
-        return savedFavorites;
-    });
-
-    const [titles, setTitles] = useState(() => {
-        const savedFavorites = JSON.parse(localStorage.getItem('favorites')) || [];
-        return savedFavorites.reduce((acc, movie) => {
-            acc[movie.id] = '❤️';
-            return acc;
-        }, {});
-    });
-
-    function handleAddToFavorites(movie) {
-        const movieId = movie.id;
-        const isFavorite = favorites.some(favMovie => favMovie.id === movieId);
-
-        if (isFavorite) {
-            const updatedFavorites = favorites.filter(favMovie => favMovie.id !== movieId);
-            localStorage.setItem('favorites', JSON.stringify(updatedFavorites));
-            setFavorites(updatedFavorites);
-            setTitles(prevTitles => ({
-                ...prevTitles,
-                [movieId]: '🤍'
-            }));
-        } else {
-            const updatedFavorites = [...favorites, movie];
-            localStorage.setItem('favorites', JSON.stringify(updatedFavorites));
-            setFavorites(updatedFavorites);
-            setTitles(prevTitles => ({
-                ...prevTitles,
-                [movieId]: '❤️'
-            }));
-        }
-    }
+    const {titles , handleAddToFavorites} = useFavorites();
 
     return (
         <div className="main__content">
@@ -56,11 +22,10 @@ export default function MovieCard({ currentPosts }) {
                                 }}
                                 className='favorites_button'
                                 id="favorites-button"
-                                ref={favButton}
                             >
                                 {titles[movie.id] || '🤍'}
                             </button>
-                            <Link className='details_button' to={`/details/${movie.id}`}>ℹ️</Link>
+                            <Link className='details_button' to={`/details/${movie.id}`} state={{movie}}>ℹ️</Link>
                         </div>
                     </p>
                 )

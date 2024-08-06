@@ -1,14 +1,19 @@
 import React, { useEffect, useState } from 'react'
-import { useParams } from 'react-router-dom'
+import { useLocation, useParams } from 'react-router-dom'
 import useFetch from '../../hooks/useFetch';
 import './MovieDetails.css'
 import starImage from '../../img/star-new.png'
 import CommentSection from './CommentSection';
+import useFavorites from '../../hooks/useFavorites';
 
 export default function MovieDetails() {
     const {id} = useParams();
     const data = useFetch(`/movie/${id}?language=en-US&`);
     const [isEmpty , setIsEmpty] = useState(false);
+
+    const location = useLocation();
+    const movieObject = location?.state?.movie;
+    const {titles , handleAddToFavorites} = useFavorites();
 
     useEffect(() => {
       if (data && data.vote_average) {
@@ -38,7 +43,10 @@ export default function MovieDetails() {
             <img src={`https://image.tmdb.org/t/p/w500${data.poster_path}`} alt={data.title}/>
           </div>
           <div className="movie__details">
-            <header>{data.title}</header>
+            <div className="header__section">
+              <header>{data.title}</header>
+              <button className="favorites_button" onClick={() => handleAddToFavorites(movieObject)}>{titles[movieObject.id] || '🤍'}</button>
+            </div>
             <p className="release-date">Release Date : {data.release_date}</p>
             <div className="overview">
               <header>Overview :</header>
