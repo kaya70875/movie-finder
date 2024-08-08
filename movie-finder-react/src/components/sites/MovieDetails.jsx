@@ -4,7 +4,7 @@ import useFetch from '../../hooks/useFetch';
 import './MovieDetails.css'
 import starImage from '../../img/star-new.png'
 import CommentSection from './CommentSection';
-import useFavorites from '../../hooks/useFavorites';
+import {useFavorites} from '../../context/FavoritesContext';
 
 export default function MovieDetails() {
     const {id} = useParams();

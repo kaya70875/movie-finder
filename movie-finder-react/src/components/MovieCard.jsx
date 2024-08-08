@@ -1,15 +1,15 @@
 import React, {useState } from 'react';
 import { Link } from 'react-router-dom';
 import './MainContent.css';
-import useFavorites from '../hooks/useFavorites';
+import {useFavorites} from '../context/FavoritesContext';
 
-export default function MovieCard({ currentPosts }) {
+export default function MovieCard({ movies }) {
     
     const {titles , handleAddToFavorites} = useFavorites();
 
     return (
         <div className="main__content">
-            {currentPosts.map(movie => (
+            {movies.map(movie => (
                 movie.poster_path && (
                     <p to={`/details/${movie.id}`} key={movie.id} className="item">
                         <img src={`https://image.tmdb.org/t/p/w500${movie.poster_path}`} alt={movie.title} />

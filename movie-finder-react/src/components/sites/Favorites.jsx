@@ -13,7 +13,7 @@ export default function Favorites() {
     return (
         <div className="favorites">
             <header>Favorites</header>
-            <MovieCard currentPosts={favorites}></MovieCard>
+            <MovieCard movies={favorites}></MovieCard>
         </div>
     );
 }
