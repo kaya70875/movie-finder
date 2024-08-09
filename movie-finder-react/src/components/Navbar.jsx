@@ -1,9 +1,12 @@
 import './Navbar.css'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import GetGenreId from './utils/GetGenreId';
+import { useAuth } from '../context/AuthContext';
 
 export default function Navbar({setSearchQuery , selectedGenres , setSelectedGenres}) {
   const genres = GetGenreId();
+  const { logOut } = useAuth();
+  const navigate = useNavigate();
 
   function handleDropdown(e){
     const isDropdownButton = e.target.matches("[data-dropdown-button]")
@@ -38,11 +41,20 @@ export default function Navbar({setSearchQuery , selectedGenres , setSelectedGen
     setSelectedGenres([])
   }
 
+  async function handleLogOut(){
+    try{
+      await logOut();
+      navigate('/login');
+    }catch(err){
+      console.log(err)
+    }
+  }
+
   return (
     <nav className="navbar">
         <div className="container">
           <header className='navbar__header'>Movie Finder</header>
-          <input type="text" id='inputField' onChange={(e) => (
+          <input type="text" id='inputField' className='navbar-input' onChange={(e) => (
             setSearchQuery(e.target.value)
           )}/>
           <div className="items">
@@ -70,6 +82,7 @@ export default function Navbar({setSearchQuery , selectedGenres , setSelectedGen
                 </div>
               
               <li><Link to='/favorites'>Favorites</Link></li>
+              <li onClick={handleLogOut}>Log Out</li>
             </ul>
           </div>
         </div>
