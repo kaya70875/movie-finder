@@ -3,7 +3,9 @@
     flex-direction: column;
     justify-content: space-between;
     width: 100%;
-    height: 100vh;
+
+    margin-left: 100px;
+    overflow-x: auto;
 }
 
 .details__container{
@@ -11,11 +13,17 @@
     flex-direction: row-reverse;
     justify-content: space-around;
     align-items: center;
-    background: #e5373717;
     width: 100%;
     height: 500px;
-    margin-top:104.8px;
-    padding: 0px;
+    margin-top:120px;
+
+    color : var(--primary-font-color);
+}
+
+.container-comment-similar{
+    display: flex;
+    flex-direction: column;
+    padding: 2rem;
 }
 
 .card{
@@ -78,7 +86,7 @@
     font-weight: 200;
     letter-spacing: 2px;
     width: 100%;
-    min-width: 620px;
+    min-width: 580px;
     overflow: hidden;
     overflow-y: auto;
 }
@@ -104,7 +112,7 @@
 }
 
 .button-comments{
-    color: black;
+    color: white;
     background: none;
     border:3px solid #d99090;
 }
@@ -113,12 +121,12 @@
 .rating__section{
     display: flex;
     flex-direction: column;
-    gap : 40px;
+    gap : 2rem;
     align-items: center;
     justify-content: flex-start;
     width: 100px;
     height: 100%;
-    margin-top: 120px;
+    margin-top: 110px;
 }
 
 .rating__section header{

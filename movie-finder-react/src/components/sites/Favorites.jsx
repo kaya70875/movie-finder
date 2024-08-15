@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import './Favorites.css';
 import MovieCard from '../MovieCard';
+import Dropdown from '../reusables/Dropdown';
 
 export default function Favorites() {
     const [favorites, setFavorites] = useState([]);
@@ -9,11 +10,37 @@ export default function Favorites() {
         const savedFavorites = JSON.parse(localStorage.getItem('favorites')) || [];
         setFavorites(savedFavorites);
     }, [favorites]);
+    
 
     return (
         <div className="favorites">
-            <header>Favorites</header>
-            <MovieCard movies={favorites}></MovieCard>
+            <div className="slide__container">
+                <div className="fav-container">
+                    <h3 className='fav-header'>Favorites</h3>
+                    <div className="fav-query-titles">
+                        <Dropdown buttonStyle={{
+                            border : 'none' , color : 'var(--primary-font-color)' , fontSize : '1rem',
+                            background : 'none'
+
+                        }} dropdownLabel={'All'} dropdownStyle={{
+                            width : '200px' , height : '250px' , backgroundColor : 'var(--main-background)',
+                            fontSize : '.9rem'
+                        }}>
+                            <ul className='profile-list-items'>
+                                <li>All</li>
+                                <li>By Genre</li>
+                                <li>By Year</li>
+                                <li>By Popularity</li>
+                                <li>By Rating</li>
+                            </ul>
+                        </Dropdown>
+                        
+                    </div>
+                    <MovieCard movies={favorites} showScrollButtons={false} defaultGrid={false}></MovieCard>
+                </div>
+                
+            </div>
         </div>
+        
     );
 }

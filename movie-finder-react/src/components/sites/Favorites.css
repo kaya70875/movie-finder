@@ -1,17 +1,35 @@
 .favorites{
     display: flex;
     flex-direction: column;
-    gap : 2rem;
+    justify-content: start;
+    align-items: start;
+    margin-top: 120px;
+
     width: 100%;
-    justify-content: center;
-    align-items: center;
-    margin-top: 150px;
+
+    color : var(--primary-font-color);
 }
 
-.favorites header{
-    font-weight: bold;
-    font-size: 2.2rem;
-    color :#eb5d20;
+.fav-container{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: start;
+    padding: 2rem;
+}
+
+.fav-query-titles{
+    display: flex;
+    gap : 2rem;
+}
+
+.main__content{
+    padding: 0;
+}
+
+.fav-header{
+    font-weight: 400;
+    text-align: start;
 }
 
 .cards__container{

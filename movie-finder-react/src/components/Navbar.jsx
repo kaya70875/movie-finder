@@ -1,45 +1,23 @@
 import './Navbar.css'
 import { Link, useNavigate } from 'react-router-dom'
-import GetGenreId from './utils/GetGenreId';
 import { useAuth } from '../context/AuthContext';
 
-export default function Navbar({setSearchQuery , selectedGenres , setSelectedGenres}) {
-  const genres = GetGenreId();
+import useFetch from '../hooks/useFetch';
+import { useEffect, useState } from 'react';
+import Dropdown from './reusables/Dropdown';
+import { useTheme } from '../context/ThemeContext';
+
+export default function Navbar() {
   const { logOut } = useAuth();
   const navigate = useNavigate();
 
-  function handleDropdown(e){
-    const isDropdownButton = e.target.matches("[data-dropdown-button]")
-    if(!isDropdownButton && e.target.closest("[data-dropdown]") != null) return
+  const [searchQuery , setSearchQuery] = useState('');
+  const [isFocus , setIsFocus] = useState(false);
 
-    let currentDropdown
-    if(isDropdownButton){
-      currentDropdown = e.target.closest("[data-dropdown]")
-      currentDropdown.classList.toggle('active')
-    }
+  const {toggleTheme , theme} = useTheme();
 
-    const dropdown = document.querySelector("[data-dropdown].active")
-    if(dropdown === currentDropdown) return
-      dropdown.classList.remove('active');
-    
-  }
-
-  function handleButtonClick(e){
-    const genreId = e.target.id;
-
-    const isActive = e.target.classList.contains('active');
-    if(isActive){
-      setSelectedGenres([...selectedGenres, genreId]);
-    }else{
-      setSelectedGenres(selectedGenres.filter(id => id !== genreId));
-    }
-  }
-
-  function handleReset(){
-    const buttons = document.querySelectorAll('.genre-button.active');
-    buttons.forEach(button => button.classList.remove('active'));
-    setSelectedGenres([])
-  }
+  const data = useFetch(`/search/movie?query=${searchQuery}&include_adult=false&language=en-US&`);
+  const searchResults = data?.results;
 
   async function handleLogOut(){
     try{
@@ -50,39 +28,68 @@ export default function Navbar({setSearchQuery , selectedGenres , setSelectedGen
     }
   }
 
+  useEffect(() => {
+    const dropdownContent = document.querySelector('.dropdown__content');
+    searchQuery ? dropdownContent.style.display = 'block' : dropdownContent.style.display = 'none';
+    
+    if(!isFocus){
+      dropdownContent.style.display = 'none';
+    }
+  } , [searchQuery , isFocus])
+
   return (
     <nav className="navbar">
         <div className="container">
-          <header className='navbar__header'>Movie Finder</header>
-          <input type="text" id='inputField' className='navbar-input' onChange={(e) => (
-            setSearchQuery(e.target.value)
-          )}/>
+          <div className="navbar__left">
+            
+            <header className='navbar__header'>Movie Finder</header>
+            <div className="dropdown" tabIndex={0} onBlur={(e) => {
+              if(!e.currentTarget.contains(e.relatedTarget)){
+                setIsFocus(false);
+              }
+            }}>
+              <input type="text" id='inputField' className='navbar-input' onFocus={() => setIsFocus(true)} onChange={(e) => (
+                setSearchQuery(e.target.value)
+              )}/>
+              <div className="dropdown__content">
+                <h2>Top Results</h2>
+                <div className="dropdown__elements">
+                  {searchResults?.slice(0 , 12).map(movie => movie.poster_path && (
+                    <Link to={`/details/${movie.id}`} state={{ movie }}>
+                        <div className="dropdown__item">
+                        <div className="item-image">
+                          <img src={`https://image.tmdb.org/t/p/w500${movie.poster_path}`} alt={movie.title} />
+                        </div>
+                        <div className="item-info">
+                          <p>{movie.title}</p>
+                          <p>{movie.release_date}</p>
+                        </div>
+                      </div>
+                    </Link>
+                  ))}
+                </div>
+              </div>
+            </div>
+            
+          </div>
           <div className="items">
             <ul className="list-items">
-              <li><Link to='/' onClick={handleReset}>Home</Link></li>
-              <div className="dropdown" data-dropdown>
-                <button className='link' data-dropdown-button onClick={e => handleDropdown(e)}>Filter</button>
-                  <div className="dropdown__menu">
-                    
-                    <div className="dropdown__top">
-                      <p className='dropdown__header'>Choose a Filter</p>
-                      <button className="reset__button" onClick={handleReset}>Reset</button>
-                    </div>
-                    
-                    
-                    <div className="all-buttons">
-                      {genres.map(genre => (
-                        <button className='genre-button' key={genre.id} id={genre.id} onClick={(e) => {
-                          e.target.classList.toggle('active');
-                          handleButtonClick(e);
-                        }}>{genre.name}</button>
-                      ))}
-                    </div>
-                  </div>
-                </div>
-              
-              <li><Link to='/favorites'>Favorites</Link></li>
-              <li onClick={handleLogOut}>Log Out</li>
+              <li onClick={toggleTheme}>
+                {theme === '' ? <svg xmlns="http://www.w3.org/2000/svg" width="48" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-toggle-left"><rect x="1" y="5" width="32" height="14" rx="7" ry="7"></rect><circle cx="8" cy="12" r="3"></circle></svg>:
+                <svg xmlns="http://www.w3.org/2000/svg" width="48" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-toggle-right"><rect x="1" y="5" width="32" height="14" rx="7" ry="7"></rect><circle cx="26" cy="12" r="3"></circle></svg> }
+              </li>
+              <li>
+                <Dropdown dropdownStyle={{width : '200px' , height : '300px' , backgroundColor: 'var(--main-background)' , left : '-150px'}}
+                buttonStyle={{backgroundColor : 'var(--primary-button-color)' , color : 'var(--secondary-background)' , borderRadius : '100%' , width : '48px' , height : '48px',
+                  border : 'none' , fontSize : '1.2rem' , fontWeight : '500'
+                }} dropdownLabel={'A'}>
+                  <ul className='profile-list-items'>
+                    <li><a>Profile</a></li>
+                    <li><a>Settings</a></li>
+                    <li onClick={handleLogOut}>Log Out</li>
+                  </ul>
+                </Dropdown>
+              </li>
             </ul>
           </div>
         </div>

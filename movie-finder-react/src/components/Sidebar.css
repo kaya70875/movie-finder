@@ -1,0 +1,52 @@
+.sidebar{
+    width: var(--sidebar-width);
+    height: 100vh;
+    background: var(--secondary-background);
+    position: fixed;
+    top : 0;
+    left: 0;
+    z-index: 1000; 
+    transition: 0.5s;
+
+    margin-top : 131.5px;
+    display: flex;
+    align-items: start;
+    justify-content: center;
+
+    padding-top: 2rem;
+
+    color : var(--primary-font-color);
+}
+
+.sidebar__items{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap : 2.5rem;
+}
+
+.hamburger button{
+    border: none;
+    outline: none;
+    background: none;
+}
+
+.sidebar__items > *{
+    max-width: 145px;
+    min-width: 60px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap : 1.5rem;
+    cursor: pointer;
+    padding: .7rem;
+}
+
+.watchlist:hover, .sidebar__favorites:hover, .home:hover{
+    background: var(--primary-hover-color);
+}
+
+.sidebar__items a{
+    text-decoration: none;
+}

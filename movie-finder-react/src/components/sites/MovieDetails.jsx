@@ -1,19 +1,21 @@
 import React, { useEffect, useState } from 'react'
-import { useLocation, useParams } from 'react-router-dom'
+import {useParams } from 'react-router-dom'
 import useFetch from '../../hooks/useFetch';
 import './MovieDetails.css'
 import starImage from '../../img/star-new.png'
 import CommentSection from './CommentSection';
 import {useFavorites} from '../../context/FavoritesContext';
+import MovieCard from '../MovieCard';
 
 export default function MovieDetails() {
     const {id} = useParams();
     const data = useFetch(`/movie/${id}?language=en-US&`);
     const [isEmpty , setIsEmpty] = useState(false);
 
-    const location = useLocation();
-    const movieObject = location?.state?.movie;
     const {titles , handleAddToFavorites} = useFavorites();
+
+    const similarMovies = useFetch(`/movie/${id}/similar?`);
+    const resultSimilar = similarMovies?.results || [];
 
     useEffect(() => {
       if (data && data.vote_average) {
@@ -45,7 +47,7 @@ export default function MovieDetails() {
           <div className="movie__details">
             <div className="header__section">
               <header>{data.title}</header>
-              <button className="favorites_button" onClick={() => handleAddToFavorites(movieObject)}>{titles[movieObject.id] || '🤍'}</button>
+              <button className="favorites_button" onClick={() => handleAddToFavorites(data)}>{titles[data.id] || '🤍'}</button>
             </div>
             <p className="release-date">Release Date : {data.release_date}</p>
             <div className="overview">
@@ -65,9 +67,13 @@ export default function MovieDetails() {
               
           </div>
         </div>
-        <CommentSection id={id}></CommentSection>
+        <div className="container-comment-similar">
+          <MovieCard movies={resultSimilar.slice(0 , 21)} title={'Similar Movies'} showScrollButtons={true}></MovieCard>
+          <CommentSection id={id}></CommentSection>
+        </div>
+        
     </div>
-    
+
     </>
     
   )

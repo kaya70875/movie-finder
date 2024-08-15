@@ -1,4 +1,4 @@
-import React, { useRef, useState } from 'react'
+import React, {useState } from 'react'
 import './CommentSection.css'
 import useFetch from '../../hooks/useFetch'
 
@@ -7,7 +7,7 @@ export default function CommentSection({id}) {
     const comments = useFetch(`/movie/${id}/reviews?language=en-US&`)
     const results = comments?.results || [];
 
-    const [expand , setExpand] = useState(false); 
+    const [expand , setExpand] = useState(false);
 
     function handleClick(index){
         const commentsDiv = document.getElementById(`comment-${index}`)
@@ -22,7 +22,7 @@ export default function CommentSection({id}) {
 
   return (
     <div className="container__comments">
-        <header>Comments</header>
+        <header>See Comments</header>
         <div className="wrap__containers">
         {results.length !== 0 ? results.map((result  ,index) => (
              <div className="comments__wrap" id={`comment-${index}`} key={index}>
@@ -33,7 +33,8 @@ export default function CommentSection({id}) {
                  {result.author_details.rating ? <p className="rating" style={{color : 'red'}}>{result.author_details.rating} of 10</p> : 'No Rating'}
              </div>
              <div className="comments__comment" key={result.id}>
-                 <p>{result.content}</p>
+                 <p>{result.content.replaceAll('</em>','')
+                    .replaceAll('<em>' , '')}</p>
              </div>
              {result.content.length > 400 && <p className="see-more" onClick={() => handleClick(index)}>{expand ? 'collapse' : 'see more'}</p>}
              

@@ -1,49 +1,30 @@
   import './MainContent.css'
   import useFetch from '../hooks/useFetch';
-  import { useEffect, useState } from 'react';
-  import { useNavigate, useParams } from 'react-router-dom';
-  import Pagination from './Pagination';
   import MovieCard from './MovieCard';
 
-  export default function MainContent({searchQuery , selectedGenres}) {
-    const { page } = useParams()
-    const [currentPage , setCurrentPage] = useState(Number(page) || 1);
-    const navigate = useNavigate()
+  const MAX_CONTENT = 21
 
-    const [query , setQuery] = useState(`/movie/popular?language=en-US&page=${currentPage}&`);
-    const [title, setTitle] = useState('Most Popular :');
-    const data = useFetch(query);
+  export default function MainContent() {
+    const popular = useFetch('/movie/popular?language=en-US&');
+    const topRated = useFetch('/movie/top_rated?language=en-US&');
+    const upcoming = useFetch('/movie/upcoming?language=en-US&page=1&region=tr&');
+    const trending = useFetch('/trending/movie/day?language=en-US&');
 
-    useEffect(() =>{
-      if(searchQuery){
-        setQuery(`/search/movie?query=${searchQuery}&include_adult=false&language=en-US&page=${currentPage}&`);
-        setTitle(`Results For ${searchQuery} :`)
-      }
-      else if(selectedGenres && selectedGenres.length > 0){
-        setQuery(`/discover/movie?with_genres=${selectedGenres.join(',')}&language=en-US&page=${currentPage}&`);
-        setTitle('Filtered Movies:');
-      }
-      else{
-        setQuery(`/movie/popular?language=en-US&page=${currentPage}&`);
-        setTitle('Most Popular :');
-      }
-
-    },[searchQuery , selectedGenres , currentPage])
-
-    const results = data?.results || [];
-    const currentPosts = results.slice(0 , 18);
-
-    const handlePageChange = (newPage) => {
-      setCurrentPage(newPage)
-      navigate(`/page/${newPage}`)
-      window.scrollTo(0 , 0)
-    }
+    const resultsPopular = popular?.results || [];
+    const resultsTop = topRated?.results || [];
+    const resultsUpcoming = upcoming?.results || [];
+    const resultsTrending = trending?.results || [];
 
     return (
       <div className="main">
-        <p className='results' id='queryResults'>{title}</p>
-        <MovieCard movies={currentPosts}></MovieCard>
-        <Pagination currentPage={currentPage} setCurrentPage={handlePageChange} results={data}></Pagination>
+        <div className="main__components">
+          <div className="slide__container">
+            <MovieCard movies={resultsPopular.slice(0 , MAX_CONTENT)} title={'Most Popular'}></MovieCard>
+            <MovieCard movies={resultsTrending.slice(0 , MAX_CONTENT)} title={'Trending Today'}></MovieCard>
+            <MovieCard movies={resultsTop.slice(0 , MAX_CONTENT)} title={'Top Ratings'}></MovieCard>
+            <MovieCard movies={resultsUpcoming.slice(0 , MAX_CONTENT)} title={'Upcoming In Turkey'}></MovieCard>
+          </div>
+        </div>
       </div>
     );
   }

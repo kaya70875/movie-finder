@@ -8,6 +8,8 @@
     gap : 40px;
 
     margin-top : 50px;
+
+    color : var(--primary-font-color)
 }
 
 .wrap__containers{
@@ -17,8 +19,7 @@
 }
 
 .container__comments header{
-    font-size: 40px;
-    color : #EB5E20;
+    font-size: 32px;
     font-weight: bold;
 }
 
@@ -28,7 +29,7 @@
     justify-content: space-around;
     width: 90%;
     margin: 0 auto;
-    background: #eb5d205a;
+    background: var(--secondary-background);
     border-radius: 20px;
     padding: 40px;
     gap : 40px;

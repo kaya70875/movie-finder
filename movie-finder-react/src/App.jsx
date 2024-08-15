@@ -1,4 +1,3 @@
-import { useState } from 'react';
 import { Route, Routes, BrowserRouter as Router, useLocation } from 'react-router-dom';
 import MainContent from './components/MainContent';
 import Navbar from './components/Navbar';
@@ -10,46 +9,53 @@ import { FavoritesProvider } from './context/FavoritesContext';
 import Login from './components/auth/Login';
 import { AuthProvider } from './context/AuthContext';
 import PrivateRoute from './PrivateRoute';
+import Sidebar from './components/Sidebar';
+import ScrollToTop from './components/reusables/ScrollToTop';
+import { ThemeProvider, useTheme } from './context/ThemeContext';
 
 function AppWithLocation() {
-  const [searchQuery, setSearchQuery] = useState('');
-  const [selectedGenres, setSelectedGenres] = useState([]);
   const location = useLocation();
+  const {theme} = useTheme();
 
-  // Conditionally render Navbar based on the current route
   const showNavbar = location.pathname !== '/login' && location.pathname !== '/register';
 
   return (
-    <AuthProvider>
-      <FavoritesProvider>
-        <div className="app">
-          {showNavbar && (
-            <Navbar setSearchQuery={setSearchQuery} selectedGenres={selectedGenres} setSelectedGenres={setSelectedGenres} />
-          )}
-          <div className="container">
-            <Routes>
-              {/* Wrap protected routes with PrivateRoute */}
-              <Route element={<PrivateRoute />}>
-                <Route path="/page/:page" element={<MainContent searchQuery={searchQuery} selectedGenres={selectedGenres} />} />
-                <Route path="/" element={<MainContent searchQuery={searchQuery} selectedGenres={selectedGenres} />} />
-                <Route path="/details/:id" element={<MovieDetails />} />
-                <Route path="/favorites" element={<Favorites />} />
-              </Route>
-              {/* Public routes */}
-              <Route path="/register" element={<Register />} />
-              <Route path="/login" element={<Login />} />
-            </Routes>
+      <AuthProvider>
+        <FavoritesProvider>
+          <div className="app" data-theme={theme}>
+            {showNavbar && (
+              <>
+                <Navbar/>
+                <Sidebar></Sidebar>
+              </>
+            )}
+            <div className="container">
+              <Routes>
+                <Route element={<PrivateRoute />}>
+                  <Route path="/" element={<MainContent/>} />
+                  <Route path="/details/:id" element={<MovieDetails />} />
+                  <Route path="/favorites" element={<Favorites />} />
+                </Route>
+                {/* Public routes */}
+                <Route path="/register" element={<Register />} />
+                <Route path="/login" element={<Login />} />
+              </Routes>
+            </div>
           </div>
-        </div>
-      </FavoritesProvider>
-    </AuthProvider>
+        </FavoritesProvider>
+      </AuthProvider>
+    
   );
 }
 
 export default function App() {
   return (
-    <Router>
-      <AppWithLocation />
-    </Router>
+    <ThemeProvider>
+      <Router>
+        <ScrollToTop />
+        <AppWithLocation />
+      </Router>
+    </ThemeProvider>
+    
   );
 }
