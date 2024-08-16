@@ -1,12 +1,16 @@
 .sidebar{
     width: var(--sidebar-width);
     height: 100vh;
+
     background: var(--secondary-background);
+    color : var(--primary-font-color);
+    
     position: fixed;
     top : 0;
     left: 0;
     z-index: 1000; 
-    transition: 0.5s;
+
+    transition: 0.3s;
 
     margin-top : 131.5px;
     display: flex;
@@ -14,8 +18,7 @@
     justify-content: center;
 
     padding-top: 2rem;
-
-    color : var(--primary-font-color);
+    
 }
 
 .sidebar__items{
@@ -24,6 +27,8 @@
     align-items: center;
     justify-content: center;
     gap : 2.5rem;
+
+    
 }
 
 .hamburger button{
@@ -43,7 +48,7 @@
     padding: .7rem;
 }
 
-.watchlist:hover, .sidebar__favorites:hover, .home:hover{
+.discover:hover, .sidebar__favorites:hover, .home:hover{
     background: var(--primary-hover-color);
 }
 

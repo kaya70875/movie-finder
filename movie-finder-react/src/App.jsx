@@ -3,7 +3,6 @@ import MainContent from './components/MainContent';
 import Navbar from './components/Navbar';
 import MovieDetails from './components/sites/MovieDetails';
 import Register from './components/auth/Register';
-import './style.css';
 import Favorites from './components/sites/Favorites';
 import { FavoritesProvider } from './context/FavoritesContext';
 import Login from './components/auth/Login';
@@ -12,6 +11,9 @@ import PrivateRoute from './PrivateRoute';
 import Sidebar from './components/Sidebar';
 import ScrollToTop from './components/reusables/ScrollToTop';
 import { ThemeProvider, useTheme } from './context/ThemeContext';
+import Discover from './components/sites/Discover';
+
+import './style.css';
 
 function AppWithLocation() {
   const location = useLocation();
@@ -35,6 +37,7 @@ function AppWithLocation() {
                   <Route path="/" element={<MainContent/>} />
                   <Route path="/details/:id" element={<MovieDetails />} />
                   <Route path="/favorites" element={<Favorites />} />
+                  <Route path="/discover" element={<Discover />} />
                 </Route>
                 {/* Public routes */}
                 <Route path="/register" element={<Register />} />

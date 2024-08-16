@@ -61,7 +61,7 @@ export default function MovieCard({ movies, title , showScrollButtons = true , d
                                 >
                                     {titles[movie.id] || '🤍'}
                                 </button>
-                                <Link className='details_button' to={`/details/${movie.id}`}>ℹ️</Link>
+                                <Link className='details_button' to={`/details/${movie.id}`}>i</Link>
                             </div>
                         </div>
                     )

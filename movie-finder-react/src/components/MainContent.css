@@ -122,11 +122,14 @@
 }
 
 .details_button{
-    padding: .7rem;
+    padding: .7rem 1.2rem;
     border: none;
     border-radius: 100%;
     background: var(--primary-button-color);
     cursor: pointer;
+
+    max-width: 48px;
+    max-height: 48px;
 }
 
 .favorites_button{

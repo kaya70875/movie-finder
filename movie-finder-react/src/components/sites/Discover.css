@@ -1,0 +1,54 @@
+.discover-d{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    width: 100%;
+    min-height: 100vh;
+    margin-top: 150px;
+    
+    color : var(--primary-font-color);
+}
+
+.discover-content{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: start;
+
+    gap : 2rem;
+    width: 100%;
+
+}
+
+.discover-icons{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap : .5rem;
+}
+
+.discover-header-section{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-evenly;
+    padding: 2rem;
+    gap : 1.5rem;
+}
+
+.discover-filter-section{
+    width: 100%;
+    display: flex;
+    justify-content: space-around; 
+
+}
+
+.discover-movie-section{
+    margin-top: -50px;
+}
+
+.discover-cards-filter{
+    display: flex;
+    gap : 2rem;
+}

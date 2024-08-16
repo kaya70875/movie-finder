@@ -3,7 +3,7 @@
     padding: 0;
     box-sizing: border-box;
     font-family: 'Poppins' , sans-serif;
-    transition: 0.5s;
+    transition: 0.05s;
 }
 
 :root{
@@ -19,6 +19,8 @@
     --primary-hover-color : #353940;
     --secondary-hover-color : rgba(255, 255, 0, 0.147);
 
+    --primary-active-color : rgba(255, 255, 0, 0.147);
+
     --button-hover-color : #e8e7e7;
 
 }
@@ -33,16 +35,17 @@
     --primary-hover-color : #ffb74d;
     --secondary-hover-color : rgba(255, 255, 0, 0.147);
 
+    --primary-active-color : rgb(114, 201, 251);
+
     --button-hover-color : #e8e7e7;
 }
 
 .app{
     background: var(--main-background);
-    
+
 }
 
 .slide__container{
     margin-left: var(--sidebar-width);
-    transition: margin-left 0.3s ease-in-out;
     padding: 2rem;
 }
