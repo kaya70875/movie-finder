@@ -83,11 +83,13 @@ export default function Navbar() {
                 buttonStyle={{backgroundColor : 'var(--primary-button-color)' , color : 'var(--secondary-background)' , borderRadius : '100%' , width : '48px' , height : '48px',
                   border : 'none' , fontSize : '1.2rem' , fontWeight : '500'
                 }} dropdownLabel={'A'}>
-                  <ul className='profile-list-items'>
-                    <li><a>Profile</a></li>
-                    <li><a>Settings</a></li>
-                    <li onClick={handleLogOut}>Log Out</li>
-                  </ul>
+                  <div className='profile-list-items'>
+                    <ul style={{display : 'flex' , justifyContent : 'space-evenly' , alignItems : 'center'}}>
+                      <li><a>Profile</a></li>
+                      <li><a>Settings</a></li>
+                      <li onClick={handleLogOut}>Log Out</li>
+                    </ul>
+                  </div>
                 </Dropdown>
               </li>
             </ul>
