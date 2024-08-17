@@ -68,7 +68,3 @@
 .profile-list-items li.active{
     background: var(--primary-active-color);
 }
-
-.dropdown:hover{
-    background: var(--primary-hover-color);
-}

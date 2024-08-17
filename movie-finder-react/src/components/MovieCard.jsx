@@ -27,8 +27,6 @@ export default function MovieCard({ movies, title , showScrollButtons = true , d
 
     }, []);
 
-    console.log(defaultGrid);
-
     return (
         <div className="main__content">
             <div className="header__wrapper">
