@@ -6,13 +6,12 @@
     color : var(--primary-font-color);
     
     position: fixed;
-    top : 0;
     left: 0;
     z-index: 1000; 
 
     transition: 0.3s;
 
-    margin-top : 131.5px;
+    margin-top : 145px;
     display: flex;
     align-items: start;
     justify-content: center;
@@ -54,4 +53,39 @@
 
 .sidebar__items a{
     text-decoration: none;
+}
+
+@media (max-width : 660px){
+    .sidebar{
+        width: 100vw;
+        height: var(--sidebar-height, 60px);
+        
+        background: var(--secondary-background);
+        color: var(--primary-font-color);
+        
+        position: fixed;
+        bottom: 0;
+        left: 0;
+        z-index: 1000;
+        
+        transition: 0.3s;
+        
+        margin-top: 0;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .sidebar__items{
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        align-items: center;
+        gap : 2rem;
+        margin-top: -20px;
+    }
+
+    .hamburger{
+        display: none;
+    }
 }

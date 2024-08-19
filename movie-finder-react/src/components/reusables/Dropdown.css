@@ -20,6 +20,7 @@
     border-radius: 4px;
 
     color: var(--primary-font-color);
+    background: var(--main-background);
     overflow :auto;
     
 }
@@ -67,4 +68,16 @@
 
 .profile-list-items li.active{
     background: var(--primary-active-color);
+}
+
+@media (max-width : 450px){
+
+    .profile-list-items ul li , .items .list-items li a{
+        font-size: .8rem;
+    }
+
+    .profile-list-items ul{
+        justify-content: space-evenly !important;
+    }
+
 }

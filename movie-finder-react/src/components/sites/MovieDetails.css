@@ -99,21 +99,12 @@
     gap : 40px;
 }
 
-.buttons__section-details button{
+.button-play , .button-comments{
     flex: 1;
     width: 100px;
     height: 35px;
     cursor: pointer;
-}
-
-.button-play{
-    color: white;
-    background: #D99090;
-    border: none;
-}
-
-.button-comments{
-    color: white;
+    color: var(--primary-font-color);
     background: none;
     border:3px solid #d99090;
 }
@@ -142,4 +133,225 @@
 .rating__section .stars img{
     width: 24px;
     height: 24px;
+}
+
+@media (max-width : 1420px){
+    .card , .card img{
+        width: 200px;
+        height: 300px;
+    }
+
+    .overview p{
+        min-width: 450px;
+        font-size: .9rem;
+    }
+}
+
+@media (max-width : 990px){
+    .card , .card img{
+        width: 150px;
+        height: 250px;
+    }
+
+    .release-date{
+        font-size: 1rem !important;
+    }
+
+    .header__section header{
+        font-size: 1.2rem;
+    }
+
+    .overview header{
+        font-size: 1rem;
+    }
+
+    .overview p{
+        min-width: 400px;
+        font-size: .7rem;
+        font-weight: 400;
+    }
+
+    .rating__section header{
+        font-size: 1.2rem;
+    }
+
+    .stars img{
+        width: 16px !important;
+        height: 16px !important;
+    }
+
+    .buttons__section-details{
+        align-items: center;
+        justify-content: start;
+    }
+
+    .button-play , .button-comments{
+        flex : 0;
+        min-width: 120px;
+        height: 30px;
+        font-size: .7rem;
+    }
+
+    .header__wrapper h2{
+        font-size: 1.2rem;
+    }
+
+    .next__icons {
+        display: none;
+    }
+
+    .favorites_button{
+        width: 32px;
+        height: 32px;
+        padding: 0;
+        text-align: center;
+    }
+}
+
+@media (max-width : 812px){
+    .card , .card img{
+        width: 120px;
+        height: 200px;
+    }
+
+    .release-date{
+        font-size: .8rem !important;
+    }
+
+    .header__section header{
+        font-size: 1rem;
+    }
+
+    .overview header{
+        font-size: .8rem;
+    }
+
+    
+
+    .overview p{
+        min-width: 300px;
+        font-size: .6rem;
+        font-weight: 400;
+    }
+
+    .rating__section header{
+        font-size: 1rem;
+    }
+
+    .stars img{
+        width: 12px !important;
+        height: 12px !important;
+    }
+
+    .buttons__section-details{
+        align-items: center;
+        justify-content: start;
+    }
+
+    .button-play , .button-comments{
+        flex : 0;
+        min-width: 120px;
+        height: 30px;
+        font-size: .7rem;
+    }
+
+    .header__wrapper h2{
+        font-size: 1.2rem;
+    }
+
+    .next__icons {
+        display: none;
+    }
+
+    .favorites_button{
+        width: 32px;
+        height: 32px;
+        padding: 0;
+        text-align: center;
+    }
+}
+
+@media (max-width : 450px){
+    .details{
+        margin: 0;
+    }
+
+    .details__container{
+        justify-content: space-evenly;
+        margin-top: 150px;
+    }
+
+    .movie__details{
+        max-width: 220px;
+        justify-content: space-evenly;
+    }
+
+    .card , .card img{
+        width: 90px;
+        height: 160px;
+    }
+
+    .release-date{
+        font-size: .7rem !important;
+    }
+
+    .header__section header{
+        font-size: .9rem;
+    }
+
+    .overview header{
+        font-size: .7rem;
+    }
+
+    .overview{
+        width: 200px;
+    }
+
+    .overview p{
+        min-width: 400px;
+        font-size: .5rem;
+        font-weight: 400;
+    }
+
+    .rating__section{
+        display: none;
+    }
+
+    .rating__section header{
+        font-size: .9rem;
+    }
+
+    .stars img{
+        width: 10px !important;
+        height: 10px !important;
+    }
+
+    .buttons__section-details{
+        align-items: center;
+        justify-content: start;
+    }
+
+    .button-play , .button-comments{
+        flex : 0;
+        min-width: 80px;
+        height: 22px;
+        font-size: .5rem;
+        border-width: 2px;
+    }
+
+    .header__wrapper h2{
+        font-size: 1.2rem;
+    }
+
+    .next__icons {
+        display: none;
+    }
+
+    .favorites_button{
+        width: 24px;
+        height: 24px;
+        font-size: .6rem;
+        padding: 0;
+        text-align: center;
+    }
 }

@@ -82,3 +82,72 @@
     font-size: 24px;
     font-weight: 400;
 }
+
+@media (max-width : 990px){
+    .container__comments header{
+        font-size: 1.2rem;
+    }
+
+    .comments__wrap{
+        width: 80%;
+        max-height: 100px;
+    }
+
+    .user-name{
+        font-size: 1rem;
+    }
+
+    .published-date{
+        font-size: .7rem !important;
+    }
+
+    .rating{
+        font-size: .9rem;
+    }
+
+    .comments__comment p{
+        font-size: .9rem;
+    }
+}
+
+@media (max-width : 450px){
+    .comments__comment{
+        width: 350px;
+    }
+
+    .container__comments header{
+        font-size: 1rem;
+    }
+
+    .comments__wrap{
+        width: 95%;
+        max-height: 150px;
+        padding: 1.5rem;
+        gap : 1rem;
+    }
+
+
+    .comments__top img{
+        display: none;
+    }
+
+    .user-name{
+        font-size: .7rem;
+    }
+
+    .published-date{
+        font-size: .5rem !important;
+    }
+
+    .rating{
+        font-size: .7rem;
+    }
+
+    .comments__comment p{
+        font-size: .5rem;
+    }
+
+    .see-more{
+        font-size: .7rem;
+    }
+}

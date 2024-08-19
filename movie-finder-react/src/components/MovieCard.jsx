@@ -41,9 +41,7 @@ export default function MovieCard({ movies, title , showScrollButtons = true , d
                 </div>}
                 
             </div>
-            <div className="cards__wrapper snaps-inline" ref={scrollContainerRef} style={!defaultGrid ? {gridTemplateColumns : 'repeat(4 , auto)',
-                gridAutoFlow : 'rows'
-            }: {gridTemplateColumns : 'repeat(4 , auto)' , gridAutoFlow : 'column'}}>
+            <div className={`cards__wrapper snaps-inline ${!defaultGrid ? 'default-grid' : ''}`} ref={scrollContainerRef}>
                 {movies.map(movie => (
                     movie.poster_path && (
                         <div key={movie.id} className="item">

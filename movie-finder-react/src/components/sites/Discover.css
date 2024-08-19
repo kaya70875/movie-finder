@@ -52,3 +52,69 @@
     display: flex;
     gap : 2rem;
 }
+
+@media (max-width : 1253px){
+    .cards__wrapper.default-grid{
+        grid-template-columns: repeat(3 , auto);
+        grid-auto-flow: row;
+    }
+}
+
+@media (max-width : 1007px){
+    .cards__wrapper.default-grid{
+        grid-template-columns: repeat(2 , auto);
+        grid-auto-flow: row;
+    }
+
+    .discover-cards-header h3{
+        min-width: 100px;
+        font-size: 1rem;
+    }
+
+    .discover-filter-section{
+        width: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .filters-filter{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap : 1rem;
+    }
+}
+
+@media (max-width : 729px){
+    .cards__wrapper.default-grid{
+        grid-template-columns: auto;
+        grid-auto-flow: row;
+    }
+
+    .discover-cards-header h3{
+        display: none;
+    }
+}
+
+@media (max-width : 661px){
+    .discover-header-section{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        text-align: center;
+        max-width: 400px;
+    }
+}
+
+@media (max-width : 586px){
+    .dropdown-button{
+        font-size: .9rem !important;
+    }
+}
+
+@media (max-width : 450px){
+    .cards__wrapper.default-grid{
+        grid-template-columns: repeat(3 , auto);
+    }
+}

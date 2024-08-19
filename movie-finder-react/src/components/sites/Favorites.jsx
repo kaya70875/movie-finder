@@ -26,13 +26,16 @@ export default function Favorites() {
                             width : '200px' , height : '250px' , backgroundColor : 'var(--main-background)',
                             fontSize : '.9rem'
                         }}>
-                            <ul className='profile-list-items'>
-                                <li>All</li>
-                                <li>By Genre</li>
-                                <li>By Year</li>
-                                <li>By Popularity</li>
-                                <li>By Rating</li>
-                            </ul>
+                            <div className="profile-list-items">
+                                <ul>
+                                    <li>All</li>
+                                    <li>By Genre</li>
+                                    <li>By Year</li>
+                                    <li>By Popularity</li>
+                                    <li>By Rating</li>
+                                </ul>
+                            </div>
+                            
                         </Dropdown>
                         
                     </div>

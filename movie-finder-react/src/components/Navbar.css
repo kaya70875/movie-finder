@@ -23,8 +23,8 @@
     gap : 3rem;
 }
 
-.navbar__left header{
-    font-size: 30px;
+.navbar__header{
+    font-size: 1.8rem;
     font-weight: 600;
 }
 
@@ -35,7 +35,7 @@
     font-size: 14px;
     outline: none;
 
-    min-width: 400px;
+    width: 400px;
 }
 
 .profile{
@@ -139,4 +139,115 @@
     width: 128px;
     height: 128px;
     object-fit: contain;
+}
+
+@media (max-width : 964px){
+    .navbar__header{
+        min-width: 200px;
+        font-size: 1.5rem;
+    }
+    .items .list-items{
+        gap : 2rem;
+    }
+
+    .navbar-input{
+        width: 300px;
+    }
+}
+
+@media (max-width : 812px){
+    .navbar-input{
+        width: 200px;
+    }
+}
+
+@media (max-width : 660px){
+    .navbar__header{
+        font-size: 1.3rem;
+    }
+
+    .container{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .navbar__left{
+        gap : 0;
+    }
+
+    .dropdown__content{
+        width: 300px;
+        height: 50vh;
+        left : -50px;
+    }
+
+    .item-image img{
+        width: 64px;
+        height: 64px;
+    }
+
+    .item-info p{
+        font-size: 1rem;
+    }
+}
+
+@media (max-width : 587px){
+    .navbar__header{
+        font-size: 1rem;
+        text-align: center;
+    }
+
+    .navbar__left{
+        display: flex;
+        flex-direction: column;
+    }
+
+    .dropdown__content h2{
+        font-size: 1.2rem;
+    }
+    .list-items{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .list-items li{
+        margin-top: 25px;
+    }
+
+    .container{
+        justify-content: space-around;
+    }
+}
+
+@media (max-width : 450px){
+    .navbar-input{
+        width: 150px;
+
+    }
+
+    .dropdown-button{
+        width: 36px !important;
+        height: 36px !important;
+    }
+
+    .dropdown__content{
+        width: 250px;
+        height: 275px;
+    }
+
+    .dropdown__content h2{
+        font-size: 1rem;
+    }
+
+    .item-image img{
+        width: 48px;
+        height: 48px;
+    }
+
+    .item-info p{
+        font-size: .7rem;
+    }
+
 }

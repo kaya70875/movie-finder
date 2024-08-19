@@ -28,6 +28,20 @@ export default function Navbar() {
     }
   }
 
+  const isMobile = window.matchMedia('(max-width : 450px)').matches;
+  console.log(isMobile);
+
+  const dropdownStyle = {
+    width : isMobile ? '150px' : '200px',
+    height : isMobile ? '200px' : '300px',
+    left : isMobile ? '-50px' : '-150px'
+  }
+
+  const buttonStyle = {
+    fontSize : isMobile ? '.7rem' : '1.2rem',
+    fontWeight : isMobile ? '500' : '400'
+  }
+
   useEffect(() => {
     const dropdownContent = document.querySelector('.dropdown__content');
     searchQuery ? dropdownContent.style.display = 'block' : dropdownContent.style.display = 'none';
@@ -79,9 +93,9 @@ export default function Navbar() {
                 <svg xmlns="http://www.w3.org/2000/svg" width="48" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-toggle-right"><rect x="1" y="5" width="32" height="14" rx="7" ry="7"></rect><circle cx="26" cy="12" r="3"></circle></svg> }
               </li>
               <li>
-                <Dropdown dropdownStyle={{width : '200px' , height : '300px' , backgroundColor: 'var(--main-background)' , left : '-150px'}}
+                <Dropdown dropdownStyle={dropdownStyle}
                 buttonStyle={{backgroundColor : 'var(--primary-button-color)' , color : 'var(--secondary-background)' , borderRadius : '100%' , width : '48px' , height : '48px',
-                  border : 'none' , fontSize : '1.2rem' , fontWeight : '500'
+                  border : 'none' ,
                 }} dropdownLabel={'A'}>
                   <div className='profile-list-items'>
                     <ul style={{display : 'flex' , justifyContent : 'space-evenly' , alignItems : 'center'}}>
