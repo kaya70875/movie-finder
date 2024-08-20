@@ -94,7 +94,7 @@ export default function SignUp() {
           <p className={passwordMatch && !validMatch && password ? 'instructions' : 'offscreen'}>Passwords do not match!</p>
           <button disabled={loading} className="auth-button">Sign Up</button>
         </form>
-        <Link to='/login'>Already Have Account ?</Link>
+        <Link to='/movie-finder/login'>Already Have Account ?</Link>
       </div>
     </div>
   );

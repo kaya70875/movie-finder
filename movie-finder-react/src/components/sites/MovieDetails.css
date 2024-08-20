@@ -274,11 +274,12 @@
 @media (max-width : 450px){
     .details{
         margin: 0;
+        overflow-x: hidden;
     }
 
     .details__container{
         justify-content: space-evenly;
-        margin-top: 150px;
+        margin-top: 80px;
     }
 
     .movie__details{
@@ -289,6 +290,8 @@
     .card , .card img{
         width: 90px;
         height: 160px;
+        box-shadow: none;
+        border : 1px solid #D99090;
     }
 
     .release-date{
@@ -340,7 +343,7 @@
     }
 
     .header__wrapper h2{
-        font-size: 1.2rem;
+        font-size: 1rem;
     }
 
     .next__icons {
@@ -353,5 +356,9 @@
         font-size: .6rem;
         padding: 0;
         text-align: center;
+    }
+
+    .item__overlay{
+        display: none;
     }
 }

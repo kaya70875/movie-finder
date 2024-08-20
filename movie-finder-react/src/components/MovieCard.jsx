@@ -1,5 +1,5 @@
 import React, { useEffect, useRef, useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, Navigate, useNavigate } from 'react-router-dom';
 import './MainContent.css';
 import { useFavorites } from '../context/FavoritesContext';
 
@@ -7,6 +7,9 @@ export default function MovieCard({ movies, title , showScrollButtons = true , d
     const { titles, handleAddToFavorites } = useFavorites();
     const [scrollPosition , setScrollPosition] = useState(0);
     const scrollContainerRef = useRef(null);
+    const navigate = useNavigate();
+
+    const isMobile = window.matchMedia('(max-width : 450px)').matches;
 
     const scrollContainer = (direction) => {
         const container = scrollContainerRef.current;
@@ -27,6 +30,10 @@ export default function MovieCard({ movies, title , showScrollButtons = true , d
 
     }, []);
 
+    function handleMobileNavigate(movieId){
+        navigate(`/movie-finder/details/${movieId}`);
+    }
+
     return (
         <div className="main__content">
             <div className="header__wrapper">
@@ -44,7 +51,7 @@ export default function MovieCard({ movies, title , showScrollButtons = true , d
             <div className={`cards__wrapper snaps-inline ${!defaultGrid ? 'default-grid' : ''}`} ref={scrollContainerRef}>
                 {movies.map(movie => (
                     movie.poster_path && (
-                        <div key={movie.id} className="item">
+                        <div key={movie.id} className="item" onClick={() => isMobile && handleMobileNavigate(movie.id)}>
                             <img src={`https://image.tmdb.org/t/p/w500${movie.poster_path}`} alt={movie.title} />
                             <div className="item__overlay">
                                 <button
@@ -57,7 +64,7 @@ export default function MovieCard({ movies, title , showScrollButtons = true , d
                                 >
                                     {titles[movie.id] || '🤍'}
                                 </button>
-                                <Link className='details_button' to={`/details/${movie.id}`}>i</Link>
+                                <Link className='details_button' to={`/movie-finder/details/${movie.id}`}>i</Link>
                             </div>
                         </div>
                     )

@@ -117,4 +117,36 @@
     .cards__wrapper.default-grid{
         grid-template-columns: repeat(3 , auto);
     }
+
+    .discover-d{
+        margin-top: 80px;
+    }
+
+    .discover-filter-section{
+        width: 300px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        text-align: center;
+    }
+
+    .discover-header-section h2{
+        font-size: 1rem;
+    }
+
+    .discover-header-section p{
+        font-size: .8rem;
+    }
+
+    .filters-filter{
+        min-width: 350px;
+        gap : 3rem;
+    }
+
+    .discover-icons p{
+        text-align: center;
+        font-size: .8rem;
+        text-wrap: nowrap;
+    }
+
 }

@@ -19,7 +19,7 @@ function AppWithLocation() {
   const location = useLocation();
   const {theme} = useTheme();
 
-  const showNavbar = location.pathname !== '/login' && location.pathname !== '/register';
+  const showNavbar = location.pathname !== '/movie-finder/login' && location.pathname !== '/movie-finder/register';
 
   return (
       <AuthProvider>
@@ -34,14 +34,14 @@ function AppWithLocation() {
             <div className="container">
               <Routes>
                 <Route element={<PrivateRoute />}>
-                  <Route path="/" element={<MainContent/>} />
-                  <Route path="/details/:id" element={<MovieDetails />} />
-                  <Route path="/favorites" element={<Favorites />} />
-                  <Route path="/discover" element={<Discover />} />
+                  <Route path="/movie-finder" element={<MainContent/>} />
+                  <Route path="/movie-finder/details/:id" element={<MovieDetails />} />
+                  <Route path="/movie-finder/favorites" element={<Favorites />} />
+                  <Route path="/movie-finder/discover" element={<Discover />} />
                 </Route>
                 {/* Public routes */}
-                <Route path="/register" element={<Register />} />
-                <Route path="/login" element={<Login />} />
+                <Route path="/movie-finder/register" element={<Register />} />
+                <Route path="/movie-finder/login" element={<Login />} />
               </Routes>
             </div>
           </div>

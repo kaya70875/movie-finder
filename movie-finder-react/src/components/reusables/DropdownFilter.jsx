@@ -2,6 +2,15 @@ import React from 'react';
 import Dropdown from '../reusables/Dropdown';
 
 export default function DropdownFilter({ label, items = [], onSelect, selectedItems }) {
+
+    const isMobile = window.matchMedia('(max-width : 450px)').matches;
+
+    const dropdownStyle = {
+      width : isMobile ? '120px' : '200px',
+      height : isMobile ? '180px' : '300px',
+      left : isMobile ? '-35px' : '-150px',
+    }
+
     return (
         <Dropdown 
             dropdownLabel={label}
@@ -9,14 +18,8 @@ export default function DropdownFilter({ label, items = [], onSelect, selectedIt
                 border: 'none', 
                 background: 'none', 
                 fontSize: '1rem', 
-                color: 'var(--primary-font-color)'
             }} 
-            dropdownStyle={{
-                width: '200px',
-                height : '300px',
-                backgroundColor: 'var(--main-background)', 
-                left: '-75px'
-            }}
+            dropdownStyle={dropdownStyle}
         >
             <div className="profile-list-items">
                 <h3>{label}</h3>

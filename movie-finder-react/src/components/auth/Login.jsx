@@ -27,7 +27,7 @@ export default function Login() {
     try{
       setLoading(true)
       await logIn(email.trim() , password)
-      navigate('/');
+      navigate('/movie-finder');
     }catch(err){
       if (err.code === 'auth/invalid-credential') {
         setError("Wrong Username or Password");
@@ -67,7 +67,7 @@ export default function Login() {
           />
           <button disabled={loading} className='auth-button'>{loading ? 'Logging' : 'Log In'}</button>
         </form>
-        <Link to='/register'>Need An Account ?</Link>
+        <Link to='/movie-finder/register'>Need An Account ?</Link>
       </div>
     </div>
   );

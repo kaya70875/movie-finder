@@ -22,24 +22,18 @@ export default function Navbar() {
   async function handleLogOut(){
     try{
       await logOut();
-      navigate('/login');
+      navigate('/movie-finder/login');
     }catch(err){
       console.log(err)
     }
   }
 
   const isMobile = window.matchMedia('(max-width : 450px)').matches;
-  console.log(isMobile);
 
   const dropdownStyle = {
-    width : isMobile ? '150px' : '200px',
-    height : isMobile ? '200px' : '300px',
-    left : isMobile ? '-50px' : '-150px'
-  }
-
-  const buttonStyle = {
-    fontSize : isMobile ? '.7rem' : '1.2rem',
-    fontWeight : isMobile ? '500' : '400'
+    width : isMobile ? '120px' : '200px',
+    height : isMobile ? '180px' : '300px',
+    left : isMobile ? '-80px' : '-150px'
   }
 
   useEffect(() => {
@@ -56,7 +50,7 @@ export default function Navbar() {
         <div className="container">
           <div className="navbar__left">
             
-            <header className='navbar__header'>Movie Finder</header>
+            <p className='navbar__header'>Movie Finder</p>
             <div className="dropdown" tabIndex={0} onBlur={(e) => {
               if(!e.currentTarget.contains(e.relatedTarget)){
                 setIsFocus(false);
@@ -69,7 +63,7 @@ export default function Navbar() {
                 <h2>Top Results</h2>
                 <div className="dropdown__elements">
                   {searchResults?.slice(0 , 12).map(movie => movie.poster_path && (
-                    <Link to={`/details/${movie.id}`} state={{ movie }}>
+                    <Link to={`/movie-finder/details/${movie.id}`} state={{ movie }}>
                         <div className="dropdown__item">
                         <div className="item-image">
                           <img src={`https://image.tmdb.org/t/p/w500${movie.poster_path}`} alt={movie.title} />
