@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import {useAuth} from '../../context/AuthContext';
 import { Link, useNavigate } from 'react-router-dom';
-import './css/AuthPage.css';
+import './css/_AuthPage.scss';
 
 export default function Login() {
   const [email, setEmail] = useState('');

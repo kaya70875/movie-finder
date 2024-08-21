@@ -1,11 +1,12 @@
 import React, { useEffect, useState } from 'react'
 import {useParams } from 'react-router-dom'
 import useFetch from '../../hooks/useFetch';
-import './MovieDetails.css'
 import starImage from '../../img/star-new.png'
 import CommentSection from './CommentSection';
 import {useFavorites} from '../../context/FavoritesContext';
 import MovieCard from '../MovieCard';
+
+import './_MovieDetails.scss'
 
 export default function MovieDetails() {
     const {id} = useParams();

@@ -1,4 +1,4 @@
-  import './MainContent.css'
+  import '../sass/components/_MainContent.scss';
   import useFetch from '../hooks/useFetch';
   import MovieCard from './MovieCard';
 

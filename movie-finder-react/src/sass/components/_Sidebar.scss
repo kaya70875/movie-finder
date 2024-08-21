@@ -89,3 +89,10 @@
         display: none;
     }
 }
+
+@media (max-width : 450px){
+    .home svg , .discover svg , .sidebar__favorites svg{
+        width: 18px;
+        height: 18px;
+    }
+}

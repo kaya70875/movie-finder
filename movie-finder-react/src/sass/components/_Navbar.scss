@@ -49,22 +49,23 @@
 
 .items{
     font-size: 14px;
-}
 
-.items .list-items{
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    gap : 100px;
-    list-style: none;
-    cursor: pointer;
-}
+    .list-items{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap : 100px;
+        list-style: none;
+        cursor: pointer;
 
-.items .list-items li a{
-    text-decoration: none;
-    font-size: 16px;
-    font-weight: 300;
-    color : var(--primary-font-color);
+    }
+
+    a{
+        text-decoration: none;
+        font-size: 16px;
+        font-weight: 300;
+        color : var(--primary-font-color);
+    }
 }
 
 .link{
@@ -96,21 +97,20 @@
     overflow-y: auto;
     width: calc(100% + 50%);
     height: 80vh;
-  }
 
-.dropdown__content h2{
-    font-weight: bold;
-    width: 100%;
-    
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    padding: 2rem;
-}
-  
-.dropdown:hover .dropdown__content {
-    display: block;
-}
+    h2{
+        font-weight: bold;
+        width: 100%;
+        
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        padding: 2rem;
+    }
+    &:hover{
+        display: block;
+    }
+  }
 
 .dropdown__elements{
     display: flex;
@@ -128,11 +128,11 @@
     padding: .7rem;
     border-radius: 5px;
     color : var(--primary-font-color);
-}
 
-.dropdown__item:hover{
-    background: var(--primary-hover-color);
-    cursor: pointer;
+    &:hover{
+        background: var(--primary-hover-color);
+        cursor: pointer;
+    }
 }
 
 .item-image img{
@@ -210,10 +210,10 @@
         display: flex;
         justify-content: center;
         align-items: center;
-    }
 
-    .list-items li{
-        margin-top: 25px;
+        li{
+            margin-top: 25px;
+        }
     }
 }
 
@@ -265,11 +265,11 @@
         justify-content: center;
         align-items: center;
         margin-top: 0;
-    }
 
-    .list-items li svg{
-        width: 40px;
-        height: 15px;
+        svg{
+            width: 40px;
+            height: 15px;
+        }
     }
 
     .item-image img{
@@ -280,10 +280,4 @@
     .item-info p{
         font-size: .7rem;
     }
-
-    .home svg , .discover svg , .sidebar__favorites svg{
-        width: 15px;
-        height: 15px;
-    }
-
 }

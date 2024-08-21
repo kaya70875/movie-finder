@@ -13,7 +13,7 @@ import ScrollToTop from './components/reusables/ScrollToTop';
 import { ThemeProvider, useTheme } from './context/ThemeContext';
 import Discover from './components/sites/Discover';
 
-import './style.css';
+import './style.scss';
 
 function AppWithLocation() {
   const location = useLocation();

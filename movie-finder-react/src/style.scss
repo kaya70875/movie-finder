@@ -1,0 +1,43 @@
+@import './sass/helpers/variables';
+@import './sass/helpers/mixins';
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Poppins', sans-serif;
+    transition: 0.05s;
+}
+
+:root {
+    --sidebar-width: #{$sidebar-width};
+    --collapsed-sidebar-width: #{$collapsed-sidebar-width};
+    --main-background: #{$main-background};
+    --secondary-background: #{$secondary-background};
+    --primary-font-color: #{$primary-font-color};
+    --primary-button-color: #{$primary-button-color};
+    --primary-hover-color: #{$primary-hover-color};
+    --secondary-hover-color: #{$secondary-hover-color};
+    --primary-active-color: #{$primary-active-color};
+    --button-hover-color: #{$button-hover-color};
+}
+
+[data-theme='light'] {
+    --main-background: #{$light-main-background};
+    --secondary-background: #{$light-secondary-background};
+    --primary-font-color: #{$light-primary-font-color};
+    --primary-button-color: #{$light-primary-button-color};
+    --primary-hover-color: #{$light-primary-hover-color};
+    --secondary-hover-color: #{$light-secondary-hover-color};
+    --primary-active-color: #{$light-primary-active-color};
+    --button-hover-color: #{$light-button-hover-color};
+}
+
+.app {
+    background: var(--main-background);
+}
+
+.slide__container {
+    margin-left: var(--sidebar-width);
+    padding: 2rem;
+}
