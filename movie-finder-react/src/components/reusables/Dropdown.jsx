@@ -1,5 +1,6 @@
-import React, { useState, useRef, useEffect } from 'react';
+import React, { useState, useRef } from 'react';
 import './_Dropdown.scss';
+import useClickOutside from '../../hooks/useClickOutside';
 
 export default function Dropdown({dropdownLabel ,dropdownStyle, buttonStyle , children}) {
     
@@ -10,18 +11,7 @@ export default function Dropdown({dropdownLabel ,dropdownStyle, buttonStyle , ch
         setIsOpen(!isOpen);
     };
 
-    const handleClickOutside = (event) => {
-        if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
-            setIsOpen(false);
-        }
-    };
-
-    useEffect(() => {
-        document.addEventListener('mousedown', handleClickOutside);
-        return () => {
-            document.removeEventListener('mousedown', handleClickOutside);
-        };
-    }, []);
+    useClickOutside(dropdownRef , setIsOpen)
 
     return (
         <div className="dropdown" ref={dropdownRef}>

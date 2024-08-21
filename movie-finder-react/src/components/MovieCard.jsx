@@ -1,7 +1,7 @@
 import React, { useEffect, useRef, useState } from 'react';
-import { Link, Navigate, useNavigate } from 'react-router-dom';
-import './MainContent.css';
+import { Link, useNavigate } from 'react-router-dom';
 import { useFavorites } from '../context/FavoritesContext';
+import '../sass/components/_MainContent.scss';
 
 export default function MovieCard({ movies, title , showScrollButtons = true , defaultGrid = true}) {
     const { titles, handleAddToFavorites } = useFavorites();

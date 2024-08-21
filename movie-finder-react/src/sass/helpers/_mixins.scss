@@ -1,0 +1,14 @@
+@mixin flexCenter {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+@mixin defineColors {
+    background : var(--secondary-background);
+    color : var(--primary-font-color);
+}
+
+@mixin buttonAnimation {
+    
+}

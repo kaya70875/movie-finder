@@ -40,21 +40,20 @@
     justify-content: center;
     align-items: center;
     min-height: 250px;
-}
 
-.profile-list-items li {
-    list-style: none;
-    width: 100%;
-    text-align: center;
-    padding: .7rem;
+    li{
+        list-style: none;
+        width: 100%;
+        text-align: center;
+        padding: .7rem;
 
-    cursor: pointer;
-    min-width: 100px;
-    
-}
+        cursor: pointer;
+        min-width: 100px;
+    }
 
-.profile-list-items h3 svg{
-    display: none;
+    h3 svg{
+        display: none;
+    }   
 }
 
 .filters-filter{

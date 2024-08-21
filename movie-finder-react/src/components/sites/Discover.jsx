@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import './_Discover.scss';
+import '../sites/_Discover.scss';
 import useFetch from '../../hooks/useFetch';
 import MovieCard from '../MovieCard';
 import GetGenreId from '../utils/GetGenreId';

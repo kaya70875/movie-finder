@@ -1,9 +1,10 @@
+@import '../helpers/mixins';
+
 .sidebar{
     width: var(--sidebar-width);
     height: 100vh;
 
-    background: var(--secondary-background);
-    color : var(--primary-font-color);
+    @include defineColors;
     
     position: fixed;
     left: 0;
@@ -21,10 +22,8 @@
 }
 
 .sidebar__items{
-    display: flex;
+    @include flexCenter;
     flex-direction: column;
-    align-items: center;
-    justify-content: center;
     gap : 2.5rem;
 
     
@@ -39,9 +38,7 @@
 .sidebar__items > *{
     max-width: 145px;
     min-width: 60px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+    @include flexCenter;
     gap : 1.5rem;
     cursor: pointer;
     padding: .7rem;
@@ -60,8 +57,7 @@
         width: 100vw;
         height: var(--sidebar-height, 60px);
         
-        background: var(--secondary-background);
-        color: var(--primary-font-color);
+        @include defineColors;
         
         position: fixed;
         bottom: 0;
@@ -71,16 +67,12 @@
         transition: 0.3s;
         
         margin-top: 0;
-        display: flex;
-        align-items: center;
-        justify-content: center;
+        @include flexCenter;
     }
 
     .sidebar__items{
-        display: flex;
+        @include flexCenter;
         flex-direction: row;
-        justify-content: center;
-        align-items: center;
         gap : 2rem;
         margin-top: -20px;
     }

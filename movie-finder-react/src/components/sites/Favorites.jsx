@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import './_Favorites.scss';
+import '../sites/_Favorites.scss';
 import MovieCard from '../MovieCard';
 import Dropdown from '../reusables/Dropdown';
 

@@ -9,18 +9,18 @@
 
     margin-top : 50px;
 
-    color : var(--primary-font-color)
+    color : var(--primary-font-color);
+
+    header{
+        font-size: 32px;
+        font-weight: bold;
+    }
 }
 
 .wrap__containers{
     display: grid;
     grid-template-rows: repeat(1 , 1fr);
     gap : 40px;
-}
-
-.container__comments header{
-    font-size: 32px;
-    font-weight: bold;
 }
 
 .comments__wrap{
@@ -36,6 +36,7 @@
     max-height: 300px;
 
     box-shadow: 1px 1px 1px rgba(0, 0, 0, 0.685);
+    
 }
 
 .comments__wrap.active{
@@ -57,13 +58,13 @@
 
 .comments__comment{
     overflow: hidden;
-}
 
-.comments__comment p{
-    font-size: 16px;
-    font-weight: 300;
-    letter-spacing: 2px;
-    overflow: hidden;
+    p{
+        font-size: 16px;
+        font-weight: 300;
+        letter-spacing: 2px;
+        overflow: hidden;
+    }
 }
 
 .see-more{

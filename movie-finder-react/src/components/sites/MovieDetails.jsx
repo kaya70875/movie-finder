@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import {useParams } from 'react-router-dom'
 import useFetch from '../../hooks/useFetch';
 import starImage from '../../img/star-new.png'
@@ -6,7 +6,9 @@ import CommentSection from './CommentSection';
 import {useFavorites} from '../../context/FavoritesContext';
 import MovieCard from '../MovieCard';
 
-import './_MovieDetails.scss'
+import '../sites/_MovieDetails.scss';
+import MovieTrailers from '../videos/MovieTrailers';
+import useClickOutside from '../../hooks/useClickOutside';
 
 export default function MovieDetails() {
     const {id} = useParams();
@@ -17,6 +19,11 @@ export default function MovieDetails() {
 
     const similarMovies = useFetch(`/movie/${id}/similar?`);
     const resultSimilar = similarMovies?.results || [];
+
+    const [isTrailerVisible , setIsTrailerVisible] = useState(false);
+    const popUpRef = useRef(null);
+
+    useClickOutside(popUpRef , setIsTrailerVisible);
 
     useEffect(() => {
       if (data && data.vote_average) {
@@ -38,6 +45,9 @@ export default function MovieDetails() {
       }
     }, [data]);
 
+    const handlePopUp = () => setIsTrailerVisible(true);
+    const handleCloseTrailer = () => setIsTrailerVisible(false);
+
   return (
     <>
       <div className="details">
@@ -56,8 +66,9 @@ export default function MovieDetails() {
               <p>{data.overview}</p>
             </div>
             <div className="buttons__section-details">
-              <button className='button-play'>Play</button>
-              <button className='button-comments'>Comments</button>
+              <button className='primary-button' onClick={handlePopUp}>Watch Trailer</button>
+              <MovieTrailers movieId={id} isVisible={isTrailerVisible} onClose={handleCloseTrailer} ref={popUpRef}></MovieTrailers>
+              <button className='secondary-button'>Comments</button>
             </div>
           </div>
           <div className="rating__section">

@@ -1,5 +1,5 @@
 import React, {useState } from 'react'
-import './_CommentSection.scss'
+import '../sites/_CommentSection.scss'
 import useFetch from '../../hooks/useFetch'
 
 export default function CommentSection({id}) {
