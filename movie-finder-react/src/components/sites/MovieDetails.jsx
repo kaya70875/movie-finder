@@ -9,6 +9,7 @@ import MovieCard from '../MovieCard';
 import '../sites/_MovieDetails.scss';
 import MovieTrailers from '../videos/MovieTrailers';
 import useClickOutside from '../../hooks/useClickOutside';
+import ActorsCard from '../ActorsCard';
 
 export default function MovieDetails() {
     const {id} = useParams();
@@ -80,6 +81,7 @@ export default function MovieDetails() {
           </div>
         </div>
         <div className="container-comment-similar">
+          <ActorsCard movieId={id} />
           <MovieCard movies={resultSimilar.slice(0 , 21)} title={'Similar Movies'} showScrollButtons={true}></MovieCard>
           <CommentSection id={id}></CommentSection>
         </div>

@@ -2,33 +2,15 @@ import React, { useEffect, useRef, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { useFavorites } from '../context/FavoritesContext';
 import '../sass/components/_MainContent.scss';
+import useScroll from '../hooks/useScroll';
 
 export default function MovieCard({ movies, title , showScrollButtons = true , defaultGrid = true}) {
     const { titles, handleAddToFavorites } = useFavorites();
-    const [scrollPosition , setScrollPosition] = useState(0);
     const scrollContainerRef = useRef(null);
     const navigate = useNavigate();
 
     const isMobile = window.matchMedia('(max-width : 450px)').matches;
-
-    const scrollContainer = (direction) => {
-        const container = scrollContainerRef.current;
-        const scrollAmount = direction === 'left' ? -900 : 900;
-        container.scrollBy({ left: scrollAmount, behavior: 'smooth' });
-    };
-    
-    useEffect(() => {
-        const container = scrollContainerRef.current;
-        const handleScroll = () => {
-            setScrollPosition(container.scrollLeft);
-        }
-
-        container.addEventListener('scroll' , handleScroll);
-        return () => {
-            container.removeEventListener('scroll', handleScroll);
-        }
-
-    }, []);
+    const {scrollPosition , scrollContainer} = useScroll(scrollContainerRef);
 
     function handleMobileNavigate(movieId){
         navigate(`/movie-finder/details/${movieId}`);

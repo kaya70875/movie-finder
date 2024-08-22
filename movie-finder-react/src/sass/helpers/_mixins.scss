@@ -4,6 +4,12 @@
     align-items: center;
 }
 
+@mixin flexBetween {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
 @mixin defineColors {
     background : var(--secondary-background);
     color : var(--primary-font-color);

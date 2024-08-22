@@ -28,3 +28,15 @@
     color: var(--primary-font-color);
     cursor: pointer;
   }
+
+@media (max-width : 450px){
+  .popup-content{
+    width: 85%;
+    height: 40%;
+  }
+
+  .iframe{
+    width: 100%;
+    height: 100%;
+  }
+}
