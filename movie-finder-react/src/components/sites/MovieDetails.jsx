@@ -6,10 +6,13 @@ import CommentSection from './CommentSection';
 import {useFavorites} from '../../context/FavoritesContext';
 import MovieCard from '../MovieCard';
 
+import {auth} from "../../firebase/FirebaseAuth";
+
 import '../sites/_MovieDetails.scss';
 import MovieTrailers from '../videos/MovieTrailers';
 import useClickOutside from '../../hooks/useClickOutside';
 import ActorsCard from '../ActorsCard';
+import addMovieToHistory from '../../firebase/addMovieToHistory';
 
 export default function MovieDetails() {
     const {id} = useParams();
@@ -49,6 +52,18 @@ export default function MovieDetails() {
     const handlePopUp = () => setIsTrailerVisible(true);
     const handleCloseTrailer = () => setIsTrailerVisible(false);
 
+    const handleWatch = async() => {
+      const user = auth.currentUser;
+      console.log('current user : ' + user.uid);
+
+      if(user){
+        await addMovieToHistory(user.uid , id);
+        alert('Movie Added to Your Watched List!');
+      }else{
+        alert('Please log in to track your movies!');
+      }
+    }
+
   return (
     <>
       <div className="details">
@@ -69,7 +84,7 @@ export default function MovieDetails() {
             <div className="buttons__section-details">
               <button className='primary-button' onClick={handlePopUp}>Watch Trailer</button>
               <MovieTrailers movieId={id} isVisible={isTrailerVisible} onClose={handleCloseTrailer} ref={popUpRef}></MovieTrailers>
-              <button className='secondary-button'>Comments</button>
+              <button className='secondary-button' onClick={handleWatch}>Add As Watched</button>
             </div>
           </div>
           <div className="rating__section">

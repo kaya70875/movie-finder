@@ -12,6 +12,7 @@ import Sidebar from './components/Sidebar';
 import ScrollToTop from './components/reusables/ScrollToTop';
 import { ThemeProvider, useTheme } from './context/ThemeContext';
 import Discover from './components/sites/Discover';
+import Watched from './components/sites/Watched';
 
 import './style.scss';
 
@@ -38,6 +39,7 @@ function AppWithLocation() {
                   <Route path="/movie-finder/details/:id" element={<MovieDetails />} />
                   <Route path="/movie-finder/favorites" element={<Favorites />} />
                   <Route path="/movie-finder/discover" element={<Discover />} />
+                  <Route path="/movie-finder/watched" element={<Watched />}/>
                 </Route>
                 {/* Public routes */}
                 <Route path="/movie-finder/register" element={<Register />} />

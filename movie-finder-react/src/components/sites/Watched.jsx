@@ -1,0 +1,72 @@
+import React, { useEffect, useState } from "react";
+import "../sites/_Watched.scss";
+import MovieCard from "../MovieCard";
+import { auth } from "../../firebase/FirebaseAuth";
+import getMovieHistory from "../../firebase/getMovieHistory";
+import axios from "axios";
+
+const API_KEY = import.meta.env.VITE_MOVIE_DATABASE_API;
+
+export default function Watched() {
+  const [movies, setMovies] = useState([]);
+  const [watchedMovieDetails, setWatchedMovieDetails] = useState([]);
+  const user = auth.currentUser;
+
+  useEffect(() => {
+    if (user) {
+      const fetchHistory = async () => {
+        try {
+          const watchedMovieIds = await getMovieHistory(user.uid);
+
+          // Fetch movie details and similar movies
+          const watchedMovieDetailsResponses = await Promise.all(
+            watchedMovieIds.map(movieId =>
+              axios.get(`https://api.themoviedb.org/3/movie/${movieId}?api_key=${API_KEY}`)
+            )
+          );
+
+          const similarMoviesResponses = await Promise.all(
+            watchedMovieIds.map(movieId =>
+              axios.get(
+                `https://api.themoviedb.org/3/movie/${movieId}/recommendations?api_key=${API_KEY}`
+              )
+            )
+          );
+
+          // Extract data
+          const watchedMovieDetailsData = watchedMovieDetailsResponses.map(res => res.data);
+          const similarMovies = similarMoviesResponses.flatMap(res => res.data.results || []);
+
+          // Filter out movies that are already watched
+          const filteredMovies = similarMovies.filter(
+            (movie, index, self) =>
+              index === self.findIndex(m => m.id === movie.id) &&
+              !watchedMovieIds.includes(movie.id.toString())
+          );
+
+          // Update states
+          setWatchedMovieDetails(watchedMovieDetailsData);
+          setMovies(filteredMovies);
+        } catch (error) {
+          console.error("Error fetching movie data", error);
+        }
+      };
+
+      fetchHistory();
+    }
+  }, [user]);
+
+  return (
+    <div className="watched">
+      <div className="watched-header">
+        <h2>Watched List</h2>
+        <p>Get recommendations based on movies that you watched!</p>
+      </div>
+
+      <div className="slide__container">
+        <MovieCard movies={watchedMovieDetails} title="You Watched" showScrollButtons={true} />
+        <MovieCard movies={movies} title="Recommended For You" showScrollButtons={true} />
+      </div>
+    </div>
+  );
+}
