@@ -4,18 +4,23 @@ import MovieCard from "../MovieCard";
 import { auth } from "../../firebase/FirebaseAuth";
 import getMovieHistory from "../../firebase/getMovieHistory";
 import axios from "axios";
+import Skeleton from "react-loading-skeleton";
+import 'react-loading-skeleton/dist/skeleton.css';
 
 const API_KEY = import.meta.env.VITE_MOVIE_DATABASE_API;
 
 export default function Watched() {
   const [movies, setMovies] = useState([]);
   const [watchedMovieDetails, setWatchedMovieDetails] = useState([]);
+  const [loading , setLoading] = useState(true);
+  
   const user = auth.currentUser;
 
   useEffect(() => {
     if (user) {
       const fetchHistory = async () => {
         try {
+          setLoading(true);
           const watchedMovieIds = await getMovieHistory(user.uid);
 
           // Fetch movie details and similar movies
@@ -49,6 +54,8 @@ export default function Watched() {
           setMovies(filteredMovies);
         } catch (error) {
           console.error("Error fetching movie data", error);
+        } finally{
+          setLoading(false);
         }
       };
 
@@ -64,8 +71,15 @@ export default function Watched() {
       </div>
 
       <div className="slide__container">
-        <MovieCard movies={watchedMovieDetails} title="You Watched" showScrollButtons={true} />
-        <MovieCard movies={movies} title="Recommended For You" showScrollButtons={true} />
+        {loading ? (
+          <Skeleton count={2} height={500} baseColor="var(--main-background)" enableAnimation={true}/>
+        ) : (
+          <>
+            <MovieCard movies={watchedMovieDetails} title="You Watched" showScrollButtons={true} />
+            <MovieCard movies={movies} title="Recommended For You" showScrollButtons={true} />
+          </>
+        )}
+
       </div>
     </div>
   );

@@ -8,7 +8,7 @@ export default function DropdownFilter({ label, items = [], onSelect, selectedIt
     const dropdownStyle = {
       width : isMobile ? '120px' : '200px',
       height : isMobile ? '180px' : '300px',
-      left : isMobile ? '-35px' : '-150px',
+      left : isMobile ? '-35px' : '-60px',
     }
 
     return (

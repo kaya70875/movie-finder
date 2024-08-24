@@ -35,13 +35,13 @@ function AppWithLocation() {
             <div className="container">
               <Routes>
                 <Route element={<PrivateRoute />}>
-                  <Route path="/movie-finder" element={<MainContent/>} />
-                  <Route path="/movie-finder/details/:id" element={<MovieDetails />} />
-                  <Route path="/movie-finder/favorites" element={<Favorites />} />
-                  <Route path="/movie-finder/discover" element={<Discover />} />
                   <Route path="/movie-finder/watched" element={<Watched />}/>
                 </Route>
                 {/* Public routes */}
+                <Route path="/movie-finder/" element={<MainContent/>} />
+                <Route path="/movie-finder/details/:id" element={<MovieDetails />} />
+                <Route path="/movie-finder/favorites" element={<Favorites />} />
+                <Route path="/movie-finder/discover" element={<Discover />} />
                 <Route path="/movie-finder/register" element={<Register />} />
                 <Route path="/movie-finder/login" element={<Login />} />
               </Routes>

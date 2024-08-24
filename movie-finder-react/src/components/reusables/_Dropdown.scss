@@ -6,7 +6,7 @@
 
 .dropdown-button {
     cursor: pointer;
-
+    color : var(--primary-font-color);
 }
 
 .dropdown-menu {
@@ -32,6 +32,10 @@
     justify-content: space-evenly;
     align-items: center;
 
+    h3 svg{
+        display: none;
+    }
+
 }
 
 .profile-list-items ul{
@@ -50,10 +54,7 @@
         cursor: pointer;
         min-width: 100px;
     }
-
-    h3 svg{
-        display: none;
-    }   
+   
 }
 
 .filters-filter{

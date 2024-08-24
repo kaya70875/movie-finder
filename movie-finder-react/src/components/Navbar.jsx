@@ -16,13 +16,15 @@ export default function Navbar() {
 
   const {toggleTheme , theme} = useTheme();
 
+  const { currentUser } = useAuth()
+
   const data = useFetch(`/search/movie?query=${searchQuery}&include_adult=false&language=en-US&`);
   const searchResults = data?.results;
 
   async function handleLogOut(){
     try{
       await logOut();
-      navigate('/movie-finder/login');
+      navigate('/movie-finder');
     }catch(err){
       console.log(err)
     }
@@ -87,18 +89,23 @@ export default function Navbar() {
                 <svg xmlns="http://www.w3.org/2000/svg" width="48" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-toggle-right"><rect x="1" y="5" width="32" height="14" rx="7" ry="7"></rect><circle cx="26" cy="12" r="3"></circle></svg> }
               </li>
               <li>
-                <Dropdown dropdownStyle={dropdownStyle}
-                buttonStyle={{backgroundColor : 'var(--primary-button-color)' , color : 'var(--secondary-background)' , borderRadius : '100%' , width : '48px' , height : '48px',
-                  border : 'none' ,
-                }} dropdownLabel={'A'}>
-                  <div className='profile-list-items'>
-                    <ul style={{display : 'flex' , justifyContent : 'space-evenly' , alignItems : 'center'}}>
-                      <li><a>Profile</a></li>
-                      <li><a>Settings</a></li>
-                      <li onClick={handleLogOut}>Log Out</li>
-                    </ul>
-                  </div>
-                </Dropdown>
+                {currentUser ? (
+                  <Dropdown dropdownStyle={dropdownStyle}
+                  buttonStyle={{backgroundColor : 'var(--primary-button-color)' , color : 'var(--secondary-background)' , borderRadius : '100%' , width : '48px' , height : '48px',
+                    border : 'none' ,
+                  }} dropdownLabel={'A'}>
+                    <div className='profile-list-items'>
+                      <ul style={{display : 'flex' , justifyContent : 'space-evenly' , alignItems : 'center'}}>
+                        <li><a>Profile</a></li>
+                        <li><a>Settings</a></li>
+                        <li onClick={handleLogOut}>Log Out</li>
+                      </ul>
+                    </div>
+                  </Dropdown>
+                ) : (
+                  <button className='primary-button' onClick={() => navigate('/movie-finder/login')}>Log In</button>
+                )}
+                
               </li>
             </ul>
           </div>
