@@ -2,10 +2,12 @@ import React, { useEffect, useState } from "react";
 import "../sites/_Watched.scss";
 import MovieCard from "../MovieCard";
 import { auth } from "../../firebase/FirebaseAuth";
-import getMovieHistory from "../../firebase/getMovieHistory";
+import { getMovieHistory } from "../../firebase/movieHistory";
 import axios from "axios";
 import Skeleton from "react-loading-skeleton";
 import 'react-loading-skeleton/dist/skeleton.css';
+
+import { shuffleArray } from "../utils/Shuffle";
 
 const API_KEY = import.meta.env.VITE_MOVIE_DATABASE_API;
 
@@ -49,9 +51,12 @@ export default function Watched() {
               !watchedMovieIds.includes(movie.id.toString())
           );
 
+          // Shuffle
+          const shuffledList = shuffleArray(filteredMovies);
+          
           // Update states
           setWatchedMovieDetails(watchedMovieDetailsData);
-          setMovies(filteredMovies);
+          setMovies(shuffledList);
         } catch (error) {
           console.error("Error fetching movie data", error);
         } finally{

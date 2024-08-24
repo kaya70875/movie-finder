@@ -30,7 +30,9 @@ export default function ActorsCard({movieId}) {
             {actors?.map(actor => (
             <div className="actors">
                 <div className="actors-image">
-                    <img src={`https://image.tmdb.org/t/p/w500${actor.profile_path}`} alt={actor.name}/>
+                    {actor.profile_path && (
+                        <img src={`https://image.tmdb.org/t/p/w500${actor.profile_path}`} alt={actor.name}/>
+                    )}
                 </div>
                 <div className="actors-info">
                     <p>{actor.name}</p>

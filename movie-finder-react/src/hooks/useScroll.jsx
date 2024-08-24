@@ -1,5 +1,8 @@
 import { useEffect, useState } from "react";
 
+//Scroll Position For Disabled Option.
+//Scroll Container Ref For Container That Going to Scroll
+
 const useScroll = (scrollRef) => {
     const [scrollPosition , setScrollPosition] = useState(0);
 
