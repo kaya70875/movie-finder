@@ -3,7 +3,9 @@
 
 .watched{
     display: flex;
+    align-items: center;
     flex-direction: column;
+    gap : 2rem;
     width: 100%;
     height: auto;
     margin-top: 180px;
@@ -20,5 +22,22 @@
         p{
             font-weight: 400;
         }
+    }
+}
+
+.no-watchlist{
+    @include flexCenter;
+    flex-direction: column;
+    height: 100vh;
+    gap : 2rem;
+
+    margin-top: -200px;
+
+    h2{
+        font-weight: 400;
+    }
+
+    p{
+        font-weight: 300;
     }
 }

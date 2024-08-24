@@ -75,7 +75,8 @@ export default function Watched() {
         <p>Get recommendations based on movies that you watched!</p>
       </div>
 
-      <div className="slide__container">
+      {movies.length !== 0 ? (
+        <div className="slide__container">
         {loading ? (
           <Skeleton count={2} height={500} baseColor="var(--main-background)" enableAnimation={true}/>
         ) : (
@@ -86,6 +87,13 @@ export default function Watched() {
         )}
 
       </div>
+      ) : (
+        <div className="no-watchlist">
+          <h2>There is nothing here !</h2>
+          <p>Add some movies to get started.</p>
+        </div>
+      )}
+      
     </div>
   );
 }
