@@ -1,4 +1,4 @@
-import React, { useEffect, useReducer } from "react";
+import React, { useEffect, useMemo, useReducer } from "react";
 import "../sites/_Watched.scss";
 import MovieCard from "../MovieCard";
 import { auth } from "../../firebase/FirebaseAuth";
@@ -62,11 +62,13 @@ export default function Watched() {
           const similarMovies = similarMoviesResponses.flatMap(res => res.data.results || []);
 
           // Filter out movies that are already watched
-          const filteredMovies = similarMovies.filter(
-            (movie, index, self) =>
-              index === self.findIndex(m => m.id === movie.id) &&
-              !watchedMovieIds.includes(movie.id.toString())
-          );
+          const filteredMovies = useMemo(() => {
+            return similarMovies.filter(
+              (movie, index, self) =>
+                index === self.findIndex(m => m.id === movie.id) &&
+                !watchedMovieIds.includes(movie.id.toString())
+            );
+          }, [similarMovies, watchedMovieIds]); 
 
           // Shuffle
           const shuffledList = shuffleArray(filteredMovies);

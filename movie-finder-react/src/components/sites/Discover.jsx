@@ -1,10 +1,29 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useReducer, useState } from 'react';
 import '../sites/_Discover.scss';
 import useFetch from '../../hooks/useFetch';
 import MovieCard from '../MovieCard';
 import GetGenreId from '../utils/GetGenreId';
 import DropdownFilter from '../reusables/DropdownFilter';
 import ChevronIcon from '../reusables/ChevronIcon';
+
+const initialState = {
+    selectedGenres : [],
+    selectedYear : null,
+    selectedSortBy : ''
+}
+
+function sortReducer(state , action){
+    switch(action.type){
+        case 'SET_GENRES' :
+            return {...state , selectedGenres : action.payload};
+        case 'SET_YEAR' : 
+            return{...state , selectedYear : action.payload};
+        case 'SET_SORT_BY' : 
+            return {...state , selectedSortBy : action.payload};
+        default:
+            return state;
+    }
+}
 
 export default function Discover() {
     const [movies, setMovies] = useState([]);
@@ -19,9 +38,7 @@ export default function Discover() {
         popularity : false
     });
 
-    const [selectedGenres, setSelectedGenres] = useState([]);
-    const [selectedYear, setSelectedYear] = useState(null);
-    const [selectedSortBy, setSelectedSortBy] = useState('');
+    const [sortState , dispatch] = useReducer(sortReducer , initialState);
 
     const genres = GetGenreId() || [];
     const currentYear = new Date().getFullYear();
@@ -49,11 +66,11 @@ export default function Discover() {
         setMovies([]);
         setPage(1);
 
-        const newBaseQuery = `/discover/movie?with_genres=${selectedGenres.join(',')}&year=${selectedYear}&sort_by=${selectedSortBy}&language=en-US&`;
+        const newBaseQuery = `/discover/movie?with_genres=${sortState.selectedGenres.join(',')}&year=${sortState.selectedYear}&sort_by=${sortState.selectedSortBy}&language=en-US&`;
         setBaseQuery(newBaseQuery);
 
         setQuery(`${newBaseQuery}page=1&`);
-    }, [selectedGenres, selectedYear, selectedSortBy]);
+    }, [sortState.selectedGenres, sortState.selectedYear, sortState.selectedSortBy]);
 
     useEffect(() => {
         const handleScroll = () => {
@@ -75,21 +92,19 @@ export default function Discover() {
     }, [page]);
 
     function handleSelectedGenres(genreId) {
-        setSelectedGenres(prevGenres => {
-            if (prevGenres.includes(genreId)) {
-                return prevGenres.filter(id => id !== genreId);
-            } else {
-                return [...prevGenres, genreId];
-            }
+        dispatch({type : 'SET_GENRES' , 
+            payload: sortState.selectedGenres.includes(genreId)
+            ? sortState.selectedGenres.filter(id => id !== genreId)
+            : [...sortState.selectedGenres, genreId],
         });
     }
 
     const handleSelectedYear = year => {
-        setSelectedYear(prevYear => prevYear === year ? null : year);
+        dispatch({type : 'SET_YEAR' , payload : sortState.selectedYear === year ? null : year});
     };
 
     const handleSelectedSortBy = sort => {
-        setSelectedSortBy(prevSort => prevSort === sort ? '' : sort);
+        dispatch({type : 'SET_SORT_BY' , payload : sortState.selectedSortBy === sort ? '' : sort});
     };
 
     const handleIcons = (filterName) => {
@@ -119,7 +134,7 @@ export default function Discover() {
                             }
                             items={genres.map(genre => ({ label: genre.name, value: genre.id }))}
                             onSelect={handleSelectedGenres}
-                            selectedItems={selectedGenres}
+                            selectedItems={sortState.selectedGenres}
                         />
 
                         <DropdownFilter
@@ -131,7 +146,7 @@ export default function Discover() {
                             }
                             items={years.map(year => ({ label: year, value: year }))}
                             onSelect={handleSelectedYear}
-                            selectedItems={[selectedYear]}
+                            selectedItems={[sortState.selectedYear]}
                         />
 
                         <DropdownFilter
@@ -143,7 +158,7 @@ export default function Discover() {
                             }
                             items={sortOptions}
                             onSelect={handleSelectedSortBy}
-                            selectedItems={[selectedSortBy]}
+                            selectedItems={[sortState.selectedSortBy]}
                         />
                     </div>
 
