@@ -3,22 +3,20 @@ import { Link, useNavigate } from 'react-router-dom'
 import { useAuth } from '../context/AuthContext';
 
 import useFetch from '../hooks/useFetch';
-import { useEffect, useState } from 'react';
+import { useEffect, useReducer } from 'react';
 import Dropdown from './reusables/Dropdown';
 import { useTheme } from '../context/ThemeContext';
+import { initalState, reducer } from './reducer';
 
 export default function Navbar() {
-  const { logOut } = useAuth();
+  const { logOut , currentUser } = useAuth();
   const navigate = useNavigate();
 
-  const [searchQuery , setSearchQuery] = useState('');
-  const [isFocus , setIsFocus] = useState(false);
+  const [state , dispatch] = useReducer(reducer , initalState);
 
   const {toggleTheme , theme} = useTheme();
 
-  const { currentUser } = useAuth()
-
-  const data = useFetch(`/search/movie?query=${searchQuery}&include_adult=false&language=en-US&`);
+  const data = useFetch(`/search/movie?query=${state.searchQuery}&include_adult=false&language=en-US&`);
   const searchResults = data?.results;
 
   async function handleLogOut(){
@@ -40,12 +38,12 @@ export default function Navbar() {
 
   useEffect(() => {
     const dropdownContent = document.querySelector('.dropdown__content');
-    searchQuery ? dropdownContent.style.display = 'block' : dropdownContent.style.display = 'none';
+    state.searchQuery ? dropdownContent.style.display = 'block' : dropdownContent.style.display = 'none';
     
-    if(!isFocus){
+    if(!state.isFocus){
       dropdownContent.style.display = 'none';
     }
-  } , [searchQuery , isFocus])
+  } , [state.searchQuery , state.isFocus])
 
   return (
     <nav className="navbar">
@@ -55,11 +53,11 @@ export default function Navbar() {
             <p className='navbar__header'>Movie Finder</p>
             <div className="dropdown" tabIndex={0} onBlur={(e) => {
               if(!e.currentTarget.contains(e.relatedTarget)){
-                setIsFocus(false);
+                dispatch({type : 'TOGGLE_FOCUS' , payload : false});
               }
             }}>
-              <input type="text" id='inputField' className='navbar-input' onFocus={() => setIsFocus(true)} onChange={(e) => (
-                setSearchQuery(e.target.value)
+              <input type="text" id='inputField' className='navbar-input' onFocus={() => dispatch({type : 'TOGGLE_FOCUS' , payload : true})} onChange={(e) => (
+                dispatch({type : 'SET_SEARCH_QUERY' , payload : e.target.value})
               )}/>
               <div className="dropdown__content">
                 <h2>Top Results</h2>

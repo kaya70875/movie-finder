@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useReducer } from "react";
 import "../sites/_Watched.scss";
 import MovieCard from "../MovieCard";
 import { auth } from "../../firebase/FirebaseAuth";
@@ -11,10 +11,27 @@ import { shuffleArray } from "../utils/Shuffle";
 
 const API_KEY = import.meta.env.VITE_MOVIE_DATABASE_API;
 
+const initialState = {
+  movies : [],
+  watchedMovieDetails : [],
+  loading : true,
+}
+
+function reducer(state , action){
+  switch(action.type){
+    case 'SET_MOVIES':
+      return{...state , movies : action.payload};
+    case 'SET_WATCHED_MOVIES':
+      return{...state , watchedMovieDetails : action.payload};
+    case 'SET_LOADING':
+      return{...state , loading : action.payload};
+    default :
+      return state;
+  }
+}
+
 export default function Watched() {
-  const [movies, setMovies] = useState([]);
-  const [watchedMovieDetails, setWatchedMovieDetails] = useState([]);
-  const [loading , setLoading] = useState(true);
+  const [state , dispatch] = useReducer(reducer , initialState);
   
   const user = auth.currentUser;
 
@@ -22,7 +39,7 @@ export default function Watched() {
     if (user) {
       const fetchHistory = async () => {
         try {
-          setLoading(true);
+          dispatch({type : 'SET_LOADING' , payload : true});
           const watchedMovieIds = await getMovieHistory(user.uid);
 
           // Fetch movie details and similar movies
@@ -55,12 +72,12 @@ export default function Watched() {
           const shuffledList = shuffleArray(filteredMovies);
           
           // Update states
-          setWatchedMovieDetails(watchedMovieDetailsData);
-          setMovies(shuffledList);
+          dispatch({type : 'SET_WATCHED_MOVIES' , payload : watchedMovieDetailsData});
+          dispatch({type : 'SET_MOVIES' , payload : shuffledList});
         } catch (error) {
           console.error("Error fetching movie data", error);
         } finally{
-          setLoading(false);
+          dispatch({type : 'SET_LOADING' , payload : false});
         }
       };
 
@@ -75,14 +92,14 @@ export default function Watched() {
         <p>Get recommendations based on movies that you watched!</p>
       </div>
 
-      {movies.length !== 0 ? (
+      {state.movies.length !== 0 ? (
         <div className="slide__container">
-        {loading ? (
+        {state.loading ? (
           <Skeleton count={2} height={500} baseColor="var(--main-background)" enableAnimation={true}/>
         ) : (
           <>
-            <MovieCard movies={watchedMovieDetails} title="You Watched" showScrollButtons={true} />
-            <MovieCard movies={movies} title="Recommended For You" showScrollButtons={true} />
+            <MovieCard movies={state.watchedMovieDetails} title="You Watched" showScrollButtons={true} />
+            <MovieCard movies={state.movies} title="Recommended For You" showScrollButtons={true} />
           </>
         )}
 
