@@ -1,7 +1,7 @@
-import React, { useEffect, useReducer, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import '../sites/_Discover.scss';
 import useFetch from '../../hooks/useFetch';
-import MovieCard from '../MovieCard';
+import MovieCard from '../cards/MovieCard';
 import { useFilter } from '../../context/FilterContext';
 import FilterComponent from '../filters/FilterComponent';
 

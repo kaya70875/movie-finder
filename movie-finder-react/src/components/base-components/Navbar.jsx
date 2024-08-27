@@ -1,4 +1,4 @@
-import '../sass/components/_Navbar.scss'
+import '../../sass/components/_Navbar.scss'
 import { Link, useNavigate } from 'react-router-dom'
 import { useAuth } from '../../context/AuthContext';
 

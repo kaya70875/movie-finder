@@ -1,6 +1,6 @@
 import React, {useRef} from 'react'
 import useFetch from '../../hooks/useFetch'
-import '../sass/components/_ActorsCards.scss'
+import '../../sass/components/_ActorsCards.scss'
 import useScroll from '../../hooks/useScroll';
 
 export default function ActorsCard({movieId}) {

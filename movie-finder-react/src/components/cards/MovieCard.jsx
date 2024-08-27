@@ -1,7 +1,7 @@
 import React, { useRef } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { useFavorites } from '../../context/FavoritesContext';
-import '../sass/components/_MainContent.scss';
+import '../../sass/components/_MainContent.scss';
 import useScroll from '../../hooks/useScroll';
 
 export default function MovieCard({ movies, title , showScrollButtons = true , defaultGrid = true}) {

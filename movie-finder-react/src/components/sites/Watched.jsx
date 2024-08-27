@@ -1,6 +1,6 @@
 import React, { useEffect, useReducer, useState } from "react";
 import "../sites/_Watched.scss";
-import MovieCard from "../MovieCard";
+import MovieCard from "../cards/MovieCard";
 import { auth } from "../../firebase/FirebaseAuth";
 import { getMovieHistory } from "../../firebase/movieHistory";
 import axios from "axios";

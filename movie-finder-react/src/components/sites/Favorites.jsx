@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import '../sites/_Favorites.scss';
-import MovieCard from '../MovieCard';
+import MovieCard from '../cards/MovieCard';
 import FilterComponent from '../filters/FilterComponent';
 import { useFilter } from '../../context/FilterContext';
 import { filterAndSortMovies } from '../utils/FilterAndSortMovies';

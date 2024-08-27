@@ -4,12 +4,12 @@ import useFetch from '../../hooks/useFetch';
 import starImage from '../../img/star-new.png'
 import CommentSection from './CommentSection';
 import {useFavorites} from '../../context/FavoritesContext';
-import MovieCard from '../MovieCard';
+import MovieCard from '../cards/MovieCard';
 
 import '../sites/_MovieDetails.scss';
 import MovieTrailers from '../videos/MovieTrailers';
 import useClickOutside from '../../hooks/useClickOutside';
-import ActorsCard from '../ActorsCard';
+import ActorsCard from '../cards/ActorsCard';
 import MovieButton from '../buttons/MovieButton';
 
 export default function MovieDetails() {

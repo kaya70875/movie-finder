@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react'
-import '../sass/components/_Sidebar.scss'
+import '../../sass/components/_Sidebar.scss';
 import {useNavigate } from 'react-router-dom'
 
 export default function Sidebar() {

@@ -1,6 +1,6 @@
-  import '../sass/components/_MainContent.scss';
+  import '../../sass/components/_MainContent.scss';
   import useFetch from '../../hooks/useFetch';
-  import MovieCard from './MovieCard';
+  import MovieCard from '../cards/MovieCard';
 
   const MAX_CONTENT = 21
 
