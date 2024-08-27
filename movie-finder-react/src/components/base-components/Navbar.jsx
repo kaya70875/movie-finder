@@ -1,12 +1,12 @@
 import '../sass/components/_Navbar.scss'
 import { Link, useNavigate } from 'react-router-dom'
-import { useAuth } from '../context/AuthContext';
+import { useAuth } from '../../context/AuthContext';
 
-import useFetch from '../hooks/useFetch';
+import useFetch from '../../hooks/useFetch';
 import { useEffect, useReducer } from 'react';
-import Dropdown from './reusables/Dropdown';
-import { useTheme } from '../context/ThemeContext';
-import { initalState, reducer } from './reducer';
+import Dropdown from '../reusables/Dropdown';
+import { useTheme } from '../../context/ThemeContext';
+import { initalState, reducer } from '../reducer';
 
 export default function Navbar() {
   const { logOut , currentUser } = useAuth();

@@ -1,4 +1,4 @@
-import React, { useEffect, useMemo, useReducer } from "react";
+import React, { useEffect, useReducer, useState } from "react";
 import "../sites/_Watched.scss";
 import MovieCard from "../MovieCard";
 import { auth } from "../../firebase/FirebaseAuth";
@@ -8,6 +8,9 @@ import Skeleton from "react-loading-skeleton";
 import 'react-loading-skeleton/dist/skeleton.css';
 
 import { shuffleArray } from "../utils/Shuffle";
+import { useFilter } from "../../context/FilterContext";
+import { filterAndSortMovies } from "../utils/FilterAndSortMovies";
+import FilterComponent from "../filters/FilterComponent";
 
 const API_KEY = import.meta.env.VITE_MOVIE_DATABASE_API;
 
@@ -32,9 +35,11 @@ function reducer(state , action){
 
 export default function Watched() {
   const [state , dispatch] = useReducer(reducer , initialState);
+  const [filteredMovies , setFilteredMovies] = useState([]);
   
   const user = auth.currentUser;
-
+  const { sortState } = useFilter();
+  
   useEffect(() => {
     if (user) {
       const fetchHistory = async () => {
@@ -62,13 +67,11 @@ export default function Watched() {
           const similarMovies = similarMoviesResponses.flatMap(res => res.data.results || []);
 
           // Filter out movies that are already watched
-          const filteredMovies = useMemo(() => {
-            return similarMovies.filter(
-              (movie, index, self) =>
-                index === self.findIndex(m => m.id === movie.id) &&
-                !watchedMovieIds.includes(movie.id.toString())
-            );
-          }, [similarMovies, watchedMovieIds]); 
+          const filteredMovies = similarMovies.filter(
+            (movie, index, self) =>
+              index === self.findIndex(m => m.id === movie.id) &&
+              !watchedMovieIds.includes(movie.id.toString())
+          );
 
           // Shuffle
           const shuffledList = shuffleArray(filteredMovies);
@@ -87,6 +90,14 @@ export default function Watched() {
     }
   }, [user]);
 
+  useEffect(() => {
+    const applyFilters = filterAndSortMovies(state.movies , sortState);
+    setFilteredMovies(applyFilters);
+  
+  }, [sortState, state.movies]);
+  
+
+  
   return (
     <div className="watched">
       <div className="watched-header">
@@ -100,8 +111,9 @@ export default function Watched() {
           <Skeleton count={2} height={500} baseColor="var(--main-background)" enableAnimation={true}/>
         ) : (
           <>
+            <FilterComponent />
             <MovieCard movies={state.watchedMovieDetails} title="You Watched" showScrollButtons={true} />
-            <MovieCard movies={state.movies} title="Recommended For You" showScrollButtons={true} />
+            <MovieCard movies={filteredMovies} title="Recommended For You" showScrollButtons={false} defaultGrid={false} />
           </>
         )}
 

@@ -1,5 +1,5 @@
   import '../sass/components/_MainContent.scss';
-  import useFetch from '../hooks/useFetch';
+  import useFetch from '../../hooks/useFetch';
   import MovieCard from './MovieCard';
 
   const MAX_CONTENT = 21

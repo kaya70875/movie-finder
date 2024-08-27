@@ -1,16 +1,25 @@
 import React, { useState, useEffect } from 'react';
 import '../sites/_Favorites.scss';
 import MovieCard from '../MovieCard';
-import Dropdown from '../reusables/Dropdown';
+import FilterComponent from '../filters/FilterComponent';
+import { useFilter } from '../../context/FilterContext';
+import { filterAndSortMovies } from '../utils/FilterAndSortMovies';
 
 export default function Favorites() {
     const [favorites, setFavorites] = useState([]);
+    const [filteredMovies , setFilteredMovies] = useState([]);
+    const {sortState} = useFilter();
 
     useEffect(() => {
         const savedFavorites = JSON.parse(localStorage.getItem('favorites')) || [];
         setFavorites(savedFavorites);
     }, [favorites]);
     
+    useEffect(() => {
+        const applyFilters = filterAndSortMovies(favorites , sortState);
+        setFilteredMovies(applyFilters);
+      
+      }, [sortState, favorites]);
 
     return (
         <div className="favorites">
@@ -18,28 +27,9 @@ export default function Favorites() {
                 <div className="fav-container">
                     <h3 className='fav-header'>Favorites</h3>
                     <div className="fav-query-titles">
-                        <Dropdown buttonStyle={{
-                            border : 'none' , color : 'var(--primary-font-color)' , fontSize : '1rem',
-                            background : 'none'
-
-                        }} dropdownLabel={'All'} dropdownStyle={{
-                            width : '200px' , height : '250px' , backgroundColor : 'var(--main-background)',
-                            fontSize : '.9rem'
-                        }}>
-                            <div className="profile-list-items">
-                                <ul>
-                                    <li>All</li>
-                                    <li>By Genre</li>
-                                    <li>By Year</li>
-                                    <li>By Popularity</li>
-                                    <li>By Rating</li>
-                                </ul>
-                            </div>
-                            
-                        </Dropdown>
-                        
+                        <FilterComponent />
                     </div>
-                    <MovieCard movies={favorites} showScrollButtons={false} defaultGrid={false}></MovieCard>
+                    <MovieCard movies={filteredMovies} showScrollButtons={false} defaultGrid={false}></MovieCard>
                 </div>
                 
             </div>

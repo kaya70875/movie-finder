@@ -2,28 +2,8 @@ import React, { useEffect, useReducer, useState } from 'react';
 import '../sites/_Discover.scss';
 import useFetch from '../../hooks/useFetch';
 import MovieCard from '../MovieCard';
-import GetGenreId from '../utils/GetGenreId';
-import DropdownFilter from '../reusables/DropdownFilter';
-import ChevronIcon from '../reusables/ChevronIcon';
-
-const initialState = {
-    selectedGenres : [],
-    selectedYear : null,
-    selectedSortBy : ''
-}
-
-function sortReducer(state , action){
-    switch(action.type){
-        case 'SET_GENRES' :
-            return {...state , selectedGenres : action.payload};
-        case 'SET_YEAR' : 
-            return{...state , selectedYear : action.payload};
-        case 'SET_SORT_BY' : 
-            return {...state , selectedSortBy : action.payload};
-        default:
-            return state;
-    }
-}
+import { useFilter } from '../../context/FilterContext';
+import FilterComponent from '../filters/FilterComponent';
 
 export default function Discover() {
     const [movies, setMovies] = useState([]);
@@ -32,23 +12,7 @@ export default function Discover() {
     const [baseQuery, setBaseQuery] = useState('/discover/movie?language=en-US&');
     const [query, setQuery] = useState(`${baseQuery}page=${page}&`);
 
-    const [isFilterOpen , setIsFilterOpen] = useState({
-        genre : false,
-        year : false,
-        popularity : false
-    });
-
-    const [sortState , dispatch] = useReducer(sortReducer , initialState);
-
-    const genres = GetGenreId() || [];
-    const currentYear = new Date().getFullYear();
-    const years = Array.from({ length: currentYear - 1999 }, (_, i) => 2000 + i);
-    const sortOptions = [
-        { label: 'Most Popular', value: 'popularity.desc' },
-        { label: 'Most Votes', value: 'vote_count.desc' },
-        { label: 'Highest Rated', value: 'vote_average.desc' },
-        { label: 'Revenue', value: 'revenue.desc' }
-    ];
+    const {sortState} = useFilter();
 
     const data = useFetch(query);
     const results = data?.results || [];
@@ -91,28 +55,6 @@ export default function Discover() {
         }
     }, [page]);
 
-    function handleSelectedGenres(genreId) {
-        dispatch({type : 'SET_GENRES' , 
-            payload: sortState.selectedGenres.includes(genreId)
-            ? sortState.selectedGenres.filter(id => id !== genreId)
-            : [...sortState.selectedGenres, genreId],
-        });
-    }
-
-    const handleSelectedYear = year => {
-        dispatch({type : 'SET_YEAR' , payload : sortState.selectedYear === year ? null : year});
-    };
-
-    const handleSelectedSortBy = sort => {
-        dispatch({type : 'SET_SORT_BY' , payload : sortState.selectedSortBy === sort ? '' : sort});
-    };
-
-    const handleIcons = (filterName) => {
-        setIsFilterOpen((prev) => ({
-            [filterName] : !prev[filterName],
-        }));
-    };
-
     return (
         <div className="discover-d">
             <div className="discover-content">
@@ -125,41 +67,7 @@ export default function Discover() {
                         <h3>All Movies</h3>
                     </div>
                     <div className="filters-filter">
-                        <DropdownFilter
-                            label={
-                                <div className='discover-icons' onClick={() => handleIcons('genre')}>
-                                    <p>Genre</p>
-                                    <ChevronIcon isOpen={isFilterOpen.genre} />
-                                </div>
-                            }
-                            items={genres.map(genre => ({ label: genre.name, value: genre.id }))}
-                            onSelect={handleSelectedGenres}
-                            selectedItems={sortState.selectedGenres}
-                        />
-
-                        <DropdownFilter
-                            label={
-                                <div className='discover-icons'onClick={() => handleIcons('year')}>
-                                    <p>Release Date</p>
-                                    <ChevronIcon isOpen={isFilterOpen.year} />
-                                </div>
-                            }
-                            items={years.map(year => ({ label: year, value: year }))}
-                            onSelect={handleSelectedYear}
-                            selectedItems={[sortState.selectedYear]}
-                        />
-
-                        <DropdownFilter
-                            label={
-                                <div className='discover-icons' onClick={() => handleIcons('popularity')}>
-                                    <p>By Popularity</p>
-                                    <ChevronIcon isOpen={isFilterOpen.popularity} />
-                                </div>
-                            }
-                            items={sortOptions}
-                            onSelect={handleSelectedSortBy}
-                            selectedItems={[sortState.selectedSortBy]}
-                        />
+                        <FilterComponent />
                     </div>
 
                 </div>

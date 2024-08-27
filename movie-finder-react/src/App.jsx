@@ -15,6 +15,7 @@ import Discover from './components/sites/Discover';
 import Watched from './components/sites/Watched';
 
 import './style.scss';
+import { FilterProvider } from './context/FilterContext';
 
 function AppWithLocation() {
   const location = useLocation();
@@ -23,6 +24,7 @@ function AppWithLocation() {
   const showNavbar = location.pathname !== '/movie-finder/login' && location.pathname !== '/movie-finder/register';
 
   return (
+    <FilterProvider>
       <AuthProvider>
         <FavoritesProvider>
           <div className="app" data-theme={theme}>
@@ -49,7 +51,8 @@ function AppWithLocation() {
           </div>
         </FavoritesProvider>
       </AuthProvider>
-    
+    </FilterProvider>
+      
   );
 }
 
