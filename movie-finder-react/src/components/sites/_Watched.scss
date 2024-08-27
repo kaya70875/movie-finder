@@ -1,5 +1,5 @@
 @import '../../sass/helpers/mixins';
-
+@import '../../sass/tools/headerholder';
 
 .watched{
     display: flex;
@@ -12,14 +12,7 @@
     color : var(--primary-font-color);
 
     .watched-header{
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        gap : 2rem;
-
-        p{
-            font-weight: 400;
-        }
+        @extend %header-base;
     }
 }
 

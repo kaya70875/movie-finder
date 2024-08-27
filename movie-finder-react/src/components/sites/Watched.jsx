@@ -111,8 +111,7 @@ export default function Watched() {
           <Skeleton count={2} height={500} baseColor="var(--main-background)" enableAnimation={true}/>
         ) : (
           <>
-            <FilterComponent />
-            <MovieCard movies={state.watchedMovieDetails} title="You Watched" showScrollButtons={true} />
+            <MovieCard movies={state.watchedMovieDetails} title="You Watched" showScrollButtons={true} showFilters={true}/>
             <MovieCard movies={filteredMovies} title="Recommended For You" showScrollButtons={false} defaultGrid={false} />
           </>
         )}

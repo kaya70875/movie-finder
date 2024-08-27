@@ -1,0 +1,43 @@
+// Font families
+$primary-font : 'Poppins' , sans-serif;
+
+//Font sizes
+$font-size-xs : .7rem;
+$font-size-s : .9rem;
+$font-size-md : 1rem;
+$font-size-lg : 1.2rem;
+$font-size-xl : 1.5rem;
+
+// Line heights
+
+// Font weights
+$font-weight-normal : 400;
+$font-weight-bold : bold;
+$font-weight-light : 300;
+
+// Text colors
+$primary-text-color : white;
+
+h1 , .h1{
+    font-weight: bold;
+    color : var(--primary-font-color);
+}
+
+h2 , .h2{
+    font-weight: $font-weight-normal;
+}
+
+// Links
+
+li{
+    list-style: none;
+    cursor: pointer;
+}
+
+a{
+    text-decoration: none;   
+    font-size: $font-size-md;
+    font-weight: $font-weight-light;
+    color :var(--primary-font-color);
+    
+}

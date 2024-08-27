@@ -17,7 +17,7 @@ export default function FilterComponent() {
   } = useFilter();
 
   return (
-    <>
+    <div className="all-dropdowns">
       <DropdownFilter
         label={
           <div className="discover-icons" onClick={() => handleIcons("genre")}>
@@ -56,6 +56,6 @@ export default function FilterComponent() {
         onSelect={handleSelectedSortBy}
         selectedItems={[sortState.selectedSortBy]}
       />
-    </>
+    </div>
   );
 }

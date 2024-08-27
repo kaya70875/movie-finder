@@ -3,8 +3,9 @@ import { Link, useNavigate } from 'react-router-dom';
 import { useFavorites } from '../../context/FavoritesContext';
 import '../../sass/components/_MainContent.scss';
 import useScroll from '../../hooks/useScroll';
+import FilterComponent from '../filters/FilterComponent';
 
-export default function MovieCard({ movies, title , showScrollButtons = true , defaultGrid = true}) {
+export default function MovieCard({ movies, title , showScrollButtons = true , defaultGrid = true , showFilters = false}) {
     const { titles, handleAddToFavorites } = useFavorites();
     const scrollContainerRef = useRef(null);
     const navigate = useNavigate();
@@ -19,7 +20,10 @@ export default function MovieCard({ movies, title , showScrollButtons = true , d
     return (
         <div className="main__content">
             <div className="header__wrapper">
-                <h2>{title}</h2>
+                <div className="header-filters">
+                    <h2>{title}</h2>
+                    {showFilters && <FilterComponent />}
+                </div>
                 {showScrollButtons && <div className="next__icons">
                     <button onClick={() => scrollContainer('left')} disabled={scrollPosition === 0 ? true : false}>
                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-chevron-left"><polyline points="15 18 9 12 15 6"></polyline></svg>

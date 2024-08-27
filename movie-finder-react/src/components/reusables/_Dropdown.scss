@@ -4,6 +4,12 @@
     padding: .4rem .7rem;
 }
 
+.all-dropdowns{
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+}
+
 .dropdown-button {
     cursor: pointer;
     color : var(--primary-font-color);

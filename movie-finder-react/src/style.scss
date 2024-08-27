@@ -1,6 +1,8 @@
 @import './sass/helpers/variables';
 @import './sass/helpers/mixins';
 @import './sass/tools/placeholder';
+@import './sass/base/typography';
+@import './sass/base/global';
 
 * {
     margin: 0;
@@ -8,6 +10,7 @@
     box-sizing: border-box;
     font-family: 'Poppins', sans-serif;
     transition: 0.05s;
+    color : var(--primary-font-color);
 }
 
 :root {
@@ -41,4 +44,5 @@
 .slide__container {
     margin-left: var(--sidebar-width);
     padding: 2rem;
+    width: 90%;
 }

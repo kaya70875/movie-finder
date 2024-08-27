@@ -50,7 +50,7 @@ export default function Navbar() {
         <div className="container">
           <div className="navbar__left">
             
-            <p className='navbar__header'>Movie Finder</p>
+            <h1 className='navbar__header'>Movie Finder</h1>
             <div className="dropdown" tabIndex={0} onBlur={(e) => {
               if(!e.currentTarget.contains(e.relatedTarget)){
                 dispatch({type : 'TOGGLE_FOCUS' , payload : false});

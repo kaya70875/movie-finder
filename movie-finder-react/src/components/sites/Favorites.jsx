@@ -25,11 +25,11 @@ export default function Favorites() {
         <div className="favorites">
             <div className="slide__container">
                 <div className="fav-container">
-                    <h3 className='fav-header'>Favorites</h3>
-                    <div className="fav-query-titles">
-                        <FilterComponent />
+                    <div className="favorites-header">
+                        <h2>Welcome to Favorites</h2>
+                        <p>You can add , remove & access your favorites movies from here!</p>
                     </div>
-                    <MovieCard movies={filteredMovies} showScrollButtons={false} defaultGrid={false}></MovieCard>
+                    <MovieCard movies={filteredMovies} showScrollButtons={false} defaultGrid={false} showFilters={true} title={'Your Favorites'}></MovieCard>
                 </div>
                 
             </div>
