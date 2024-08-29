@@ -32,9 +32,11 @@
 
 .app {
   background: var(--main-background);
+  overflow: hidden;
 }
 
 .slide__container {
   margin-left: var(--sidebar-width);
   padding: 2rem;
-}/*# sourceMappingURL=style.css.map */
+}
+/*# sourceMappingURL=style.css.map */

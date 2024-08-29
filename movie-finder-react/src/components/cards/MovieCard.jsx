@@ -36,7 +36,7 @@ export default function MovieCard({ movies, title , showScrollButtons = true , g
                 
             </div>
             <div className={`cards__wrapper cards__wrapper--${gridType}`} ref={scrollContainerRef}>
-                {movies.map(movie => (
+                {movies.length > 0 ? (movies.map(movie => (
                     movie.poster_path && (
                         <div key={movie.id} className="item" onClick={() => isMobile && handleMobileNavigate(movie.id)}>
                             <img src={`https://image.tmdb.org/t/p/w500${movie.poster_path}`} alt={movie.title} />
@@ -55,7 +55,7 @@ export default function MovieCard({ movies, title , showScrollButtons = true , g
                             </div>
                         </div>
                     )
-                ))}
+                ))) : (<h3>There is no results for current filter!</h3>)}
             </div>
         </div>
     );

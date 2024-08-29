@@ -12,12 +12,12 @@ export default function Favorites() {
   useEffect(() => {
     const savedFavorites = JSON.parse(localStorage.getItem("favorites")) || [];
     setFavorites(savedFavorites);
-  }, [favorites]);
+  }, []);
 
   useEffect(() => {
     const applyFilters = filterAndSortMovies(favorites, sortState);
     setFilteredMovies(applyFilters);
-  }, [sortState, favorites]);
+  }, [sortState , favorites]);
 
   return (
     <div className="main__wrapper">

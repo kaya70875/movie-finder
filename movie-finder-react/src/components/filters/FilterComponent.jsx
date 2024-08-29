@@ -16,6 +16,8 @@ export default function FilterComponent() {
     handleIcons,
   } = useFilter();
 
+  console.log(sortState.selectedGenres.length);
+
   return (
     <div className="all-dropdowns">
       <DropdownFilter

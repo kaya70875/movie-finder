@@ -6,8 +6,9 @@
 
 .all-dropdowns{
     display: flex;
-    align-items: center;
+    align-items: start;
     justify-content: space-evenly;
+    gap : 1rem;
 }
 
 .dropdown-button {
@@ -17,15 +18,15 @@
 .dropdown-menu {
     position: absolute;
     top: 100%;
-    height: auto;
     left: 0;
+    height: auto;
+    max-height: 300px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     padding: 10px;
     z-index: 1000;
     border-radius: 4px;
-
     background: var(--main-background);
-    overflow :auto;
+    overflow-y :auto;
     
 }
 
