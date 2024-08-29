@@ -2,10 +2,11 @@ import React, { useRef } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { useFavorites } from '../../context/FavoritesContext';
 import '../../sass/components/_MainContent.scss';
+import './_MovieCard.scss';
 import useScroll from '../../hooks/useScroll';
 import FilterComponent from '../filters/FilterComponent';
 
-export default function MovieCard({ movies, title , showScrollButtons = true , defaultGrid = true , showFilters = false}) {
+export default function MovieCard({ movies, title , showScrollButtons = true , gridType = '' , showFilters = false}) {
     const { titles, handleAddToFavorites } = useFavorites();
     const scrollContainerRef = useRef(null);
     const navigate = useNavigate();
@@ -34,7 +35,7 @@ export default function MovieCard({ movies, title , showScrollButtons = true , d
                 </div>}
                 
             </div>
-            <div className={`cards__wrapper snaps-inline ${!defaultGrid ? 'default-grid' : ''}`} ref={scrollContainerRef}>
+            <div className={`cards__wrapper cards__wrapper--${gridType}`} ref={scrollContainerRef}>
                 {movies.map(movie => (
                     movie.poster_path && (
                         <div key={movie.id} className="item" onClick={() => isMobile && handleMobileNavigate(movie.id)}>
@@ -45,12 +46,12 @@ export default function MovieCard({ movies, title , showScrollButtons = true , d
                                         handleAddToFavorites(movie);
                                         e.target.classList.toggle('active');
                                     }}
-                                    className='favorites_button'
+                                    className='ellipse-button ellipse-button--favorites'
                                     id="favorites-button"
                                 >
                                     {titles[movie.id] || '🤍'}
                                 </button>
-                                <Link className='details_button' to={`/movie-finder/details/${movie.id}`}>i</Link>
+                                <Link className='ellipse-button ellipse-button--details' to={`/movie-finder/details/${movie.id}`}>i</Link>
                             </div>
                         </div>
                     )

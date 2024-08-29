@@ -12,7 +12,6 @@
 
 .dropdown-button {
     cursor: pointer;
-    color : var(--primary-font-color);
 }
 
 .dropdown-menu {
@@ -25,7 +24,6 @@
     z-index: 1000;
     border-radius: 4px;
 
-    color: var(--primary-font-color);
     background: var(--main-background);
     overflow :auto;
     
@@ -52,13 +50,13 @@
     min-height: 250px;
 
     li{
-        list-style: none;
         width: 100%;
-        text-align: center;
         padding: .7rem;
-
-        cursor: pointer;
         min-width: 100px;
+        
+        &.active{
+            background: var(--primary-active-color);
+        }   
     }
    
 }
@@ -66,14 +64,6 @@
 .filters-filter{
     display: flex;
     gap : 2rem;
-}
-
-.profile-list-items li:hover{
-    background: var(--primary-hover-color);
-}
-
-.profile-list-items li.active{
-    background: var(--primary-active-color);
 }
 
 @media (max-width : 450px){

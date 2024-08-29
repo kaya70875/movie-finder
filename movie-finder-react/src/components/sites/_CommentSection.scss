@@ -9,12 +9,6 @@
 
     margin-top : 50px;
 
-    color : var(--primary-font-color);
-
-    header{
-        font-size: 32px;
-        font-weight: bold;
-    }
 }
 
 .wrap__containers{
@@ -51,16 +45,10 @@
     gap : 20px;
 }
 
-.user-name{
-    font-size: 24px;
-    font-weight: 400;
-}
-
 .comments__comment{
     overflow: hidden;
 
     p{
-        font-size: 16px;
         font-weight: 300;
         letter-spacing: 2px;
         overflow: hidden;
@@ -85,7 +73,7 @@
 }
 
 @media (max-width : 990px){
-    .container__comments header{
+    .container__comments h2{
         font-size: 1.2rem;
     }
 
@@ -116,7 +104,7 @@
         width: 350px;
     }
 
-    .container__comments header{
+    .container__comments h2{
         font-size: 1rem;
     }
 

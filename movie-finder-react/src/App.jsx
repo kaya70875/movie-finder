@@ -15,6 +15,7 @@ import Discover from './components/sites/Discover';
 import Watched from './components/sites/Watched';
 
 import './style.scss';
+import './sass/base/_global.scss';
 import { FilterProvider } from './context/FilterContext';
 
 function AppWithLocation() {
@@ -34,7 +35,7 @@ function AppWithLocation() {
                 <Sidebar></Sidebar>
               </>
             )}
-            <div className="container">
+            <div className='container'>
               <Routes>
                 <Route element={<PrivateRoute />}>
                   <Route path="/movie-finder/watched" element={<Watched />}/>
@@ -47,7 +48,7 @@ function AppWithLocation() {
                 <Route path="/movie-finder/register" element={<Register />} />
                 <Route path="/movie-finder/login" element={<Login />} />
               </Routes>
-            </div>
+            </div >
           </div>
         </FavoritesProvider>
       </AuthProvider>

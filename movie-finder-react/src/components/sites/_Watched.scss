@@ -1,19 +1,8 @@
 @import '../../sass/helpers/mixins';
 @import '../../sass/tools/headerholder';
 
-.watched{
-    display: flex;
-    flex-direction: column;
-    width: 100%;
-    height: auto;
-    margin-top: 180px;
-    padding: 2rem;
-
-    color : var(--primary-font-color);
-
-    .watched-header{
-        @extend %header-base;
-    }
+.watched-header{
+    @extend %header-base;
 }
 
 .no-watchlist{
@@ -23,12 +12,4 @@
     gap : 2rem;
 
     margin-top: -200px;
-
-    h2{
-        font-weight: 400;
-    }
-
-    p{
-        font-weight: 300;
-    }
 }

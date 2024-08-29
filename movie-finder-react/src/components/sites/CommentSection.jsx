@@ -22,7 +22,7 @@ export default function CommentSection({id}) {
 
   return (
     <div className="container__comments">
-        <header>See Comments</header>
+        <h1>See Comments</h1>
         <div className="wrap__containers">
         {results.length !== 0 ? results.map((result  ,index) => (
              <div className="comments__wrap" id={`comment-${index}`} key={index}>

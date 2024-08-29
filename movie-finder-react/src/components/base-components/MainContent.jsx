@@ -17,7 +17,7 @@
 
     return (
       <div className="main">
-        <div className="main__components">
+        <div className="main__wrapper">
           <div className="slide__container">
             <MovieCard movies={resultsPopular.slice(0 , MAX_CONTENT)} title={'Most Popular'}></MovieCard>
             <MovieCard movies={resultsTrending.slice(0 , MAX_CONTENT)} title={'Trending Today'}></MovieCard>

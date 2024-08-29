@@ -99,7 +99,7 @@ export default function Watched() {
 
   
   return (
-    <div className="watched">
+    <div className="main__wrapper">
       <div className="watched-header">
         <h2>Watched List</h2>
         <p>Get recommendations based on movies that you watched!</p>
@@ -112,7 +112,7 @@ export default function Watched() {
         ) : (
           <>
             <MovieCard movies={state.watchedMovieDetails} title="You Watched" showScrollButtons={true} showFilters={true}/>
-            <MovieCard movies={filteredMovies} title="Recommended For You" showScrollButtons={false} defaultGrid={false} />
+            <MovieCard movies={filteredMovies} title="Recommended For You" showScrollButtons={false} gridType="fill"/>
           </>
         )}
 

@@ -64,12 +64,12 @@ export default function MovieDetails() {
           </div>
           <div className="movie__details">
             <div className="header__section">
-              <header>{data.title}</header>
-              <button className="favorites_button" onClick={() => handleAddToFavorites(data)}>{titles[data.id] || '🤍'}</button>
+              <h1>{data.title}</h1>
+              <button className="ellipse-button ellipse-button--favorites" onClick={() => handleAddToFavorites(data)}>{titles[data.id] || '🤍'}</button>
             </div>
-            <p className="release-date">Release Date : {data.release_date}</p>
+            <h4 className="release-date">Release Date : {data.release_date}</h4>
             <div className="overview">
-              <header>Overview :</header>
+              <h4>Overview :</h4>
               <p>{data.overview}</p>
             </div>
             <div className="buttons__section-details">
@@ -79,7 +79,7 @@ export default function MovieDetails() {
             </div>
           </div>
           <div className="rating__section">
-              <header>Rating</header>
+              <h1>Rating</h1>
               <div className="stars" id='star-element'>
                 {isEmpty && <p style={{color: 'red'}}>No Rating</p>}
               </div>

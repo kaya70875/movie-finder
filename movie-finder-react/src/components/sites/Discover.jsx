@@ -56,7 +56,7 @@ export default function Discover() {
     }, [page]);
 
     return (
-        <div className="discover-d">
+        <div className="main__wrapper">
             <div className="discover-content">
                 <div className="discover-header-section">
                     <h2>Welcome to Discover!</h2>
@@ -72,7 +72,7 @@ export default function Discover() {
 
                 </div>
                 <div className="discover-movie-section">
-                    <MovieCard movies={movies} title={''} showScrollButtons={false} defaultGrid={false} />
+                    <MovieCard movies={movies} title={''} showScrollButtons={false} gridType={'discover'} />
                 </div>
             </div>
         </div>

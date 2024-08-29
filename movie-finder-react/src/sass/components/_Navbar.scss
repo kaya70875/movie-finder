@@ -30,6 +30,7 @@
     outline: none;
 
     width: 400px;
+    color : black;
 }
 
 .profile{
@@ -79,7 +80,6 @@
     height: 80vh;
 
     h2{
-        font-weight: bold;
         width: 100%;
         
         @include flexCenter;
@@ -95,7 +95,7 @@
     flex-direction: column;
     width: 100%;
     min-height: 20vh;
-    gap : 1rem;    
+    gap : 1rem;
 }
 
 .dropdown__item{
@@ -105,8 +105,6 @@
     background: var(--secondary-background);
     padding: .7rem;
     border-radius: 5px;
-    color : var(--primary-font-color);
-
     &:hover{
         background: var(--primary-hover-color);
         cursor: pointer;

@@ -25,8 +25,6 @@
     @include flexCenter;
     flex-direction: column;
     gap : 2.5rem;
-
-    
 }
 
 .hamburger button{
@@ -46,10 +44,6 @@
 
 .discover:hover, .sidebar__favorites:hover, .home:hover , .watchlist:hover{
     background: var(--primary-hover-color);
-}
-
-.sidebar__items a{
-    text-decoration: none;
 }
 
 @media (max-width : 660px){

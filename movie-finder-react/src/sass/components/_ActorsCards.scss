@@ -4,7 +4,6 @@
     display: flex;
     flex-direction: column;
     gap : 2rem;
-    color : var(--primary-font-color);
 }
 
 .actors-container{
@@ -57,7 +56,6 @@
 
         p{
             min-width: 200px;
-            font-weight: 500;
         }
     }
     
