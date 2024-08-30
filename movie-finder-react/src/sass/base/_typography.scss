@@ -39,6 +39,13 @@ h4 , .h4{
     font-size: $font-size-lg;
 }
 
+h5 , .h5{
+    font-weight: $font-weight-normal;
+    font-size: $font-size-md;
+    color : #24BAEF;
+    text-transform: capitalize;
+}
+
 // Links
 
 li{
