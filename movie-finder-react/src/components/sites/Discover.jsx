@@ -72,7 +72,7 @@ export default function Discover() {
 
                 </div>
                 <div className="discover-movie-section">
-                    <MovieCard movies={movies} title={''} showScrollButtons={false} gridType={'discover'} />
+                    <MovieCard movies={movies} showScrollButtons={false} gridType={'discover'}/>
                 </div>
             </div>
         </div>

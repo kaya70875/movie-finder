@@ -1,0 +1,43 @@
+.trending__section{
+    width: 100%;
+    display: flex;
+    flex-direction: row-reverse;
+
+    margin-top: -60px;
+}
+
+.hero__slider__section{
+    width: 40%;
+    height: 700px;
+    background-size: cover;
+    background-position: center;
+    
+}
+
+.trending__info__section{
+    width: 60%;
+    background: #131722;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.trending__info__content{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    gap : 2rem;
+    height: 70%;
+    
+    h4{
+        max-width: 600px;
+        text-align: center;
+    }
+}
+
+.trending__buttons__section{
+    display: flex;
+    gap : 2rem;
+}

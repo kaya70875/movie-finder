@@ -35,7 +35,6 @@
     width: 100%;
     min-height: 100vh;
     margin-top: 200px;
-    
 }
 
 // Buttons
@@ -71,8 +70,10 @@
     background: var(--primary-button-color);
     cursor: pointer;
 
+    @include flexCenter;
+
     &:hover{
-        background: var(--button-hover-color);
+        background: $third-hover-color;
     }
 
     &:active{
@@ -83,7 +84,15 @@
         padding: .7rem;
     }
 
-    &--details {
-        padding: .7rem 1.2rem;
+    &--scroll {
+        padding: .25rem;
+        background: none;
+        
+    }
+
+    &--main {
+        width: 36px;
+        height: 36px;
+        background : #2A54A1;
     }
 }

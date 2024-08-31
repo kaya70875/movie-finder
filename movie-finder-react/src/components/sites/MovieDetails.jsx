@@ -10,6 +10,7 @@ import MovieTrailers from "../videos/MovieTrailers";
 import useClickOutside from "../../hooks/useClickOutside";
 import ActorsCard from "../cards/ActorsCard";
 import MovieButton from "../buttons/MovieButton";
+import MovieDetailsBlock from "../reusables/movies/MovieDetailsBlock";
 
 export default function MovieDetails() {
   const { id } = useParams();
@@ -93,14 +94,7 @@ export default function MovieDetails() {
               </div>
 
               <div className="movie__info">
-                <h4>{new Date(data.release_date).getFullYear()}</h4>
-                <p>{`${Math.floor(data.runtime / 60)}h ${
-                  data.runtime % 60
-                }mins`}</p>
-                {data.genres?.slice(2).map((genre) => (
-                  <p key={genre.id}>{genre.name}</p>
-                ))}
-                <h5>{data.original_language}</h5>
+                 <MovieDetailsBlock data={data} />
               </div>
               <div className="overview">
                 <p>{data.overview}</p>

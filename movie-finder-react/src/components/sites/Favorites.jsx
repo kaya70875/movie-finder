@@ -31,6 +31,7 @@ export default function Favorites() {
           showScrollButtons={false}
           gridType={'fill'}
           showFilters={true}
+          mainStyle={'column'}
           title={"Your Favorites"}
         ></MovieCard>
       </div>
