@@ -48,7 +48,7 @@ export default function MovieCard({ movies, title , content , mainStyle , showSc
             )}
             
             <div className={`cards__wrapper cards__wrapper--${gridType} ${isSingleCard ? 'single-card' : '' }`} ref={scrollContainerRef}>
-                {moviesArray.length > 1 ? (moviesArray.map(movie => (
+                {moviesArray.length > 0 ? (moviesArray.map(movie => (
                     movie.poster_path && (
                         <div key={movie.id} className="item" onClick={() => handleNavigate(movie.id)}>
                             <img src={`https://image.tmdb.org/t/p/w500${movie.poster_path}`} alt={movie.title} />
