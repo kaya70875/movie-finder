@@ -1,7 +1,8 @@
-import React, { useEffect } from "react";
+import React, { useState } from "react";
 import DropdownFilter from "../reusables/DropdownFilter";
 import ChevronIcon from "../reusables/ChevronIcon";
 import { useFilter } from "../../context/FilterContext";
+import SortBySection from "./SortBySection";
 
 export default function FilterComponent() {
   const {
@@ -15,8 +16,6 @@ export default function FilterComponent() {
     handleSelectedSortBy,
     handleIcons,
   } = useFilter();
-
-  console.log(sortState.selectedGenres.length);
 
   return (
     <div className="all-dropdowns">
@@ -44,19 +43,13 @@ export default function FilterComponent() {
         selectedItems={[sortState.selectedYear]}
       />
 
-      <DropdownFilter
-        label={
-          <div
-            className="discover-icons"
-            onClick={() => handleIcons("popularity")}
-          >
-            <p>By Popularity</p>
-            <ChevronIcon isOpen={isFilterOpen.popularity} />
-          </div>
-        }
-        items={sortOptions}
-        onSelect={handleSelectedSortBy}
-        selectedItems={[sortState.selectedSortBy]}
+      <div></div>
+
+      <SortBySection
+      items={sortOptions}
+      onSelect={handleSelectedSortBy}
+      selectedItems={sortState.selectedSortBy} 
+
       />
     </div>
   );

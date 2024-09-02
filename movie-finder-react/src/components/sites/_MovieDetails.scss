@@ -81,6 +81,17 @@
     justify-content: center;
     align-items: center;
     gap : 2.5rem;
+
+    &--card{
+        gap : 0.5rem;
+        justify-content: start;
+
+        h4 , p{
+            position: relative;
+            margin-top: 0.025rem;
+            font-size: .8rem;
+        }
+    }
 }
 
 .movie__ratings{

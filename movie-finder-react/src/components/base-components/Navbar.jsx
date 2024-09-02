@@ -1,20 +1,19 @@
 import '../../sass/components/_Navbar.scss'
 import { Link, useNavigate } from 'react-router-dom'
 import { useAuth } from '../../context/AuthContext';
-
 import useFetch from '../../hooks/useFetch';
 import { useEffect, useReducer } from 'react';
 import Dropdown from '../reusables/Dropdown';
-import { useTheme } from '../../context/ThemeContext';
 import { initalState, reducer } from '../reducer';
+
+import MovieDetailsBlock from '../reusables/movies/MovieDetailsBlock';
+import DropdownNavigates from './dropdowns/DropdownNavigates';
 
 export default function Navbar() {
   const { logOut , currentUser } = useAuth();
   const navigate = useNavigate();
 
   const [state , dispatch] = useReducer(reducer , initalState);
-
-  const {toggleTheme , theme} = useTheme();
 
   const data = useFetch(`/search/movie?query=${state.searchQuery}&include_adult=false&language=en-US&`);
   const searchResults = data?.results;
@@ -68,9 +67,9 @@ export default function Navbar() {
                         <div className="item-image">
                           <img src={`https://image.tmdb.org/t/p/w500${movie.poster_path}`} alt={movie.title} />
                         </div>
-                        <div className="item-info">
-                          <p>{movie.title}</p>
-                          <p>{movie.release_date}</p>
+                        <div className="movie__info--card">
+                          <h3>{movie.title}</h3>
+                          <MovieDetailsBlock id={movie.id} runtime={false} language={false}/>
                         </div>
                       </div>
                     </Link>
@@ -82,10 +81,11 @@ export default function Navbar() {
           </div>
           <div className="items">
             <ul className="list-items">
-              <li onClick={toggleTheme}>
-                {theme === '' ? <svg xmlns="http://www.w3.org/2000/svg" width="48" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-toggle-left"><rect x="1" y="5" width="32" height="14" rx="7" ry="7"></rect><circle cx="8" cy="12" r="3"></circle></svg>:
-                <svg xmlns="http://www.w3.org/2000/svg" width="48" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-toggle-right"><rect x="1" y="5" width="32" height="14" rx="7" ry="7"></rect><circle cx="26" cy="12" r="3"></circle></svg> }
+              <li>Home</li>
+              <li>
+                <DropdownNavigates />
               </li>
+              
               <li>
                 {currentUser ? (
                   <Dropdown dropdownStyle={dropdownStyle}

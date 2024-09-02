@@ -1,17 +1,24 @@
-import React, { useRef } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+import React, { useEffect, useRef, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { useFavorites } from '../../context/FavoritesContext';
 import '../../sass/components/_MainContent.scss';
 import './_MovieCard.scss';
 import useScroll from '../../hooks/useScroll';
 import FilterComponent from '../filters/FilterComponent';
+import MovieDetailsBlock from '../reusables/movies/MovieDetailsBlock';
 
 export default function MovieCard({ movies, title , content , mainStyle , showScrollButtons = true , gridType = '' , showFilters = false}) {
     const { titles, handleAddToFavorites } = useFavorites();
     const scrollContainerRef = useRef(null);
     const navigate = useNavigate();
 
-    const isMobile = window.matchMedia('(max-width : 450px)').matches;
+    const moviesArray = Array.isArray(movies) ? movies : [movies];
+    const [isSingleCard, setIsSingleCard] = useState(moviesArray.length === 1);
+
+    useEffect(() => {
+        setIsSingleCard(moviesArray.length === 1);
+    }, [moviesArray]);
+
     const {scrollPosition , scrollContainer} = useScroll(scrollContainerRef);
 
     function handleNavigate(movieId){
@@ -20,7 +27,8 @@ export default function MovieCard({ movies, title , content , mainStyle , showSc
 
     return (
         <div className={`main__content main__content--${mainStyle}`}>
-            <div className="header__wrapper">
+            {title?.length > 0 && (
+                <div className="header__wrapper">
                 <div className="header-filters">
                     <h1>{title}</h1>
                     <p>{content}</p>
@@ -37,17 +45,33 @@ export default function MovieCard({ movies, title , content , mainStyle , showSc
                 </div>}
  
             </div>
-            <div className={`cards__wrapper cards__wrapper--${gridType}`} ref={scrollContainerRef}>
-                {movies.length > 0 ? (movies.map(movie => (
+            )}
+            
+            <div className={`cards__wrapper cards__wrapper--${gridType} ${isSingleCard ? 'single-card' : '' }`} ref={scrollContainerRef}>
+                {moviesArray.length > 1 ? (moviesArray.map(movie => (
                     movie.poster_path && (
                         <div key={movie.id} className="item" onClick={() => handleNavigate(movie.id)}>
-                            
                             <img src={`https://image.tmdb.org/t/p/w500${movie.poster_path}`} alt={movie.title} />
-                            <p>{movie.title}</p>
+                            <h3 style={{minWidth : '200px' , textWrap : 'nowrap'}}>{movie.title}</h3>
+                            <div className="movie__info movie__info--card">
+                                <MovieDetailsBlock id={movie.id} runtime={false} language={false}/>
+                            </div>
+                            
                         </div>
                         
                     )
                 ))) : (<h3>There is no results for current filter!</h3>)}
+                {isSingleCard && (
+                    moviesArray.poster_path && (
+                        <div key={moviesArray.id} className="item" onClick={() => handleNavigate(movie.id)}>
+                            <img src={`https://image.tmdb.org/t/p/w500${moviesArray.poster_path}`} alt={movie.title} />
+                            <h3 style={{minWidth : '200px' , textWrap : 'nowrap'}}>{movie.title}</h3>
+                            <div className="movie__info movie__info--card">
+                                <MovieDetailsBlock id={moviesArray.id} runtime={false} language={false}/>
+                            </div>
+                            
+                        </div>
+                ))}
             </div>
         </div>
     );

@@ -34,7 +34,7 @@ export default function TrendingCard({ id }) {
           <h5>Today's Recomendation</h5>
           <h1>{data?.title}</h1>
           <div className="movie__info">
-            <MovieDetailsBlock data={data} />
+            <MovieDetailsBlock id={id} />
           </div>
           <h2>{data.tagline}</h2>
           <h4>{data.overview}</h4>

@@ -63,9 +63,6 @@ export default function Discover() {
                     <p>You can Filter Movies By Genre, Release Date, and More!</p>
                 </div>
                 <div className="discover-filter-section">
-                    <div className="discover-cards-header">
-                        <h3>All Movies</h3>
-                    </div>
                     <div className="filters-filter">
                         <FilterComponent />
                     </div>

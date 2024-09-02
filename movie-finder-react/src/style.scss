@@ -11,14 +11,3 @@
     --primary-active-color: #{$primary-active-color};
     --button-hover-color: #{$button-hover-color};
 }
-
-[data-theme='light'] {
-    --main-background: #{$light-main-background};
-    --secondary-background: #{$light-secondary-background};
-    --primary-font-color: #{$light-primary-font-color};
-    --primary-button-color: #{$light-primary-button-color};
-    --primary-hover-color: #{$light-primary-hover-color};
-    --secondary-hover-color: #{$light-secondary-hover-color};
-    --primary-active-color: #{$light-primary-active-color};
-    --button-hover-color: #{$light-button-hover-color};
-}

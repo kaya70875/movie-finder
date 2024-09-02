@@ -94,7 +94,7 @@ export default function MovieDetails() {
               </div>
 
               <div className="movie__info">
-                 <MovieDetailsBlock data={data} />
+                 <MovieDetailsBlock id={data.id} />
               </div>
               <div className="overview">
                 <p>{data.overview}</p>

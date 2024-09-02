@@ -1,0 +1,19 @@
+@import '../../../sass/helpers/mixins';
+.dropdown__navigates{
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    width: 95%;
+    height: 100%;
+}
+
+.navigate__dropdown__movie__section , 
+.navigate__dropdown__discover 
+, .navigate_dropdown__genres {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 2rem;
+    
+}
