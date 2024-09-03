@@ -21,6 +21,7 @@ import Watched from "./components/sites/Watched";
 import "./style.scss";
 import "./sass/base/_global.scss";
 import { FilterProvider } from "./context/FilterContext";
+import ErrorBoundry from "./components/errors/ErrorBoundry";
 
 function AppWithLocation() {
   const location = useLocation();
@@ -66,9 +67,11 @@ function AppWithLocation() {
 
 export default function App() {
   return (
-    <Router>
-      <ScrollToTop />
-      <AppWithLocation />
-    </Router>
+    <ErrorBoundry fallback='There is an Error in component render!'>
+      <Router>
+        <ScrollToTop />
+        <AppWithLocation />
+      </Router>
+    </ErrorBoundry>
   );
 }
