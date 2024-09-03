@@ -2,7 +2,7 @@
 .dropdown__navigates{
     display: flex;
     justify-content: space-around;
-    align-items: center;
+    align-items: start;
     width: 95%;
     height: 100%;
 }
@@ -12,8 +12,17 @@
 , .navigate_dropdown__genres {
     display: flex;
     flex-direction: column;
-    align-items: center;
-    justify-content: center;
+    align-items: start;
+    justify-content: start;
     padding: 2rem;
-    
+    gap : 1.5rem;
+}
+
+.genres__name{
+    display: flex;
+    align-items: start;
+    flex-direction: column;
+    flex-wrap: wrap;
+    max-height: 300px;
+    gap : .75rem;
 }

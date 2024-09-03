@@ -12,10 +12,14 @@ export default function Discover() {
     const [baseQuery, setBaseQuery] = useState('/discover/movie?language=en-US&');
     const [query, setQuery] = useState(`${baseQuery}page=${page}&`);
 
-    const {sortState} = useFilter();
+    const {sortState , resetFilters} = useFilter();
 
     const data = useFetch(query);
     const results = data?.results || [];
+
+    useEffect(() => {
+        resetFilters();
+    } , [])
 
     useEffect(() => {
         if (page === 1) {
@@ -30,11 +34,13 @@ export default function Discover() {
         setMovies([]);
         setPage(1);
 
-        const newBaseQuery = `/discover/movie?with_genres=${sortState.selectedGenres.join(',')}&year=${sortState.selectedYear}&sort_by=${sortState.selectedSortBy}&language=en-US&`;
+        const newBaseQuery = `/discover/movie?with_genres=${sortState.selectedGenres.join(',')}&year=${sortState.selectedYear}&sort_by=${sortState.selectedSortBy}&language=en-US&include_adult=${sortState.isAdult}&`;
         setBaseQuery(newBaseQuery);
 
         setQuery(`${newBaseQuery}page=1&`);
-    }, [sortState.selectedGenres, sortState.selectedYear, sortState.selectedSortBy]);
+    }, [sortState]);
+
+    console.log('queries' , query);
 
     useEffect(() => {
         const handleScroll = () => {

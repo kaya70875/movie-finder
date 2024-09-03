@@ -63,7 +63,6 @@ a{
     font-size: $font-size-md;
     font-weight: $font-weight-light;
     color :var(--primary-font-color);
-    
 }
 
 // Texts
@@ -77,4 +76,18 @@ p{
     font-size: $font-size-md;
     font-weight: $font-weight-bold;
     color : black;
+}
+
+.small-normal{
+    font-size: $font-size-md;
+    font-weight: $font-weight-normal;
+    color : black;
+
+    &:hover{
+        color : #4BC5F1;
+    }
+}
+
+.dropdown-button{
+    font-size: $font-size-md;
 }

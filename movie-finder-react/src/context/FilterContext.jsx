@@ -12,6 +12,7 @@ const initialState = {
   selectedGenres: [],
   selectedYear: null,
   selectedSortBy: "",
+  isAdult : false
 };
 
 function sortReducer(state, action) {
@@ -22,6 +23,10 @@ function sortReducer(state, action) {
       return { ...state, selectedYear: action.payload };
     case "SET_SORT_BY":
       return { ...state, selectedSortBy: action.payload };
+    case "SET_ADULT" : 
+      return { ...state , isAdult : action.payload };
+    case "RESET_FILTERS":
+      return initialState;
     default:
       return state;
   }
@@ -58,6 +63,11 @@ export function FilterProvider({ children }) {
     });
   };
 
+  const resetFilters = () => {
+      dispatch({type : 'RESET_FILTERS'});
+    };
+
+
   const handleSelectedYear = (year) => {
     dispatch({
       type: "SET_YEAR",
@@ -90,6 +100,7 @@ export function FilterProvider({ children }) {
     handleSelectedYear,
     handleSelectedSortBy,
     handleIcons,
+    resetFilters,
   };
 
   return (

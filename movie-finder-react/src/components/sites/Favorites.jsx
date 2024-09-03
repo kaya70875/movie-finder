@@ -7,11 +7,13 @@ import { filterAndSortMovies } from "../utils/FilterAndSortMovies";
 export default function Favorites() {
   const [favorites, setFavorites] = useState([]);
   const [filteredMovies, setFilteredMovies] = useState([]);
-  const { sortState } = useFilter();
+  const { sortState , resetFilters } = useFilter();
 
   useEffect(() => {
     const savedFavorites = JSON.parse(localStorage.getItem("favorites")) || [];
     setFavorites(savedFavorites);
+
+    resetFilters();
   }, []);
 
   useEffect(() => {
