@@ -89,7 +89,7 @@ export default function Navbar() {
               <li>
                 {currentUser ? (
                   <Dropdown dropdownStyle={dropdownStyle}
-                  buttonStyle={{backgroundColor : 'var(--primary-button-color)' , color : 'var(--secondary-background)' , borderRadius : '100%' , width : '48px' , height : '48px',
+                  buttonStyle={{borderRadius : '100%' , width : '48px' , height : '48px',
                     border : 'none' ,
                   }} dropdownLabel={'A'}>
                     <div className='profile-list-items'>
