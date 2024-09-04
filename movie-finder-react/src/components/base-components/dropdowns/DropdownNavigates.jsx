@@ -1,13 +1,12 @@
 import React from 'react'
 import Dropdown from '../../reusables/Dropdown'
-import MovieCard from '../../cards/MovieCard';
 import './_DropdownNavigates.scss';
 import useFetch from '../../../hooks/useFetch';
 import { Link, useNavigate } from 'react-router-dom';
 import { useFilter } from '../../../context/FilterContext';
+import DropdownTrendingMovies from './DropdownTrendingMovies';
 
 export default function DropdownNavigates() {
-  const popular = useFetch('/movie/popular?');
   const genres = useFetch('/genre/movie/list?language=en&');
   
   const {dispatch} = useFilter();
@@ -55,12 +54,9 @@ export default function DropdownNavigates() {
         
         <div className="dropdown__navigates">
             <div className="navigate__dropdown__movie__section">
-                <p className='small-bold'>Movie Of The Week</p>
-                <MovieCard movies={popular?.results?.[0]} 
-                showFilters={false} 
-                showScrollButtons={false}
-                mainStyle={'single'}
-                />
+                <p className='small-bold'>Discover More Content</p>
+                <DropdownTrendingMovies />
+                
             </div>
 
             <div className="navigate_dropdown__genres">

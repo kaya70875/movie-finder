@@ -10,7 +10,6 @@ import 'react-loading-skeleton/dist/skeleton.css';
 import { shuffleArray } from "../utils/Shuffle";
 import { useFilter } from "../../context/FilterContext";
 import { filterAndSortMovies } from "../utils/FilterAndSortMovies";
-import FilterComponent from "../filters/FilterComponent";
 
 const API_KEY = import.meta.env.VITE_MOVIE_DATABASE_API;
 

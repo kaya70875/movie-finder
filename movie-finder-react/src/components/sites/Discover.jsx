@@ -1,83 +1,132 @@
-import React, { useEffect, useState } from 'react';
-import '../sites/_Discover.scss';
-import useFetch from '../../hooks/useFetch';
-import MovieCard from '../cards/MovieCard';
-import { useFilter } from '../../context/FilterContext';
-import FilterComponent from '../filters/FilterComponent';
+import React, { useEffect, useRef, useState } from "react";
+import "../sites/_Discover.scss";
+import useFetch from "../../hooks/useFetch";
+import MovieCard from "../cards/MovieCard";
+import { useFilter } from "../../context/FilterContext";
+import DiscoverFilter from "../filters/DiscoverFilter";
+import GetGenreId from "../utils/GetGenreId";
+
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faFistRaised, faLaugh, faBinoculars ,faMountainSun,faUserSecret , faBook, faUsers, faMask } from '@fortawesome/free-solid-svg-icons';
+
 
 export default function Discover() {
-    const [movies, setMovies] = useState([]);
-    const [page, setPage] = useState(1);
-    const [isFetching, setIsFetching] = useState(false);
-    const [baseQuery, setBaseQuery] = useState('/discover/movie?language=en-US&');
-    const [query, setQuery] = useState(`${baseQuery}page=${page}&`);
+  const [movies, setMovies] = useState([]);
+  const [page, setPage] = useState(1);
+  const [isFetching, setIsFetching] = useState(false);
+  const [baseQuery, setBaseQuery] = useState("/discover/movie?language=en-US&");
+  const [query, setQuery] = useState(`${baseQuery}page=${page}&`);
 
-    const {sortState , resetFilters} = useFilter();
+  const { sortState, resetFilters  , dispatch} = useFilter();
+  const movieCardRef = useRef(null);
 
-    const data = useFetch(query);
-    const results = data?.results || [];
+  const data = useFetch(query);
+  const results = data?.results || [];
 
-    useEffect(() => {
-        resetFilters();
-    } , [])
+  const genres = GetGenreId();
 
-    useEffect(() => {
-        if (page === 1) {
-            setMovies(results);
-        }else{
-            setMovies(prevMovies => [...prevMovies, ...results]);
-            setIsFetching(false);
-        }
-    }, [results]);
+  const genreIcons = {
+    Action: faFistRaised,
+    Comedy: faLaugh,
+    Adventure: faBinoculars,
+    Animation: faMountainSun,
+    Crime: faUserSecret,
+    Documentary: faBook,
+    Drama: faMask,
+    Family: faUsers,
+  };
 
-    useEffect(() => {
-        setMovies([]);
-        setPage(1);
+  useEffect(() => {
+    resetFilters();
+  }, []);
 
-        const newBaseQuery = `/discover/movie?with_genres=${sortState.selectedGenres.join(',')}&year=${sortState.selectedYear}&sort_by=${sortState.selectedSortBy}&language=en-US&include_adult=${sortState.isAdult}&`;
-        setBaseQuery(newBaseQuery);
+  useEffect(() => {
+    if (page === 1) {
+      setMovies(results);
+    } else {
+      setMovies((prevMovies) => [...prevMovies, ...results]);
+      setIsFetching(false);
+    }
+  }, [results]);
 
-        setQuery(`${newBaseQuery}page=1&`);
-    }, [sortState]);
+  useEffect(() => {
+    setMovies([]);
+    setPage(1);
 
-    console.log('queries' , query);
+    const newBaseQuery = `/discover/movie?with_genres=${sortState.selectedGenres.join(
+      ","
+    )}&year=${sortState.selectedYear}&sort_by=${
+      sortState.selectedSortBy
+    }&language=en-US&include_adult=${sortState.isAdult}&`;
+    setBaseQuery(newBaseQuery);
 
-    useEffect(() => {
-        const handleScroll = () => {
-            if (document.documentElement.clientHeight + window.scrollY >=
-                (document.documentElement.scrollHeight || document.documentElement.clientHeight) && !isFetching) {
-                setPage(prevPage => prevPage + 1);
-                setIsFetching(true);
-            }
-        };
+    setQuery(`${newBaseQuery}page=1&`);
+  }, [sortState]);
 
-        window.addEventListener('scroll', handleScroll);
-        return () => window.removeEventListener('scroll', handleScroll);
-    }, [isFetching]);
+  useEffect(() => {
+    const movieCardContainer = movieCardRef.current;
 
-    useEffect(() => {
-        if (page > 1) {
-            setQuery(`${baseQuery}page=${page}&`);
-        }
-    }, [page]);
+    const handleScroll = () => {
+      if (
+        movieCardContainer.scrollTop + movieCardContainer.clientHeight >=
+          movieCardContainer.scrollHeight - 10 &&
+        !isFetching
+      ) {
+        setPage((prevPage) => prevPage + 1);
+        setIsFetching(true);
+      }
+    };
 
-    return (
-        <div className="main__wrapper">
-            <div className="discover-content">
-                <div className="discover-header-section">
-                    <h2>Welcome to Discover!</h2>
-                    <p>You can Filter Movies By Genre, Release Date, and More!</p>
-                </div>
-                <div className="discover-filter-section">
-                    <div className="filters-filter">
-                        <FilterComponent />
-                    </div>
+    movieCardContainer.addEventListener("scroll", handleScroll);
+    return () => movieCardContainer.removeEventListener("scroll", handleScroll);
+  }, [isFetching]);
 
-                </div>
-                <div className="discover-movie-section">
-                    <MovieCard movies={movies} showScrollButtons={false} gridType={'discover'}/>
-                </div>
+  useEffect(() => {
+    if (page > 1) {
+      setQuery(`${baseQuery}page=${page}&`);
+    }
+  }, [page]);
+
+  return (
+    <div className="main__wrapper">
+      <div className="discover__header">
+        <h1>Explore the Cinematic Universe</h1>
+        <p>
+          Dive into a world of movies tailored to your tastes. Use our powerful
+          filters to discover films by genre, year, and popularity. Your next
+          favorite movie is just a click away!
+        </p>
+      </div>
+
+      <div className="discover__genres__preview">
+        <h2>Explore Genres</h2>
+        <div className="discover__genres__preview__items">
+          {genres.slice(0, 8).map((genre) => (
+            <div key={genre.id} className="discover__genres__preview__item" onClick={() => {
+                dispatch({ type: "SET_GENRES", payload: [genre.id] });
+                window.scrollTo({
+                    top : document.documentElement.scrollHeight,
+                    behavior: "smooth",
+                });
+            }}>
+              <FontAwesomeIcon icon={genreIcons[genre.name]} />
+              <p>{genre.name}</p>
             </div>
+          ))}
         </div>
-    );
+      </div>
+
+      <div className="discover-content">
+        <DiscoverFilter />
+        <div className="discover-movie-section" ref={movieCardRef}>
+          <MovieCard
+            movies={movies}
+            showScrollButtons={false}
+            gridType={"discover"}
+            mainStyle={"single"}
+          />
+        </div>
+      </div>
+    </div>
+  );
 }

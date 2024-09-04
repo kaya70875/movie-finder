@@ -76,15 +76,26 @@ p{
     font-size: $font-size-md;
     font-weight: $font-weight-bold;
     color : black;
+    cursor: pointer;
+
+    &--white{
+        color : White;
+    }
 }
 
 .small-normal{
     font-size: $font-size-md;
     font-weight: $font-weight-normal;
     color : black;
+    text-align: start;
+    cursor: pointer;
 
     &:hover{
-        color : #4BC5F1;
+        color : var(--small-text-hover-color);
+    }
+
+    &--white{
+        color : White;
     }
 }
 

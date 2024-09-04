@@ -5,6 +5,7 @@ import {
   useReducer,
 } from "react";
 import GetGenreId from "../components/utils/GetGenreId";
+import createYearsList from '../components/utils/CreateYearsList';
 
 const FilterContext = createContext();
 
@@ -45,8 +46,7 @@ export function FilterProvider({ children }) {
   });
 
   const genres = GetGenreId() || [];
-  const currentYear = new Date().getFullYear();
-  const years = Array.from({ length: currentYear - 1999 }, (_, i) => 2000 + i);
+  const years = createYearsList();
   const sortOptions = [
     { label: "Most Popular", value: "popularity.desc" },
     { label: "Most Votes", value: "vote_count.desc" },

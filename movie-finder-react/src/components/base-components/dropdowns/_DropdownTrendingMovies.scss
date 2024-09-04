@@ -1,0 +1,32 @@
+.dropdown__trending__movies__item{
+    display: flex;
+    justify-content: start;
+    align-items: start;
+    gap: 2rem;
+    padding: 1rem;
+
+    img{
+        width: 64px;
+        height: 64px;
+
+        object-fit: contain;
+    }
+
+    &:hover {
+        background-color: rgba(75, 197, 241, 0.39);
+        transition: background-color 0.3s ease;
+    }
+
+    .small-normal:hover{
+        color: inherit;
+    }
+}
+
+.dropdown__trending__movies__item__info{
+    text-align: start;
+}
+
+.dropdown__trending__movies__item__details{
+    display: flex;
+    gap: 1rem;
+}
