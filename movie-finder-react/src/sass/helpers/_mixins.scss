@@ -14,3 +14,12 @@
     background : var(--secondary-background);
     color : var(--primary-font-color);
 }
+
+@mixin gradient-background($start-color, $end-color) {
+    background: linear-gradient(135deg, $start-color 0%, $end-color 100%);
+    color: white;
+    padding: 2rem;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+  

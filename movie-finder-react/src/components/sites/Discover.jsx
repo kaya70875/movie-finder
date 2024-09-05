@@ -8,6 +8,7 @@ import GetGenreId from "../utils/GetGenreId";
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faFistRaised, faLaugh, faBinoculars ,faMountainSun,faUserSecret , faBook, faUsers, faMask } from '@fortawesome/free-solid-svg-icons';
+import ScrollToBottom from "../utils/scroll/ScrollToBottom";
 
 
 export default function Discover() {
@@ -89,13 +90,15 @@ export default function Discover() {
 
   return (
     <div className="main__wrapper">
-      <div className="discover__header">
-        <h1>Explore the Cinematic Universe</h1>
-        <p>
-          Dive into a world of movies tailored to your tastes. Use our powerful
-          filters to discover films by genre, year, and popularity. Your next
-          favorite movie is just a click away!
-        </p>
+      <div className="discover__header__wrapper">
+        <div className="discover__header">
+          <h1>Explore the Cinematic Universe</h1>
+          <p>
+            Dive into a world of movies tailored to your tastes. Use our powerful
+            filters to discover films by genre, year, and popularity. Your next
+            favorite movie is just a click away!
+          </p>
+        </div>
       </div>
 
       <div className="discover__genres__preview">
@@ -104,16 +107,17 @@ export default function Discover() {
           {genres.slice(0, 8).map((genre) => (
             <div key={genre.id} className="discover__genres__preview__item" onClick={() => {
                 dispatch({ type: "SET_GENRES", payload: [genre.id] });
-                window.scrollTo({
-                    top : document.documentElement.scrollHeight,
-                    behavior: "smooth",
-                });
+                ScrollToBottom();
             }}>
               <FontAwesomeIcon icon={genreIcons[genre.name]} />
               <p>{genre.name}</p>
             </div>
           ))}
         </div>
+      </div>
+
+      <div className="discover__button__section" style={{marginTop : '70px'}}>
+        <button className="primary-button" onClick={ScrollToBottom}>Discover Now!</button>
       </div>
 
       <div className="discover-content">

@@ -1,5 +1,14 @@
 @import '../../sass/tools/headerholder';
+@import '../../sass/helpers/mixins';
 
 .favorites-header{
     @extend %header-base;
+    max-width: 720px;
+    text-align: center;
+}
+
+.favorites__header__wrapper{
+    @include flexCenter;
+    width: 100vw;
+    @include gradient-background(#2c3e50, #4ca1af);
 }

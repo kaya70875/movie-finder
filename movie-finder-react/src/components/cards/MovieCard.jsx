@@ -30,7 +30,7 @@ export default function MovieCard({ movies, title , content , mainStyle , showSc
             {title?.length > 0 && (
                 <div className="header__wrapper">
                 <div className="header-filters">
-                    <h1>{title}</h1>
+                    <h2>{title}</h2>
                     <p>{content}</p>
                     {showFilters && <FilterComponent />}
                 </div>

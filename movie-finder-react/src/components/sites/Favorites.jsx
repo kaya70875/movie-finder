@@ -7,7 +7,7 @@ import { filterAndSortMovies } from "../utils/FilterAndSortMovies";
 export default function Favorites() {
   const [favorites, setFavorites] = useState([]);
   const [filteredMovies, setFilteredMovies] = useState([]);
-  const { sortState , resetFilters } = useFilter();
+  const { sortState, resetFilters } = useFilter();
 
   useEffect(() => {
     const savedFavorites = JSON.parse(localStorage.getItem("favorites")) || [];
@@ -19,24 +19,30 @@ export default function Favorites() {
   useEffect(() => {
     const applyFilters = filterAndSortMovies(favorites, sortState);
     setFilteredMovies(applyFilters);
-  }, [sortState , favorites]);
+  }, [sortState, favorites]);
 
   return (
     <div className="main__wrapper">
-      <div className="favorites-header">
-        <h2>Welcome to Favorites</h2>
-        <p>You can add , remove & access your favorites movies from here!</p>
+      <div className="favorites__header__wrapper">
+        <div className="favorites-header">
+          <h1>Welcome to Favorites</h1>
+          <p>
+            Welcome to Your Favorites! This is your personal movie collection,
+            curated by you. You can add , remove & access your favorites movies
+            from here!
+          </p>
+        </div>
       </div>
       <div className="slide__container">
-        <MovieCard
-          movies={filteredMovies}
-          showScrollButtons={false}
-          gridType={'fill'}
-          showFilters={true}
-          mainStyle={'column'}
-          title={"Your Favorites"}
-        ></MovieCard>
-      </div>
+          <MovieCard
+            movies={filteredMovies}
+            showScrollButtons={false}
+            gridType={"fill"}
+            showFilters={true}
+            mainStyle={"single"}
+            title={"Your Favorites"}
+          ></MovieCard>
+        </div>
     </div>
   );
 }

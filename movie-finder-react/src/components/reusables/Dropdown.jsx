@@ -19,7 +19,7 @@ export default function Dropdown({dropdownLabel ,dropdownStyle, buttonStyle , ch
                 {dropdownLabel}
             </button>
             {isOpen && (
-                <div className={`dropdown-menu`} style={dropdownStyle}>
+                <div className={`dropdown-menu ${isOpen ? 'show' : ''}`} style={dropdownStyle}>
                     {children}
                 </div>
             )}

@@ -1,6 +1,12 @@
 @import '../../sass/helpers/variables';
 @import '../../sass/helpers/mixins';
 
+.discover__header__wrapper{
+    @include flexCenter;
+    width: 100vw;
+    @include gradient-background(#ff6b6b, #4ecdc4);
+}
+
 .discover-content{
     display: flex;
     gap : 5rem;

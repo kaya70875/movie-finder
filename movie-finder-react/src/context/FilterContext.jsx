@@ -12,7 +12,7 @@ const FilterContext = createContext();
 const initialState = {
   selectedGenres: [],
   selectedYear: null,
-  selectedSortBy: "",
+  selectedSortBy: "popularity.desc",
   isAdult : false
 };
 
