@@ -18,7 +18,9 @@ export function FavoritesProvider({ children }) {
         setTitles(savedTitles);
     }, []);
 
-    const handleAddToFavorites = (movie) => {
+    const handleAddToFavorites = (event , movie) => {
+        event.stopPropagation();
+
         const movieId = movie.id;
         const isFavorite = favorites.some(favMovie => favMovie.id === movieId);
 

@@ -50,13 +50,12 @@
     background-color: rgba(0, 0, 0, 0);
     z-index: 1;
     cursor: pointer;
-    transition: background-color 0.3s ease, border 0.3s ease; // Apply transition to border and background-color
+    transition: background-color 0.3s ease, border 0.3s ease;
   
     p {
       margin-top: -10px;
     }
   
-    // Define default border for the transition
     &:before {
       content: "";
       position: absolute;
@@ -66,15 +65,27 @@
       height: 68%;
       background-color: rgba(0, 0, 0, 0);
       z-index: 1;
-      border: 2px solid transparent; // Start with transparent border
+      border: 2px solid transparent;
       border-radius: 5px;
-      transition: background-color 0.3s ease, border 0.3s ease; // Add border transition here
+      transition: background-color 0.3s ease, border 0.3s ease;
     }
   
-    // Add hover effect
     &:hover::before {
       background-color: rgba(0, 0, 0, 0.4);
-      border: 2px solid #428493; // Border changes on hover
+      border: 2px solid #428493;
+    }
+
+    .card-items {
+      position: absolute;
+      top: 20px;
+      right: -250px;
+      transition: right 0.3s ease;
+
+      z-index: 1000;
+    }
+  
+    &:hover .card-items {
+      right: -140px;
     }
   }
   

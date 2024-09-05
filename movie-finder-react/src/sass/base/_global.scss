@@ -82,6 +82,11 @@
 
     &--favorites {
         padding: .7rem;
+        background: #2A54A1;
+
+        &:active{
+            background: #2A54A1;
+        }
     }
 
     &--scroll {

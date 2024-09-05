@@ -87,9 +87,9 @@ export default function MovieDetails() {
                 </div>
                 <button
                     className="ellipse-button ellipse-button--favorites"
-                    onClick={() => handleAddToFavorites(data)}
+                    onClick={(e) => handleAddToFavorites(e, data)}
                   >
-                    {titles[data.id] || "🤍"}
+                    {titles[data.id] || '🤍'}
                   </button>
               </div>
 
@@ -126,7 +126,9 @@ export default function MovieDetails() {
           <MovieCard
             movies={resultSimilar.slice(0, 21)}
             title={"Similar Movies"}
+            content={'You may like this movies.'}
             showScrollButtons={true}
+            mainStyle={'column'}
           ></MovieCard>
           <CommentSection id={id}></CommentSection>
         </div>

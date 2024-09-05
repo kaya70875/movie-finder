@@ -18,9 +18,10 @@
     &--column{
         padding: 2rem;
         .header__wrapper{
-            width: 300px;
+            width: auto;
             justify-content: space-around;
             margin-top: -50px;
+            text-wrap: nowrap;
         }
     }
 

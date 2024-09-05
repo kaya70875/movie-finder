@@ -56,16 +56,21 @@ export default function MovieCard({ movies, title , content , mainStyle , showSc
                             <div className="movie__info movie__info--card">
                                 <MovieDetailsBlock id={movie.id} runtime={false} language={false}/>
                             </div>
-                            
+                            <div className="card-items">
+                                <button className='ellipse-button ellipse-button--favorites'
+                                onClick={(e) => handleAddToFavorites(e , movie)} >
+                                    {titles[movie.id] || '🤍'}
+                                </button>
+                            </div>
                         </div>
                         
                     )
                 ))) : (<h3>There is no results for current filter!</h3>)}
                 {isSingleCard && (
                     moviesArray.poster_path && (
-                        <div key={moviesArray.id} className="item" onClick={() => handleNavigate(movie.id)}>
-                            <img src={`https://image.tmdb.org/t/p/w500${moviesArray.poster_path}`} alt={movie.title} />
-                            <h3 style={{minWidth : '200px' , textWrap : 'nowrap'}}>{movie.title}</h3>
+                        <div key={moviesArray.id} className="item" onClick={() => handleNavigate(moviesArray.id)}>
+                            <img src={`https://image.tmdb.org/t/p/w500${moviesArray.poster_path}`} alt={moviesArray.title} />
+                            <h3 style={{minWidth : '200px' , textWrap : 'nowrap'}}>{moviesArray.title}</h3>
                             <div className="movie__info movie__info--card">
                                 <MovieDetailsBlock id={moviesArray.id} runtime={false} language={false}/>
                             </div>
