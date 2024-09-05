@@ -11,18 +11,16 @@ export default function Dropdown({dropdownLabel ,dropdownStyle, buttonStyle , ch
         setIsOpen(!isOpen);
     };
 
-    useClickOutside(dropdownRef , setIsOpen)
+    useClickOutside(dropdownRef , setIsOpen);
 
     return (
         <div className="dropdown" ref={dropdownRef}>
             <button onClick={toggleDropdown} className="dropdown-button" style={buttonStyle}>
                 {dropdownLabel}
             </button>
-            {isOpen && (
-                <div className={`dropdown-menu ${isOpen ? 'show' : ''}`} style={dropdownStyle}>
-                    {children}
-                </div>
-            )}
+            <div className={`dropdown-menu ${isOpen ? 'show' : ''}`} style={dropdownStyle}>
+                {children}
+            </div>
         </div>
     );
 }
