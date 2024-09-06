@@ -1,4 +1,4 @@
-import React, { useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { useParams } from "react-router-dom";
 import useFetch from "../../hooks/useFetch";
 import CommentSection from "./CommentSection";
@@ -117,7 +117,10 @@ export default function MovieDetails() {
               onClose={handleCloseTrailer}
               ref={popUpRef}
             ></MovieTrailers>
-            <MovieButton id={id} />
+            <MovieButton id={id} 
+            watchedLabel={'Add as Watched'}
+            removeLabel={'Remove From History'} 
+            button={'secondary-button'}/>
           </div>
         </div>
 

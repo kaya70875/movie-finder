@@ -75,7 +75,7 @@
       border: 2px solid #428493;
     }
 
-    .card-items {
+    .card-favorites {
       position: absolute;
       top: 20px;
       right: -250px;
@@ -83,8 +83,27 @@
 
       z-index: 1000;
     }
+
+    .card-watchlist {
+      position: absolute;
+      top: 20px;
+      right: -250px;
+      transition: right 0.3s ease;
+
+      z-index: 999;
+
+      svg{
+        color: var(--primary-font-color);
+      }
+      
+      
+    }
+
+    &:hover .card-watchlist {
+      right: -20px;
+    }
   
-    &:hover .card-items {
+    &:hover .card-favorites {
       right: -140px;
     }
   }

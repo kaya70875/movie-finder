@@ -49,7 +49,12 @@ export default function TrendingCard({ id }) {
             onClose = {handleCloseTrailer}
             ref={popUpRef}
           />
-          <MovieButton  id={id}/>
+          <MovieButton 
+          id={id}
+          watchedLabel={'Add as Watched'}
+          removeLabel={'Remove from History.'}
+          button={'secondary-button'}
+          />
         </div>
       </div>
     </div>

@@ -10,6 +10,7 @@ import "react-loading-skeleton/dist/skeleton.css";
 import { shuffleArray } from "../utils/Shuffle";
 import { useFilter } from "../../context/FilterContext";
 import { filterAndSortMovies } from "../utils/FilterAndSortMovies";
+import { useWatchList } from "../../context/WatchListContext";
 
 const API_KEY = import.meta.env.VITE_MOVIE_DATABASE_API;
 
@@ -38,17 +39,17 @@ export default function Watched() {
 
   const user = auth.currentUser;
   const { sortState } = useFilter();
+  const { watchList } = useWatchList();
 
   useEffect(() => {
-    if (user) {
+    if (user && watchList.length) {
       const fetchHistory = async () => {
         try {
           dispatch({ type: "SET_LOADING", payload: true });
-          const watchedMovieIds = await getMovieHistory(user.uid);
 
           // Fetch movie details and similar movies
           const watchedMovieDetailsResponses = await Promise.all(
-            watchedMovieIds.map((movieId) =>
+            watchList.map((movieId) =>
               axios.get(
                 `https://api.themoviedb.org/3/movie/${movieId}?api_key=${API_KEY}`
               )
@@ -56,7 +57,7 @@ export default function Watched() {
           );
 
           const similarMoviesResponses = await Promise.all(
-            watchedMovieIds.map((movieId) =>
+            watchList.map((movieId) =>
               axios.get(
                 `https://api.themoviedb.org/3/movie/${movieId}/recommendations?api_key=${API_KEY}`
               )
@@ -75,7 +76,7 @@ export default function Watched() {
           const filteredMovies = similarMovies.filter(
             (movie, index, self) =>
               index === self.findIndex((m) => m.id === movie.id) &&
-              !watchedMovieIds.includes(movie.id.toString())
+              !watchList.includes(movie.id.toString())
           );
 
           // Shuffle
@@ -96,7 +97,7 @@ export default function Watched() {
 
       fetchHistory();
     }
-  }, [user]);
+  }, [user , watchList]);
 
   useEffect(() => {
     const applyFilters = filterAndSortMovies(state.movies, sortState);

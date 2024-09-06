@@ -1,47 +1,29 @@
-import React, { useEffect, useState } from "react";
-import { auth } from "../../firebase/FirebaseAuth";
-import {addMovieToHistory , removeFromHistory , getMovieHistory} from '../../firebase/movieHistory';
+import React, { useEffect } from "react";
+import { useWatchList } from "../../context/WatchListContext";
 
-export default function MovieButton({id}) {
+export default function MovieButton({ id, watchedLabel, removeLabel, button }) {
+  const { watchList, addMovie, deleteMovie } = useWatchList();
 
-    const user = auth.currentUser;
-    const [buttonLabel  , setButtonLabel] = useState('Add As Watched');
+  const isInWatchList = watchList.includes(id);
 
-    const handleWatch = async() => {
-      
-        if(user){
-          const watchedMovies = await getMovieHistory(user.uid);
-  
-          if(watchedMovies.includes(id)){
-            await removeFromHistory(user.uid , id);
-            setButtonLabel('Add As Watched');
-            alert('Movie Removed From Your History!');
-          }else{
-            await addMovieToHistory(user.uid , id);
-            setButtonLabel('Remove From History');
-            alert('Movie Added to Your Watched List!');
-          }
-          
-        }else{
-          alert('Please log in to track your movies!');
-        }
-      }
-  
-      useEffect(() => {
-        const setInitialButtonLabel = async () => {
-          if (user) {
-            const watchedMovies = await getMovieHistory(user.uid);
-            if (watchedMovies.includes(id)) {
-              setButtonLabel('Remove From History');
-            } else {
-              setButtonLabel('Add As Watched');
-            }
-          }
-        };
-    
-        setInitialButtonLabel();
-      }, [user, id]);
+  const handleWatch = (e) => {
+    e.stopPropagation();
+
+    if (isInWatchList) {
+      deleteMovie(id);
+      console.log('movie removed');
+    } else {
+      addMovie(id);
+      console.log('movie added');
+    }
+  };
+
+  // No need for local state, determine the label based on the watchList
+  const buttonLabel = isInWatchList ? removeLabel : watchedLabel;
+
   return (
-    <button className='secondary-button' onClick={handleWatch}>{buttonLabel}</button>
-  )
+    <button className={button} onClick={handleWatch}>
+      {buttonLabel}
+    </button>
+  );
 }

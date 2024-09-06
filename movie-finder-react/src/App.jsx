@@ -22,6 +22,7 @@ import "./style.scss";
 import "./sass/base/_global.scss";
 import { FilterProvider } from "./context/FilterContext";
 import ErrorBoundry from "./components/errors/ErrorBoundry";
+import { WatchListProvider } from "./context/WatchListContext";
 
 function AppWithLocation() {
   const location = useLocation();
@@ -31,43 +32,48 @@ function AppWithLocation() {
     location.pathname !== "/movie-finder/register";
 
   return (
-    <FilterProvider>
-      <AuthProvider>
-        <FavoritesProvider>
-          <div className="app">
-            {showNavbar && (
-              <>
-                <Navbar />
-                <Sidebar></Sidebar>
-              </>
-            )}
-            <div className="container">
-              <Routes>
-                <Route element={<PrivateRoute />}>
-                  <Route path="/movie-finder/watched" element={<Watched />} />
-                </Route>
-                {/* Public routes */}
-                <Route path="/movie-finder/" element={<MainContent />} />
-                <Route
-                  path="/movie-finder/details/:id"
-                  element={<MovieDetails />}
-                />
-                <Route path="/movie-finder/favorites" element={<Favorites />} />
-                <Route path="/movie-finder/discover" element={<Discover />} />
-                <Route path="/movie-finder/register" element={<Register />} />
-                <Route path="/movie-finder/login" element={<Login />} />
-              </Routes>
+    <WatchListProvider>
+      <FilterProvider>
+        <AuthProvider>
+          <FavoritesProvider>
+            <div className="app">
+              {showNavbar && (
+                <>
+                  <Navbar />
+                  <Sidebar></Sidebar>
+                </>
+              )}
+              <div className="container">
+                <Routes>
+                  <Route element={<PrivateRoute />}>
+                    <Route path="/movie-finder/watched" element={<Watched />} />
+                  </Route>
+                  {/* Public routes */}
+                  <Route path="/movie-finder/" element={<MainContent />} />
+                  <Route
+                    path="/movie-finder/details/:id"
+                    element={<MovieDetails />}
+                  />
+                  <Route
+                    path="/movie-finder/favorites"
+                    element={<Favorites />}
+                  />
+                  <Route path="/movie-finder/discover" element={<Discover />} />
+                  <Route path="/movie-finder/register" element={<Register />} />
+                  <Route path="/movie-finder/login" element={<Login />} />
+                </Routes>
+              </div>
             </div>
-          </div>
-        </FavoritesProvider>
-      </AuthProvider>
-    </FilterProvider>
+          </FavoritesProvider>
+        </AuthProvider>
+      </FilterProvider>
+    </WatchListProvider>
   );
 }
 
 export default function App() {
   return (
-    <ErrorBoundry fallback='There is an Error in component render!'>
+    <ErrorBoundry fallback="There is an Error in component render!">
       <Router>
         <ScrollToTop />
         <AppWithLocation />
