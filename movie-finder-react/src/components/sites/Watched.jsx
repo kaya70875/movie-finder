@@ -2,7 +2,6 @@ import React, { useEffect, useReducer, useState } from "react";
 import "../sites/_Watched.scss";
 import MovieCard from "../cards/MovieCard";
 import { auth } from "../../firebase/FirebaseAuth";
-import { getMovieHistory } from "../../firebase/movieHistory";
 import axios from "axios";
 import Skeleton from "react-loading-skeleton";
 import "react-loading-skeleton/dist/skeleton.css";
@@ -39,7 +38,7 @@ export default function Watched() {
 
   const user = auth.currentUser;
   const { sortState } = useFilter();
-  const { watchList } = useWatchList();
+  const { watchList , buttonLabels} = useWatchList();
 
   useEffect(() => {
     if (user && watchList.length) {
