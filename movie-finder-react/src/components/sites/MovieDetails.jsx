@@ -117,10 +117,11 @@ export default function MovieDetails() {
               onClose={handleCloseTrailer}
               ref={popUpRef}
             ></MovieTrailers>
-            <MovieButton id={id} 
-            watchedLabel={'Add as Watched'}
-            removeLabel={'Remove From History'} 
-            button={'secondary-button'}/>
+            <MovieButton 
+            id={id} 
+            button={'secondary-button'}
+            buttonType={'bigButton'}
+            />
           </div>
         </div>
 
