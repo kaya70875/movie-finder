@@ -118,7 +118,7 @@ export default function MovieDetails() {
               ref={popUpRef}
             ></MovieTrailers>
             <MovieButton 
-            id={id} 
+            id={parseInt(id)} 
             button={'secondary-button'}
             buttonType={'bigButton'}
             />

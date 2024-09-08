@@ -6,15 +6,14 @@ export default function MovieButton({ id, button, buttonType }) {
 
   const isInWatchList = watchList.includes(id);
 
+  
   const handleWatch = (e) => {
     e.stopPropagation();
 
     if (isInWatchList) {
       deleteMovie(id);
-      console.log('movie removed');
     } else {
       addMovie(id);
-      console.log('movie added');
     }
   };
 

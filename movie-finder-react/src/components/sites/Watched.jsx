@@ -38,7 +38,7 @@ export default function Watched() {
 
   const user = auth.currentUser;
   const { sortState } = useFilter();
-  const { watchList , buttonLabels} = useWatchList();
+  const { watchList } = useWatchList();
 
   useEffect(() => {
     if (user && watchList.length) {

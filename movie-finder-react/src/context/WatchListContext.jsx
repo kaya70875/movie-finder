@@ -38,6 +38,7 @@ export const WatchListProvider = ({ children }) => {
       }));
     }
   };
+  console.log('movie added' , watchList);
 
   const deleteMovie = async (movieId) => {
     if (user) {
@@ -45,6 +46,7 @@ export const WatchListProvider = ({ children }) => {
       setWatchList((prevWatchList) =>
         prevWatchList.filter((id) => id !== movieId)
       );
+
 
       setButtonLabels((prev) => ({
         ...prev,
@@ -57,7 +59,7 @@ export const WatchListProvider = ({ children }) => {
       }));
     }
   };
-
+  console.log('movie removed' , watchList);
   useEffect(() => {
     loadWatchList();
   }, [user]);
