@@ -51,9 +51,8 @@ export default function TrendingCard({ id }) {
           />
           <MovieButton 
           id={id}
-          watchedLabel={'Add as Watched'}
-          removeLabel={'Remove from History.'}
           button={'secondary-button'}
+          buttonType={'bigButton'}
           />
         </div>
       </div>
