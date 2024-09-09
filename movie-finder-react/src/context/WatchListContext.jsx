@@ -26,7 +26,7 @@ export const WatchListProvider = ({ children }) => {
 
   const addMovie = async (movieId) => {
     if (user) {
-      await addMovieToHistory(user.uid, movieId);
+      await addMovieToHistory(user?.uid, movieId);
       setWatchList((prevWatchList) => [...prevWatchList, movieId]);
 
       setButtonLabels((prev) => ({
@@ -44,7 +44,7 @@ export const WatchListProvider = ({ children }) => {
 
   const deleteMovie = async (movieId) => {
     if (user) { 
-      await removeFromHistory(user.uid, movieId);
+      await removeFromHistory(user?.uid, movieId);
       setWatchList((prevWatchList) =>
         prevWatchList.filter((id) => id !== movieId)
       );
@@ -70,7 +70,7 @@ export const WatchListProvider = ({ children }) => {
     if (user && watchList.length > 0) {
       addStatsToHistory(user.uid, stats.mostWatchedGenresValue, watchList.length, stats.averageRatingValue);
     } else{
-      removeStatsFromHistory(user.uid);
+      removeStatsFromHistory(user?.uid);
     }
   }, [watchList, user, stats]);
   

@@ -10,6 +10,7 @@ import { shuffleArray } from "../utils/Shuffle";
 import { useFilter } from "../../context/FilterContext";
 import { filterAndSortMovies } from "../utils/FilterAndSortMovies";
 import { useWatchList } from "../../context/WatchListContext";
+import StatsCard from "../cards/StatsCard";
 
 const API_KEY = import.meta.env.VITE_MOVIE_DATABASE_API;
 
@@ -142,24 +143,7 @@ export default function Watched() {
               />
             </>
           )}
-
-          <div className="stats__section">
-            <h2>See Your Current Stats</h2>
-            <div className="stats__wrapper">
-              <div className="stats__card">
-                <h3>Total Movies Watched</h3>
-                <p>12 Movies Watch in Total</p>
-              </div>
-              <div className="stats__card">
-                <h3>Most Watched Genres</h3>
-                <p>Action & Horror & Romance</p>
-              </div>
-              <div className="stats__card">
-                <h3>Average Ratings</h3>
-                <p>5.4 Ratings</p>
-              </div>
-            </div>
-          </div>
+          <StatsCard />
         </div>
 
       ) : (
