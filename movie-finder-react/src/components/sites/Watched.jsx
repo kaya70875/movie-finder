@@ -75,7 +75,7 @@ export default function Watched() {
           const filteredMovies = similarMovies.filter(
             (movie, index, self) =>
               index === self.findIndex((m) => m.id === movie.id) &&
-              !watchList.includes(movie.id.toString())
+              !watchList.includes(movie.id)
           );
 
           // Shuffle
@@ -105,10 +105,12 @@ export default function Watched() {
 
   return (
     <div className="main__wrapper">
-      <div className="watched-header">
-        <h2>Watched List</h2>
-        <p>Get recommendations based on movies that you watched!</p>
-      </div>
+      <div className="watched__header__wrapper">
+        <div className="watched-header">
+          <h1>Watched List</h1>
+          <p>Personalized Movie Dashboard. Get recommendations based on movies that you watched!</p>
+        </div>
+      </div> 
 
       {state.movies.length !== 0 ? (
         <div className="slide__container">
@@ -131,8 +133,8 @@ export default function Watched() {
                 
               />
               <MovieCard
-                movies={filteredMovies}
-                title="Recommended For You"
+                movies={filteredMovies.slice(0, 12)}
+                title="Based On Your Watch History"
                 showScrollButtons={false}
                 gridType={"fill"}
                 mainStyle={'single'}
@@ -140,7 +142,26 @@ export default function Watched() {
               />
             </>
           )}
+
+          <div className="stats__section">
+            <h2>See Your Current Stats</h2>
+            <div className="stats__wrapper">
+              <div className="stats__card">
+                <h3>Total Movies Watched</h3>
+                <p>12 Movies Watch in Total</p>
+              </div>
+              <div className="stats__card">
+                <h3>Most Watched Genres</h3>
+                <p>Action & Horror & Romance</p>
+              </div>
+              <div className="stats__card">
+                <h3>Average Ratings</h3>
+                <p>5.4 Ratings</p>
+              </div>
+            </div>
+          </div>
         </div>
+
       ) : (
         <div className="no-watchlist">
           <h2>There is nothing here !</h2>

@@ -1,6 +1,8 @@
 import React, { createContext, useContext, useEffect, useState } from "react";
 import { auth } from "../firebase/FirebaseAuth";
 import { addMovieToHistory, removeFromHistory, getMovieHistory } from "../firebase/movieHistory";
+import { addStatsToHistory, removeStatsFromHistory } from "../firebase/UserStats";
+import useStats from "../hooks/useStats";
 
 export const WatchListContext = createContext();
 
@@ -11,8 +13,9 @@ export function useWatchList() {
 export const WatchListProvider = ({ children }) => {
   const [watchList, setWatchList] = useState([]);
   const user = auth.currentUser;
-
   const [buttonLabels, setButtonLabels] = useState({});
+
+  const stats = useStats(watchList);
 
   const loadWatchList = async () => {
     if (user) {
@@ -38,10 +41,9 @@ export const WatchListProvider = ({ children }) => {
       }));
     }
   };
-  console.log('movie added' , watchList);
 
   const deleteMovie = async (movieId) => {
-    if (user) {
+    if (user) { 
       await removeFromHistory(user.uid, movieId);
       setWatchList((prevWatchList) =>
         prevWatchList.filter((id) => id !== movieId)
@@ -59,10 +61,19 @@ export const WatchListProvider = ({ children }) => {
       }));
     }
   };
-  console.log('movie removed' , watchList);
+
   useEffect(() => {
     loadWatchList();
   }, [user]);
+
+  useEffect(() => {
+    if (user && watchList.length > 0) {
+      addStatsToHistory(user.uid, stats.mostWatchedGenresValue, watchList.length, stats.averageRatingValue);
+    } else{
+      removeStatsFromHistory(user.uid);
+    }
+  }, [watchList, user, stats]);
+  
 
   return (
     <WatchListContext.Provider

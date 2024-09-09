@@ -5,6 +5,39 @@
     @extend %header-base;
 }
 
+.watched__header__wrapper{
+    @include flexCenter;
+    width: 100vw;
+    @include gradient-background(#2c3e50, #4ca1af);
+
+}
+
+.stats__section{
+    display: flex;
+    flex-direction: column;
+    gap : 2rem;
+    padding: 1.8rem;
+}
+
+.stats__wrapper{
+    @include flexCenter;
+    gap : 5rem;
+}
+
+.stats__card{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    padding : 2rem;
+    gap : 2rem;
+    width: 500px;
+    height: 200px;
+
+    background: #2c3e50;
+    border-radius: 15px;
+}
+
 .no-watchlist{
     @include flexCenter;
     flex-direction: column;

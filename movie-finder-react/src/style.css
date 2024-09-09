@@ -60,5 +60,6 @@ body{
 .slide__container {
   margin-left: var(--sidebar-width);
   padding: 2rem;
+  z-index: 200;
 }
 /*# sourceMappingURL=style.css.map */
