@@ -8,15 +8,11 @@ import TrendingCard from '../cards/TrendingCard';
   export default function MainContent() {
     const popular = useFetch('/movie/popular?language=en-US&');
     const topRated = useFetch('/movie/top_rated?language=en-US&');
-    const upcoming = useFetch('/movie/upcoming?language=en-US&page=1&region=tr&');
     const trending = useFetch('/trending/movie/day?language=en-US&');
 
     const resultsPopular = popular?.results || [];
     const resultsTop = topRated?.results || [];
-    const resultsUpcoming = upcoming?.results || [];
     const resultsTrending = trending?.results || [];
-
-    console.log('results : ' , resultsTrending);
 
     return (
       <div className="main">

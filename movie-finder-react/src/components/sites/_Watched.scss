@@ -12,6 +12,11 @@
 
 }
 
+.content__more{
+    background: var(--secondary-background);
+    width: 100vw;
+}
+
 .no-watchlist{
     @include flexCenter;
     flex-direction: column;

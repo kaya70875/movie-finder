@@ -9,13 +9,10 @@ const useStats = (watchList) => {
     mostWatchedGenresValue: [],
   });
 
-  console.log('WL' , watchList);
-
   useEffect(() => {
     const fetchStats = async () => {
       try {
         const movieCount = watchList?.length || 0;
-        console.log('initial count : ' , movieCount);
 
         const movieDetailsResponses = await Promise.all(
           watchList.map(async (movieId) => {
@@ -53,7 +50,6 @@ const useStats = (watchList) => {
             ? averageRating.reduce((acc, rating) => acc + rating, 0) /
               averageRating.length
             : 0;
-        console.log('movieCount : ' , movieCount);
 
         setStats({
           movieCount,

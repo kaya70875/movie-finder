@@ -11,6 +11,7 @@ import { useFilter } from "../../context/FilterContext";
 import { filterAndSortMovies } from "../utils/FilterAndSortMovies";
 import { useWatchList } from "../../context/WatchListContext";
 import StatsCard from "../cards/StatsCard";
+import useFetch from "../../hooks/useFetch";
 
 const API_KEY = import.meta.env.VITE_MOVIE_DATABASE_API;
 
@@ -40,6 +41,8 @@ export default function Watched() {
   const user = auth.currentUser;
   const { sortState } = useFilter();
   const { watchList } = useWatchList();
+
+  const topRated = useFetch('/movie/top_rated?language=en-US&page=2&')?.results || [];
 
   useEffect(() => {
     if (user && watchList.length) {
@@ -144,6 +147,7 @@ export default function Watched() {
             </>
           )}
           <StatsCard />
+          <h1 style={{display : 'flex', alignItems : 'center' , justifyContent : 'center' , padding : '2rem'}}>Discover More</h1>
         </div>
 
       ) : (
@@ -152,6 +156,16 @@ export default function Watched() {
           <p>Add some movies to get started.</p>
         </div>
       )}
+        <div className="content__more">
+            <MovieCard 
+            movies={topRated}
+            title="Discover More Content"
+            content={'Add More Movies To Your Watchlist !'}
+            showScrollButtons={true}
+            showFilters={false}
+
+            />
+        </div>
     </div>
   );
 }
