@@ -1,11 +1,23 @@
 import React, { useEffect, useState } from 'react'
 import axios from 'axios';
 
-const useFetch = (url : string) => {
+interface Movie {
+  id: number;
+  title: string;
+  overview: string;
+  poster_path: string;
+  release_date: string;
+}
+
+interface ApiResponse<T> {
+  results : T[];
+}
+
+function useFetch<D> (url : string) {
   const API_KEY = import.meta.env.VITE_MOVIE_DATABASE_API as string;
   const BASE_URL = 'https://api.themoviedb.org/3';
 
-  const [data , setData] = useState([]);
+  const [data , setData] = useState<D | null>(null);
   const [loading , setLoading] = useState(true);
 
   useEffect(() => {
