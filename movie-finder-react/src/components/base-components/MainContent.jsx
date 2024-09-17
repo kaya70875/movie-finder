@@ -1,7 +1,7 @@
   import '../../sass/components/_MainContent.scss';
   import useFetch from '../../hooks/useFetch';
   import MovieCard from '../cards/MovieCard';
-import TrendingCard from '../cards/TrendingCard';
+  import TrendingCard from '../cards/TrendingCard';
 
   const MAX_CONTENT = 21
 

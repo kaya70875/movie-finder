@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from 'react'
 import axios from 'axios';
 
-const useFetch = (url) => {
-  const API_KEY = import.meta.env.VITE_MOVIE_DATABASE_API;
+const useFetch = (url : string) => {
+  const API_KEY = import.meta.env.VITE_MOVIE_DATABASE_API as string;
   const BASE_URL = 'https://api.themoviedb.org/3';
 
   const [data , setData] = useState([]);
@@ -29,5 +29,4 @@ const useFetch = (url) => {
 
   return data
 }
-
 export default useFetch
