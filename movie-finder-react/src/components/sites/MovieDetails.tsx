@@ -17,7 +17,7 @@ export default function MovieDetails() {
   const data = useFetch(`/movie/${id}?language=en-US&`);
   const movieCreditsData = useFetch(`/movie/${id}/credits?`);
   
-  const producerNames = movieCreditsData.crew?.filter(member => member.job === 'Producer').
+  const producerNames = movieCreditsData?.crew?.filter(member => member.job === 'Producer').
   map(producer => producer.name);
 
   const { titles, handleAddToFavorites } = useFavorites();
