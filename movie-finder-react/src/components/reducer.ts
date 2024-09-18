@@ -9,6 +9,7 @@ const enum REDUCER_ACTION_TYPE {
     TOGGLE_FOCUS,
 }
 
+
 type ReducerAction = 
     | { type: REDUCER_ACTION_TYPE.SET_SEARCH_QUERY, payload: string }
     | { type: REDUCER_ACTION_TYPE.TOGGLE_FOCUS, payload: boolean };
@@ -25,4 +26,4 @@ const reducer = (state : typeof initalState , action : ReducerAction): typeof in
     }
 }
 
-export {initalState , reducer};
+export {initalState , reducer , REDUCER_ACTION_TYPE};

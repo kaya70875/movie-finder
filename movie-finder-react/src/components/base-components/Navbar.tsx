@@ -4,7 +4,7 @@ import { useAuth } from '../../context/AuthContext';
 import useFetch from '../../hooks/useFetch';
 import { useEffect, useReducer } from 'react';
 import Dropdown from '../reusables/Dropdown';
-import { initalState, reducer } from '../reducer';
+import { initalState, reducer , REDUCER_ACTION_TYPE} from '../reducer';
 
 import MovieDetailsBlock from '../reusables/movies/MovieDetailsBlock';
 import DropdownNavigates from './dropdowns/DropdownNavigates';
@@ -52,11 +52,11 @@ export default function Navbar() {
             <h1 className='navbar__header'>Movie Finder</h1>
             <div className="dropdown" tabIndex={0} onBlur={(e) => {
               if(!e.currentTarget.contains(e.relatedTarget)){
-                dispatch({type : 'TOGGLE_FOCUS' , payload : false});
+                dispatch({type : REDUCER_ACTION_TYPE.TOGGLE_FOCUS , payload : false});
               }
             }}>
-              <input type="text" id='inputField' className='navbar-input' onFocus={() => dispatch({type : 'TOGGLE_FOCUS' , payload : true})} onChange={(e) => (
-                dispatch({type : 'SET_SEARCH_QUERY' , payload : e.target.value})
+              <input type="text" id='inputField' className='navbar-input' onFocus={() => dispatch({type : REDUCER_ACTION_TYPE.TOGGLE_FOCUS , payload : true})} onChange={(e) => (
+                dispatch({type : REDUCER_ACTION_TYPE.SET_SEARCH_QUERY , payload : e.target.value})
               )}/>
               <div className="dropdown__content">
                 <h2>Top Results</h2>
