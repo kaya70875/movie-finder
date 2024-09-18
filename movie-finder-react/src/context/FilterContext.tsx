@@ -9,16 +9,16 @@ import createYearsList from '../components/utils/CreateYearsList';
 
 interface ContextType {
   sortState: {
-    selectedGenres: string[];
+    selectedGenres: number[] | null;
     selectedYear: number;
     selectedSortBy: string;
     isAdult: boolean;
   };
-  genres: string[];
-  years: number[];
+  genres: number[];
+  years: number;
   sortOptions: { label: string; value: string }[];
   isFilterOpen: { genre: boolean; year: boolean; popularity: boolean };
-  handleSelectedGenres: (genreId: string) => void;
+  handleSelectedGenres: (genreId: number) => void;
   handleSelectedYear: (year: number) => void;
   handleSelectedSortBy: (sort: string) => void;
   handleIcons: (filterName: string) => void;
@@ -33,7 +33,7 @@ interface FilterContextProviderProps {
 const FilterContext = createContext<ContextType | null>(null);
 
 const initialState = {
-  selectedGenres: [''],
+  selectedGenres: [] as number[],
   selectedYear: 2024,
   selectedSortBy: "popularity.desc",
   isAdult : false
@@ -48,14 +48,13 @@ export enum REDUCER_ACTION_TYPE {
 }
 
 type ReducerAction = 
-  | { type: REDUCER_ACTION_TYPE.SET_GENRES, payload: string[] }
+  | { type: REDUCER_ACTION_TYPE.SET_GENRES, payload: number[] }
   | { type: REDUCER_ACTION_TYPE.SET_YEAR, payload: number}
   | { type: REDUCER_ACTION_TYPE.SET_SORT_BY, payload: string }
   | { type: REDUCER_ACTION_TYPE.SET_ADULT, payload: boolean }
   | { type: REDUCER_ACTION_TYPE.RESET_FILTERS }; // No payload for RESET_FILTERS
 
-
-const sortReducer = (state : typeof initialState, action : ReducerAction) : typeof initialState => {
+const sortReducer = (state: typeof initialState, action: ReducerAction): typeof initialState => {
   switch (action.type) {
     case REDUCER_ACTION_TYPE.SET_GENRES:
       return { ...state, selectedGenres: action.payload };
@@ -63,8 +62,8 @@ const sortReducer = (state : typeof initialState, action : ReducerAction) : type
       return { ...state, selectedYear: action.payload };
     case REDUCER_ACTION_TYPE.SET_SORT_BY:
       return { ...state, selectedSortBy: action.payload };
-    case REDUCER_ACTION_TYPE.SET_ADULT : 
-      return { ...state , isAdult : action.payload };
+    case REDUCER_ACTION_TYPE.SET_ADULT: 
+      return { ...state , isAdult: action.payload };
     case REDUCER_ACTION_TYPE.RESET_FILTERS:
       return initialState;
     default:
@@ -73,10 +72,15 @@ const sortReducer = (state : typeof initialState, action : ReducerAction) : type
 }
 
 export function useFilter() {
-  return useContext(FilterContext);
+  const context = useContext(FilterContext);
+  if(!context) {
+    throw new Error('useFilter must be used within a FilterProvider');
+  }
+
+  return context;
 }
 
-export function FilterProvider({ children } : FilterContextProviderProps) {
+export function FilterProvider({ children }: FilterContextProviderProps) {
   const [sortState, dispatch] = useReducer(sortReducer, initialState);
   const [isFilterOpen, setIsFilterOpen] = useState({
     genre: false,
@@ -93,7 +97,7 @@ export function FilterProvider({ children } : FilterContextProviderProps) {
     { label: "Revenue", value: "revenue.desc" },
   ];
 
-  const handleSelectedGenres = (genreId : string) => {
+  const handleSelectedGenres = (genreId: number) => {
     dispatch({
       type: REDUCER_ACTION_TYPE.SET_GENRES,
       payload: sortState.selectedGenres.includes(genreId)
@@ -103,32 +107,31 @@ export function FilterProvider({ children } : FilterContextProviderProps) {
   };
 
   const resetFilters = () => {
-      dispatch({type : REDUCER_ACTION_TYPE.RESET_FILTERS});
-    };
+    dispatch({ type: REDUCER_ACTION_TYPE.RESET_FILTERS });
+  };
 
-
-  const handleSelectedYear = (year : number) => {
+  const handleSelectedYear = (year: number) => {
     dispatch({
       type: REDUCER_ACTION_TYPE.SET_YEAR,
       payload: sortState.selectedYear === year ? 2024 : year,
     });
   };
 
-  const handleSelectedSortBy = (sort : string) => {
+  const handleSelectedSortBy = (sort: string) => {
     dispatch({
       type: REDUCER_ACTION_TYPE.SET_SORT_BY,
       payload: sortState.selectedSortBy === sort ? "" : sort,
     });
   };
 
-  const handleIcons = (filterName : string) => {
+  const handleIcons = (filterName: string) => {
     setIsFilterOpen((prev) => ({
       ...prev,
       [filterName]: !prev[filterName],
     }));
   };
 
-  const value : ContextType = {
+  const value: ContextType = {
     sortState,
     dispatch,
     genres,

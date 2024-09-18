@@ -12,7 +12,7 @@ export default function DropdownNavigates() {
   const { dispatch } = useFilter();
   const navigate = useNavigate();
 
-  const handleGenres = (genreId) => {
+  const handleGenres = (genreId : number) => {
     dispatch({
       type : REDUCER_ACTION_TYPE.SET_GENRES,
       payload : [genreId]
@@ -62,7 +62,7 @@ export default function DropdownNavigates() {
             <div className="navigate_dropdown__genres">
                 <p className='small-bold'>Genres</p>
                 <div className="genres__name">
-                  {genres?.genres?.map(genre => (
+                  {genres?.genres.map(genre => (
                     <Link key={genre.id} className='small-normal' 
                     onClick={() => handleGenres(genre.id)}
                     to={'/movie-finder/discover'}>
