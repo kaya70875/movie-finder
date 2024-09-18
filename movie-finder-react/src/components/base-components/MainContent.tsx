@@ -5,24 +5,10 @@
 
   const MAX_CONTENT = 21
 
-  interface Movie {
-    id: number;
-    title: string;
-    poster_path: string;
-    vote_average: number;
-    release_date: string;
-    overview: string;
-    tagline : string;
-  }
-
-  interface MovieResponse {
-    results : Movie[]
-  }
-
   export default function MainContent() {
-    const popular = useFetch<MovieResponse>('/movie/popular?language=en-US&');
-    const topRated = useFetch<MovieResponse>('/movie/top_rated?language=en-US&');
-    const trending = useFetch<MovieResponse>('/trending/movie/day?language=en-US&');
+    const popular = useFetch('/movie/popular?language=en-US&');
+    const topRated = useFetch('/movie/top_rated?language=en-US&');
+    const trending = useFetch('/trending/movie/day?language=en-US&');
 
     const resultsPopular = popular?.results || [];
     const resultsTop = topRated?.results || [];

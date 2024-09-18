@@ -4,20 +4,22 @@ import axios from 'axios';
 interface Movie {
   id: number;
   title: string;
-  overview: string;
   poster_path: string;
+  vote_average: number;
   release_date: string;
+  overview: string;
+  tagline : string;
 }
 
-interface ApiResponse<T> {
-  results : T[];
+interface MovieResponse {
+  results : Movie[]
 }
 
-function useFetch<D> (url : string) {
+function useFetch (url : string) {
   const API_KEY = import.meta.env.VITE_MOVIE_DATABASE_API as string;
   const BASE_URL = 'https://api.themoviedb.org/3';
 
-  const [data , setData] = useState<D | null>(null);
+  const [data , setData] = useState<MovieResponse | null>(null);
   const [loading , setLoading] = useState(true);
 
   useEffect(() => {
@@ -26,7 +28,7 @@ function useFetch<D> (url : string) {
       try{
         const showUrl = `${BASE_URL}${url}api_key=${API_KEY}`;
         console.log(showUrl);
-        const response = await axios.get(`${BASE_URL}${url}api_key=${API_KEY}`); 
+        const response = await axios.get<MovieResponse>(`${BASE_URL}${url}api_key=${API_KEY}`); 
         console.log(response);
         setData(response.data);
         
