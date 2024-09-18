@@ -5,9 +5,11 @@ import { Link, useNavigate } from 'react-router-dom';
 import { useFilter } from '../../../context/FilterContext';
 import DropdownTrendingMovies from './DropdownTrendingMovies';
 import { REDUCER_ACTION_TYPE } from '../../../context/FilterContext';
+import { Genres } from '../../../types';
+
 
 export default function DropdownNavigates() {
-  const genres = useFetch('/genre/movie/list?language=en&');
+  const {data : genres} = useFetch<Genres[]>('/genre/movie/list?language=en&');
   
   const { dispatch } = useFilter();
   const navigate = useNavigate();
@@ -62,7 +64,7 @@ export default function DropdownNavigates() {
             <div className="navigate_dropdown__genres">
                 <p className='small-bold'>Genres</p>
                 <div className="genres__name">
-                  {genres?.genres.map(genre => (
+                  {genres?.map(genre => (
                     <Link key={genre.id} className='small-normal' 
                     onClick={() => handleGenres(genre.id)}
                     to={'/movie-finder/discover'}>

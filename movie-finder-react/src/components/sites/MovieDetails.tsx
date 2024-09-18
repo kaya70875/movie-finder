@@ -11,19 +11,25 @@ import useClickOutside from "../../hooks/useClickOutside";
 import ActorsCard from "../cards/ActorsCard";
 import MovieButton from "../buttons/MovieButton";
 import MovieDetailsBlock from "../reusables/movies/MovieDetailsBlock";
+import {Movie , Crew} from '../../types';
 
 export default function MovieDetails() {
-  const { id } = useParams();
-  const data = useFetch(`/movie/${id}?language=en-US&`);
-  const movieCreditsData = useFetch(`/movie/${id}/credits?`);
+  const { id: idParam } = useParams<{ id: string }>();
+  if (!idParam) {
+    return <div>Error: No movie ID provided</div>;
+  }
+  const id = parseInt(idParam, 10);
+
+  const {data , loading  , error} = useFetch<Movie>(`/movie/${id}?language=en-US&`);
+  const {data : movieCreditsData} = useFetch<Crew[]>(`/movie/${id}/credits?`);
   
-  const producerNames = movieCreditsData?.crew?.filter(member => member.job === 'Producer').
+  const producerNames = movieCreditsData?.filter(member => member.job === 'Producer').
   map(producer => producer.name);
 
   const { titles, handleAddToFavorites } = useFavorites();
 
-  const similarMovies = useFetch(`/movie/${id}/similar?`);
-  const resultSimilar = similarMovies?.results || [];
+  const similarMovies = useFetch<Movie[]>(`/movie/${id}/similar?`);
+  const resultSimilar = similarMovies || [];
 
   const [isTrailerVisible, setIsTrailerVisible] = useState(false);
   const popUpRef = useRef(null);
@@ -32,6 +38,10 @@ export default function MovieDetails() {
 
   const handlePopUp = () => setIsTrailerVisible(true);
   const handleCloseTrailer = () => setIsTrailerVisible(false);
+
+  if (loading) return <div>Loading...</div>;
+  if (error) return <div>{error}</div>;
+  if (!data) return <div>No data</div>;
 
   return (
     <>
@@ -45,7 +55,7 @@ export default function MovieDetails() {
         <div className="details__container">
           <div className="movie__hero__section">
             <div className="card">
-              {data.poster_path && (
+              {data?.poster_path && (
                 <img
                   src={`https://image.tmdb.org/t/p/w500${data.poster_path}`}
                   alt={data.title}
@@ -118,7 +128,7 @@ export default function MovieDetails() {
               ref={popUpRef}
             ></MovieTrailers>
             <MovieButton 
-            id={parseInt(id)} 
+            id={id} 
             button={'secondary-button'}
             buttonType={'bigButton'}
             />
@@ -128,7 +138,7 @@ export default function MovieDetails() {
         <div className="container-comment-similar">
           <ActorsCard movieId={id} />
           <MovieCard
-            movies={resultSimilar.slice(0, 21)}
+            movies={resultSimilar}
             title={"Similar Movies"}
             content={'You may like this movies.'}
             showScrollButtons={true}
