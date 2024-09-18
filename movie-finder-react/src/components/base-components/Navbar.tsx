@@ -36,10 +36,10 @@ export default function Navbar() {
   }
 
   useEffect(() => {
-    const dropdownContent = document.querySelector('.dropdown__content');
-    state.searchQuery ? dropdownContent.style.display = 'block' : dropdownContent.style.display = 'none';
+    const dropdownContent = document.querySelector<HTMLElement>('.dropdown__content');
+    state.searchQuery && dropdownContent ? dropdownContent.style.display = 'block' : dropdownContent && dropdownContent.style.display === 'none';
     
-    if(!state.isFocus){
+    if(!state.isFocus && dropdownContent){
       dropdownContent.style.display = 'none';
     }
   } , [state.searchQuery , state.isFocus])
