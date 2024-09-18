@@ -1,20 +1,20 @@
-import React from 'react'
 import Dropdown from '../../reusables/Dropdown'
 import './_DropdownNavigates.scss';
 import useFetch from '../../../hooks/useFetch';
 import { Link, useNavigate } from 'react-router-dom';
 import { useFilter } from '../../../context/FilterContext';
 import DropdownTrendingMovies from './DropdownTrendingMovies';
+import { REDUCER_ACTION_TYPE } from '../../../context/FilterContext';
 
 export default function DropdownNavigates() {
   const genres = useFetch('/genre/movie/list?language=en&');
   
-  const {dispatch} = useFilter();
+  const { dispatch } = useFilter();
   const navigate = useNavigate();
 
   const handleGenres = (genreId) => {
     dispatch({
-      type : 'SET_GENRES',
+      type : REDUCER_ACTION_TYPE.SET_GENRES,
       payload : [genreId]
     });
   }
@@ -22,23 +22,23 @@ export default function DropdownNavigates() {
   const exploreActions = {
     'Most Popular' : () => {
       navigate('/movie-finder/discover');
-      dispatch({type : 'SET_SORT_BY' , payload : 'popularity.desc'});
+      dispatch({type : REDUCER_ACTION_TYPE.SET_SORT_BY , payload : 'popularity.desc'});
     },
     'Top Ratings' : () => {
       navigate('/movie-finder/discover');
-      dispatch({type : 'SET_SORT_BY' , payload : 'revenue.desc'});
+      dispatch({type : REDUCER_ACTION_TYPE.SET_SORT_BY , payload : 'revenue.desc'});
     },
     'Newest' : () => {
       navigate('/movie-finder/discover');
-      dispatch({type : 'SET_YEAR' , payload : 2024});
+      dispatch({type : REDUCER_ACTION_TYPE.SET_YEAR , payload : 2024});
     },
     'For Family' : () => {
       navigate('/movie-finder/discover');
-      dispatch({type : 'SET_GENRES' , payload : [10751]});
+      dispatch({type : REDUCER_ACTION_TYPE.SET_GENRES, payload : [10751]});
     },
     'Adult Movies' : () => {
       navigate('/movie-finder/discover');
-      dispatch({type : 'SET_ADULT' , payload : true});
+      dispatch({type : REDUCER_ACTION_TYPE.SET_ADULT , payload : true});
     }
     
   }
