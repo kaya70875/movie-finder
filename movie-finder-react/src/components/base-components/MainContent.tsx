@@ -2,18 +2,18 @@ import '../../sass/components/_MainContent.scss';
 import useFetch from '../../hooks/useFetch';
 import MovieCard from '../cards/MovieCard';
 import TrendingCard from '../cards/TrendingCard';
-import { Movie } from '../../types';
+import { MovieListResponse } from '../../types';
 
 const MAX_CONTENT = 21;
 
 export default function MainContent() {
-  const { data: popular, loading: loadingPopular } = useFetch<Movie[]>('/movie/popular?language=en-US&');
-  const { data: topRated, loading: loadingTopRated } = useFetch<Movie[]>('/movie/top_rated?language=en-US&');
-  const { data: trending, loading: loadingTrending } = useFetch<Movie[]>('/trending/movie/day?language=en-US&');
+  const { data: popular, loading: loadingPopular } = useFetch<MovieListResponse>('/movie/popular?language=en-US&');
+  const { data: topRated, loading: loadingTopRated } = useFetch<MovieListResponse>('/movie/top_rated?language=en-US&');
+  const { data: trending, loading: loadingTrending } = useFetch<MovieListResponse>('/trending/movie/day?language=en-US&');
 
-  const resultsPopular = popular || [];
-  const resultsTop = topRated || [];
-  const resultsTrending = trending || [];
+  const resultsPopular = popular?.results || [];
+  const resultsTop = topRated?.results || [];
+  const resultsTrending = trending?.results || [];
 
   if (loadingPopular || loadingTopRated || loadingTrending) return <div>Loading...</div>;
 

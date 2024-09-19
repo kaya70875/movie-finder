@@ -12,10 +12,9 @@ const useFetch = <T,>(url: string) => {
     const fetchData = async () => {
       try {
         const response = await fetch(`${BASE_URL}${url}&api_key=${API_KEY}`);
-        console.log('resp' , response);
         if (!response.ok) throw new Error('Network response was not ok');
-        const result: T = await response.json();
-        setData(result);
+        const data : T = await response.json();
+        setData(data);
       } catch (error: any) {
         setError(error.message);
       } finally {

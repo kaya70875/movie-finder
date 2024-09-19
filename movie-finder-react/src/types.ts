@@ -27,3 +27,11 @@ export interface Crew {
   department: string;
   job: string;
 }
+
+export interface MovieListResponse {
+  results : Movie[];
+}
+
+export interface CrewResponse {
+  crew : Crew[];
+}

@@ -11,7 +11,7 @@ import useClickOutside from "../../hooks/useClickOutside";
 import ActorsCard from "../cards/ActorsCard";
 import MovieButton from "../buttons/MovieButton";
 import MovieDetailsBlock from "../reusables/movies/MovieDetailsBlock";
-import {Movie , Crew} from '../../types';
+import {Movie , CrewResponse} from '../../types';
 
 export default function MovieDetails() {
   const { id: idParam } = useParams<{ id: string }>();
@@ -21,9 +21,9 @@ export default function MovieDetails() {
   const id = parseInt(idParam, 10);
 
   const {data , loading  , error} = useFetch<Movie>(`/movie/${id}?language=en-US&`);
-  const {data : movieCreditsData} = useFetch<Crew[]>(`/movie/${id}/credits?`);
+  const {data : movieCreditsData} = useFetch<CrewResponse>(`/movie/${id}/credits?`);
   
-  const producerNames = movieCreditsData?.filter(member => member.job === 'Producer').
+  const producerNames = movieCreditsData?.crew.filter(member => member.job === 'Producer').
   map(producer => producer.name);
 
   const { titles, handleAddToFavorites } = useFavorites();

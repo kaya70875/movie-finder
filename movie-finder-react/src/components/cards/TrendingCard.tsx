@@ -6,8 +6,10 @@ import MovieButton from "../buttons/MovieButton";
 import useClickOutside from "../../hooks/useClickOutside";
 import MovieDetailsBlock from "../reusables/movies/MovieDetailsBlock";
 
+import { Movie } from '../../types';
+
 export default function TrendingCard({ id }) {
-  const data = useFetch(`/movie/${id}?language=en-US&`);
+  const { data } = useFetch<Movie>(`/movie/${id}?language=en-US&`);
 
   // Movie Trailer Set Up
 
