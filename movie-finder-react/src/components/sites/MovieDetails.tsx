@@ -11,7 +11,7 @@ import useClickOutside from "../../hooks/useClickOutside";
 import ActorsCard from "../cards/ActorsCard";
 import MovieButton from "../buttons/MovieButton";
 import MovieDetailsBlock from "../reusables/movies/MovieDetailsBlock";
-import {Movie , CrewResponse} from '../../types';
+import {Movie , CrewResponse , MovieListResponse} from '../../types';
 
 export default function MovieDetails() {
   const { id: idParam } = useParams<{ id: string }>();
@@ -28,8 +28,8 @@ export default function MovieDetails() {
 
   const { titles, handleAddToFavorites } = useFavorites();
 
-  const similarMovies = useFetch<Movie[]>(`/movie/${id}/similar?`);
-  const resultSimilar = similarMovies || [];
+  const {data : similarMovies} = useFetch<MovieListResponse>(`/movie/${id}/similar?`);
+  const resultSimilar = similarMovies?.results || [];
 
   const [isTrailerVisible, setIsTrailerVisible] = useState(false);
   const popUpRef = useRef(null);

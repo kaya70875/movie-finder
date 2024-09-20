@@ -4,7 +4,7 @@ import '../../sass/components/_ActorsCards.scss'
 import useScroll from '../../hooks/useScroll';
 import { CastResponse } from '../../types';
 
-export default function ActorsCard({movieId}) {
+export default function ActorsCard({movieId} : {movieId : number}) {
 
     const { data : actors } = useFetch<CastResponse>(`/movie/${movieId}/credits?language=en-US&`);
     const scrollContainerRef = useRef(null);
