@@ -1,10 +1,12 @@
-import React from 'react';
 import useFetch from '../../../hooks/useFetch';
+import { Movie } from '../../../types';
 
 const MovieDetailsBlock = ({ id , runtime = true , language = true}) => {
 
-  const data = useFetch(`/movie/${id}?language=en-US&`);
+  const { data  } = useFetch<Movie>(`/movie/${id}?language=en-US&`);
 
+  if (!data) return <div>No data</div>;
+  
   return (
     <>
       <h4>{new Date(data?.release_date).getFullYear()}</h4>
