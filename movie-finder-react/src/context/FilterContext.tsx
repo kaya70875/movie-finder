@@ -6,6 +6,7 @@ import {
 } from "react";
 import GetGenreId from "../components/utils/GetGenreId";
 import createYearsList from '../components/utils/CreateYearsList';
+import { Genres } from "../types";
 
 interface ContextType {
   sortState: {
@@ -14,8 +15,8 @@ interface ContextType {
     selectedSortBy: string;
     isAdult: boolean;
   };
-  genres: number[];
-  years: number;
+  genres: Genres[];
+  years: number[];
   sortOptions: { label: string; value: string }[];
   isFilterOpen: { genre: boolean; year: boolean; popularity: boolean };
   handleSelectedGenres: (genreId: number) => void;
