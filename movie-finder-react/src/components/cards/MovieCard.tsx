@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React, { FC, useEffect, useRef, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useFavorites } from '../../context/FavoritesContext';
 import '../../sass/components/_MainContent.scss';
@@ -7,8 +7,19 @@ import useScroll from '../../hooks/useScroll';
 import FilterComponent from '../filters/FilterComponent';
 import MovieDetailsBlock from '../reusables/movies/MovieDetailsBlock';
 import MovieButton from '../buttons/MovieButton';
+import { Movie } from '../../types';
 
-export default function MovieCard({ movies, title , content , mainStyle , showScrollButtons = true , gridType = '' , showFilters = false}) {
+interface MovieCardProps {
+    movies : Movie | Movie[];
+    title? : string;
+    content? : string;
+    mainStyle? : string;
+    showScrollButtons? : boolean;
+    showFilters? : boolean;
+    gridType? : string; 
+}
+
+const MovieCard : FC<MovieCardProps> = ({ movies, title , content , mainStyle , showScrollButtons = true , gridType = '' , showFilters = false}) => {
     const { titles, handleAddToFavorites } = useFavorites();
     const scrollContainerRef = useRef(null);
     const navigate = useNavigate();
@@ -22,13 +33,13 @@ export default function MovieCard({ movies, title , content , mainStyle , showSc
 
     const {scrollPosition , scrollContainer} = useScroll(scrollContainerRef);
 
-    function handleNavigate(movieId){
+    function handleNavigate(movieId : number){
         navigate(`/movie-finder/details/${movieId}`);
     }
 
     return (
         <div className={`main__content main__content--${mainStyle}`}>
-            {title?.length > 0 && (
+            {title && content && title?.length > 0 && (
                 <div className="header__wrapper">
                 <div className="header-filters">
                     <h2>{title}</h2>
@@ -38,10 +49,10 @@ export default function MovieCard({ movies, title , content , mainStyle , showSc
                 {showScrollButtons &&
                 <div className="next__icons">
                     <button className='ellipse-button ellipse-button--main' onClick={() => scrollContainer('left')} disabled={scrollPosition === 0 ? true : false}>
-                        <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-chevron-left"><polyline points="15 18 9 12 15 6"></polyline></svg>
+                        <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" className="feather feather-chevron-left"><polyline points="15 18 9 12 15 6"></polyline></svg>
                     </button>
                     <button className='ellipse-button ellipse-button--main' onClick={() => scrollContainer('right')} >
-                        <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-chevron-right"><polyline points="9 18 15 12 9 6"></polyline></svg>
+                        <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" className="feather feather-chevron-right"><polyline points="9 18 15 12 9 6"></polyline></svg>
                     </button>
                 </div>}
  
@@ -74,13 +85,13 @@ export default function MovieCard({ movies, title , content , mainStyle , showSc
                         
                     )
                 ))) : (<h3>There is no results for current filter!</h3>)}
-                {isSingleCard && (
-                    moviesArray.poster_path && (
-                        <div key={moviesArray.id} className="item" onClick={() => handleNavigate(moviesArray.id)}>
-                            <img src={`https://image.tmdb.org/t/p/w500${moviesArray.poster_path}`} alt={moviesArray.title} />
-                            <h3 style={{minWidth : '200px' , textWrap : 'nowrap'}}>{moviesArray.title}</h3>
+                {isSingleCard && moviesArray[0] && moviesArray[0].poster_path &&(
+                    moviesArray[0].poster_path && (
+                        <div key={moviesArray[0].id} className="item" onClick={() => handleNavigate(moviesArray[0].id)}>
+                            <img src={`https://image.tmdb.org/t/p/w500${moviesArray[0].poster_path}`} alt={moviesArray[0].title} />
+                            <h3 style={{minWidth : '200px' , textWrap : 'nowrap'}}>{moviesArray[0].title}</h3>
                             <div className="movie__info movie__info--card">
-                                <MovieDetailsBlock id={moviesArray.id} runtime={false} language={false}/>
+                                <MovieDetailsBlock id={moviesArray[0].id} runtime={false} language={false}/>
                             </div>
                             
                         </div>
@@ -89,3 +100,5 @@ export default function MovieCard({ movies, title , content , mainStyle , showSc
         </div>
     );
 }
+
+export default MovieCard;
