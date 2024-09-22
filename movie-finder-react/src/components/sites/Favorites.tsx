@@ -1,18 +1,18 @@
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import "../sites/_Favorites.scss";
 import MovieCard from "../cards/MovieCard";
 import { useFilter } from "../../context/FilterContext";
 import { filterAndSortMovies } from "../utils/FilterAndSortMovies";
+import { Movie } from "../../types";
 
 export default function Favorites() {
   const [favorites, setFavorites] = useState([]);
-  const [filteredMovies, setFilteredMovies] = useState([]);
+  const [filteredMovies, setFilteredMovies] = useState<Movie[]>([]);
   const { sortState, resetFilters } = useFilter();
 
   useEffect(() => {
-    const savedFavorites = JSON.parse(localStorage.getItem("favorites")) || [];
+    const savedFavorites = JSON.parse(localStorage.getItem("favorites") || '[]');
     setFavorites(savedFavorites);
-
     resetFilters();
   }, []);
 
