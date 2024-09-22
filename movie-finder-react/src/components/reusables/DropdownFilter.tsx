@@ -1,7 +1,16 @@
-import React from 'react';
-import Dropdown from '../reusables/Dropdown';
+import Dropdown from './Dropdown';
 
-export default function DropdownFilter({ label, items = [], onSelect, selectedItems }) {
+interface DropdownFilterProps {
+    label : string | any;
+    items : {
+        label : string | number;
+        value : number;
+    }[];
+    onSelect : (arg : number) => void;
+    selectedItems : (string | number)[] | null;
+}
+
+export default function DropdownFilter({ label, items = [{value: 0, label: ''}], onSelect, selectedItems }: DropdownFilterProps) {
 
     const isMobile = window.matchMedia('(max-width : 450px)').matches;
 
@@ -27,7 +36,7 @@ export default function DropdownFilter({ label, items = [], onSelect, selectedIt
                     {items.map(item => (
                         <li 
                             key={item.value}
-                            className={selectedItems.includes(item.value) ? 'active' : ''}
+                            className={selectedItems?.includes(item.value) ? 'active' : ''}
                             onClick={() => {
                                 onSelect(item.value)
                             }}
