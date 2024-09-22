@@ -1,4 +1,3 @@
-import React, { useState } from "react";
 import DropdownFilter from "../reusables/DropdownFilter";
 import ChevronIcon from "../reusables/ChevronIcon";
 import { useFilter } from "../../context/FilterContext";

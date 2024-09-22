@@ -1,8 +1,15 @@
-import React, { useState, useRef } from 'react';
+import React, { useState, useRef, CSSProperties } from 'react';
 import './_Dropdown.scss';
 import useClickOutside from '../../hooks/useClickOutside';
 
-export default function Dropdown({dropdownLabel ,dropdownStyle, buttonStyle , children}) {
+interface DropdownProps {
+    dropdownLabel : string;
+    dropdownStyle? : CSSProperties;
+    buttonStyle? : CSSProperties;
+    children? : React.ReactNode
+}
+
+export default function Dropdown({dropdownLabel ,dropdownStyle, buttonStyle , children} : DropdownProps) {
     
     const [isOpen, setIsOpen] = useState(false);
     const dropdownRef = useRef(null);
