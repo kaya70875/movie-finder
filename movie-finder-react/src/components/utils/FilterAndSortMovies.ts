@@ -1,8 +1,12 @@
-export function filterAndSortMovies (movies , sortState) {
+import { Movie, SortState } from "../../types";
+
+export function filterAndSortMovies (
+  movies : Movie[],
+  sortState : SortState) : Movie[] {
   let filtered = movies.filter((movie) => {
     const genreMatch =
-      sortState.selectedGenres.length === 0 ||
-      movie?.genre_ids?.some((id) => sortState.selectedGenres.includes(id));
+      sortState.selectedGenres?.length === 0 ||
+      movie?.genre_ids?.some((id) => sortState.selectedGenres?.includes(id));
     const yearMatch =
       !sortState.selectedYear ||
       new Date(movie.release_date).getFullYear() === sortState.selectedYear;
