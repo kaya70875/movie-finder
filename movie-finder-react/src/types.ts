@@ -15,6 +15,10 @@ export interface Movie {
   tagline?: string;
   runtime: number;
   genres: Genres[];
+  genre_ids : number[]
+  popularity : number;
+  vote_count : number;
+  revenue : number;
 }
 
 export interface Crew {
@@ -43,6 +47,13 @@ export interface Cast {
   character: string;
   credit_id: string;
   order: number;
+}
+
+export interface SortState {
+    selectedGenres: number[] | null;
+    selectedYear: number;
+    selectedSortBy: string;
+    isAdult: boolean;
 }
 
 export interface MovieListResponse {
