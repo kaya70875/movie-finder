@@ -9,7 +9,7 @@ import { Genres } from '../../../types';
 
 
 export default function DropdownNavigates() {
-  const {data : genres = []} = useFetch<Genres[]>('/genre/movie/list?language=en&');
+  const {data : genres} = useFetch<Genres>('/genre/movie/list?language=en&'); // This endpoint returns an array of genres with a genres property.
   
   const { dispatch } = useFilter();
   const navigate = useNavigate();
@@ -64,7 +64,7 @@ export default function DropdownNavigates() {
             <div className="navigate_dropdown__genres">
                 <p className='small-bold'>Genres</p>
                 <div className="genres__name">
-                  {Array.isArray(genres) && genres?.map(genre => (
+                  {Array.isArray(genres?.genres) && genres?.genres?.map(genre => (
                     <Link key={genre.id} className='small-normal' 
                     onClick={() => handleGenres(genre.id)}
                     to={'/movie-finder/discover'}>
