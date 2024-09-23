@@ -9,13 +9,15 @@ import { initalState, reducer , REDUCER_ACTION_TYPE} from '../reducer';
 import MovieDetailsBlock from '../reusables/movies/MovieDetailsBlock';
 import DropdownNavigates from './dropdowns/DropdownNavigates';
 
+import { MovieListResponse } from '../../types';
+
 export default function Navbar() {
-  const { logOut , currentUser } = useAuth();
+  const { logOut , currentUser } = useAuth()!;
   const navigate = useNavigate();
 
   const [state , dispatch] = useReducer(reducer , initalState);
 
-  const data = useFetch(`/search/movie?query=${state.searchQuery}&include_adult=false&language=en-US&`);
+  const { data } = useFetch<MovieListResponse>(`/search/movie?query=${state.searchQuery}&include_adult=false&language=en-US&`);
   const searchResults = data?.results;
 
   async function handleLogOut(){
