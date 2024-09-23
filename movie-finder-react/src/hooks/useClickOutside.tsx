@@ -1,9 +1,14 @@
 import { useEffect } from 'react';
 
-function useClickOutside(ref, callback) {
+interface Props {
+    ref: React.RefObject<HTMLElement>;
+    callback: (isOpen: boolean) => void;
+}
+
+function useClickOutside({ref , callback} : Props) {
     useEffect(() => {
-        function handleClickOutside(event) {
-            if (ref.current && !ref.current.contains(event.target)) {
+        function handleClickOutside(event : MouseEvent) {
+            if (ref.current && !ref.current.contains(event.target as Node)) {
                 callback(false);
             }
         }
