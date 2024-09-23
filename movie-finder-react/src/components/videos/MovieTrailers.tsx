@@ -1,18 +1,25 @@
 import React, { forwardRef } from 'react'
 import useFetch from '../../hooks/useFetch';
 import './_MovieTrailers.scss';
+import { MovieMedia } from '../../types';
 
-const MovieTrailers = forwardRef(({movieId , isVisible , onClose} , ref) => {
+interface MovieTrailersProps {
+    movieId : number;
+    isVisible : boolean;
+    onClose : () => void;
+}
 
-    const trailerData = useFetch(`/movie/${movieId}/videos?language=en-US&`);
-    const trailerVideo = trailerData?.results?.find(video => video.site === 'YouTube' && video.type === 'Trailer') || [];
+const MovieTrailers = forwardRef(({movieId , isVisible , onClose} : MovieTrailersProps , ref : React.ForwardedRef<HTMLDivElement>) => {
+
+    const {data : trailerData} = useFetch<MovieMedia>(`/movie/${movieId}/videos?language=en-US&`);
+    const trailerVideo = trailerData?.results?.find(video => video.site === 'YouTube' && video.type === 'Trailer');
 
     if(!isVisible) return null;
     
   return (
     <div className='popup'>
       <div className="popup-content" ref={ref}>
-        <span class="close" onClick={onClose}>×</span>
+        <span className="close" onClick={onClose}>×</span>
         <div style={{height : '10px'}}>
         </div>
         {trailerVideo ? (
