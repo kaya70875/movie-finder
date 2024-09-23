@@ -1,13 +1,18 @@
-import React, { useEffect } from "react";
 import { useWatchList } from "../../context/WatchListContext";
 
-export default function MovieButton({ id, button, buttonType }) {
+interface MovieButtonProps {
+  id: number;
+  button: string;
+  buttonType: string;
+}
+
+export default function MovieButton({ id, button, buttonType } : MovieButtonProps) {
   const { watchList, addMovie, deleteMovie, buttonLabels } = useWatchList();
 
   const isInWatchList = watchList.includes(id);
 
   
-  const handleWatch = (e) => {
+  const handleWatch = (e : React.MouseEvent<HTMLButtonElement>) => {
     e.stopPropagation();
 
     if (isInWatchList) {
