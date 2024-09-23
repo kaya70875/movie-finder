@@ -1,13 +1,13 @@
-import React from 'react'
 import './_DropdownTrendingMovies.scss';
 import useFetch from '../../../hooks/useFetch';
 import { useNavigate } from 'react-router-dom';
+import { MovieListResponse , Movie} from '../../../types';
 
 export default function DropdownTrendingMovies() {
-    const popular = useFetch('/movie/popular?page=4&');
+    const { data : popular } = useFetch<MovieListResponse>('/movie/popular?page=4&');
     const navigate = useNavigate();
     
-    const handleNavigate = (movie) => {
+    const handleNavigate = (movie : Movie) => {
         navigate(`/movie-finder/details/${movie.id}`);
     };
   return (
