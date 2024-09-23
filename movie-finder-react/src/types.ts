@@ -22,6 +22,13 @@ export interface Movie {
   revenue : number;
 }
 
+export interface MovieMedia {
+  site : string;
+  type : string;
+  key : string;
+  results : MovieMedia[];
+}
+
 export interface Crew {
   adult: boolean;
   gender: number;
