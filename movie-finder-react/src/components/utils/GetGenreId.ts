@@ -1,7 +1,8 @@
 import useFetch from '../../hooks/useFetch'
+import { Genres } from '../../types';
 
 export default function GetGenreId() {
-    const getGenres = useFetch('/genre/movie/list?language=en&');
+    const {data : getGenres} = useFetch<Genres>('/genre/movie/list?language=en&');
     
     return getGenres?.genres || [];
 }

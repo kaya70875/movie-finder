@@ -1,6 +1,7 @@
 export interface Genres {
   id: number;
   name: string;
+  genres : Genres[];
 }
 
 export interface Movie {
