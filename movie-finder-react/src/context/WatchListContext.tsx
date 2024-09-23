@@ -4,14 +4,26 @@ import { addMovieToHistory, removeFromHistory, getMovieHistory } from "../fireba
 import { addStatsToHistory, removeStatsFromHistory } from "../firebase/UserStats";
 import useStats from "../hooks/useStats";
 
-export const WatchListContext = createContext();
+interface ContextType {
+  watchList : number[];
+  addMovie : (movieId : number) => void;
+  deleteMovie : (movieId : number) => void;
+  buttonLabels : {
+    [key: number]: {
+      bigButton: string;
+      ellipseButton: string;
+    };
+  }
+}
+
+export const WatchListContext = createContext<ContextType | null>(null);
 
 export function useWatchList() {
   return useContext(WatchListContext);
 }
 
 export const WatchListProvider = ({ children }) => {
-  const [watchList, setWatchList] = useState([]);
+  const [watchList, setWatchList] = useState<number[]>([]);
   const user = auth.currentUser;
   const [buttonLabels, setButtonLabels] = useState({});
 
@@ -24,7 +36,7 @@ export const WatchListProvider = ({ children }) => {
     }
   };
 
-  const addMovie = async (movieId) => {
+  const addMovie = async (movieId : number) => {
     if (user) {
       await addMovieToHistory(user?.uid, movieId);
       setWatchList((prevWatchList) => [...prevWatchList, movieId]);
@@ -42,7 +54,7 @@ export const WatchListProvider = ({ children }) => {
     }
   };
 
-  const deleteMovie = async (movieId) => {
+  const deleteMovie = async (movieId : number) => {
     if (user) { 
       await removeFromHistory(user?.uid, movieId);
       setWatchList((prevWatchList) =>

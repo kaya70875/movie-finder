@@ -7,7 +7,7 @@ interface MovieButtonProps {
 }
 
 export default function MovieButton({ id, button, buttonType } : MovieButtonProps) {
-  const { watchList, addMovie, deleteMovie, buttonLabels } = useWatchList();
+  const { watchList, addMovie, deleteMovie, buttonLabels } = useWatchList()!;
 
   const isInWatchList = watchList.includes(id);
 
