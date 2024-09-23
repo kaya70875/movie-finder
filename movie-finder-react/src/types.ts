@@ -4,6 +4,20 @@ export interface Genres {
   genres : Genres[];
 }
 
+export interface MovieReviewsResults {
+  author_details: {
+    name: string;
+    username: string;
+    avatar_path: string;
+    rating: number;
+  }
+  id : string;
+  author : string;
+  content : string;
+  created_at : string;
+  results : MovieReviewsResults[];
+}
+
 export interface Movie {
   id: number;
   title: string;
