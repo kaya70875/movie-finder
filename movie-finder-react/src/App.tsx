@@ -4,8 +4,8 @@ import {
   BrowserRouter as Router,
   useLocation,
 } from "react-router-dom";
-import MainContent from "./components//base-components/MainContent";
-import Navbar from "./components//base-components/Navbar";
+import MainContent from "./components/base-components/MainContent";
+import Navbar from "./components/base-components/Navbar";
 import MovieDetails from "./components/sites/MovieDetails";
 import Register from "./components/auth/Register";
 import Favorites from "./components/sites/Favorites";
