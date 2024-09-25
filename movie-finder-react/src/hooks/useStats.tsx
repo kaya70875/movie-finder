@@ -1,8 +1,9 @@
 import { useEffect, useState } from "react";
+import { Movie } from "../types";
 
 const API_KEY = import.meta.env.VITE_MOVIE_DATABASE_API;
 
-const useStats = (watchList) => {
+const useStats = (watchList : Movie[]) => {
   const [stats, setStats] = useState({
     movieCount: 0,
     averageRatingValue: 0,
@@ -56,7 +57,7 @@ const useStats = (watchList) => {
           averageRatingValue,
           mostWatchedGenresValue,
         });
-      } catch (error) {
+      } catch (error : any) {
         console.error("Error fetching stats:", error);
       }
     };
@@ -65,7 +66,7 @@ const useStats = (watchList) => {
         fetchStats();
       }
   }, [watchList]);
-
+  console.log(stats);
   return stats;
 };
 
