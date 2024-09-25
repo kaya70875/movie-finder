@@ -1,9 +1,9 @@
-import React, { useEffect, useState } from 'react'
+import { useEffect, useState } from 'react'
 import axios from 'axios';
 
-const useMultipleFetch = (urls) => {
+const useMultipleFetch = <T,>(urls : string[]) => {
     
-  const [data , setData] = useState([]);
+  const [data , setData] = useState<T[] | null>([]);
   const [loading , setLoading] = useState(true);
   const [error , setError] = useState(null);
 
@@ -15,7 +15,7 @@ const useMultipleFetch = (urls) => {
         const responses = await Promise.all(urls.map(url => axios.get(url)));
         const data = responses.map(response => response.data);
         setData(data); 
-      }catch (e){
+      }catch (e : any){
         console.error(e);
         setError(e);
       }finally{
