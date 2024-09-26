@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import "../sites/_Discover.scss";
 import useFetch from "../../hooks/useFetch";
 import MovieCard from "../cards/MovieCard";
@@ -9,19 +9,21 @@ import GetGenreId from "../utils/GetGenreId";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faFistRaised, faLaugh, faBinoculars ,faMountainSun,faUserSecret , faBook, faUsers, faMask } from '@fortawesome/free-solid-svg-icons';
 import ScrollToBottom from "../utils/scroll/ScrollToBottom";
+import { MovieListResponse , Movie} from "../../types";
+import { REDUCER_ACTION_TYPE } from "../../context/FilterContext";
 
 
 export default function Discover() {
-  const [movies, setMovies] = useState([]);
+  const [movies, setMovies] = useState<Movie[]>([]);
   const [page, setPage] = useState(1);
   const [isFetching, setIsFetching] = useState(false);
   const [baseQuery, setBaseQuery] = useState("/discover/movie?language=en-US&");
   const [query, setQuery] = useState(`${baseQuery}page=${page}&`);
 
-  const { sortState, resetFilters  , dispatch} = useFilter();
+  const { sortState, resetFilters, dispatch} = useFilter();
   const movieCardRef = useRef(null);
 
-  const data = useFetch(query);
+  const {data} = useFetch<MovieListResponse>(query);
   const results = data?.results || [];
 
   const genres = GetGenreId();
@@ -54,7 +56,7 @@ export default function Discover() {
     setMovies([]);
     setPage(1);
 
-    const newBaseQuery = `/discover/movie?with_genres=${sortState.selectedGenres.join(
+    const newBaseQuery = `/discover/movie?with_genres=${sortState?.selectedGenres?.join(
       ","
     )}&year=${sortState.selectedYear}&sort_by=${
       sortState.selectedSortBy
@@ -65,7 +67,7 @@ export default function Discover() {
   }, [sortState]);
 
   useEffect(() => {
-    const movieCardContainer = movieCardRef.current;
+    const movieCardContainer : HTMLElement = movieCardRef.current!;
 
     const handleScroll = () => {
       if (
@@ -106,7 +108,7 @@ export default function Discover() {
         <div className="discover__genres__preview__items">
           {genres.slice(0, 8).map((genre) => (
             <div key={genre.id} className="discover__genres__preview__item" onClick={() => {
-                dispatch({ type: "SET_GENRES", payload: [genre.id] });
+                dispatch({ type: REDUCER_ACTION_TYPE.SET_GENRES, payload: [genre.id] });
                 ScrollToBottom();
             }}>
               <FontAwesomeIcon icon={genreIcons[genre.name]} />
