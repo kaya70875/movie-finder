@@ -39,7 +39,7 @@ const MovieCard : FC<MovieCardProps> = ({ movies, title , content , mainStyle , 
 
     return (
         <div className={`main__content main__content--${mainStyle}`}>
-            {title && content && title?.length > 0 && (
+            {title && title?.length > 0 && (
                 <div className="header__wrapper">
                 <div className="header-filters">
                     <h2>{title}</h2>
