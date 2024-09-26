@@ -47,7 +47,7 @@ export default function FilterComponent() {
       <SortBySection
       items={sortOptions}
       onSelect={handleSelectedSortBy}
-      selectedItems={sortState.selectedSortBy} 
+      selectedItems={sortState.selectedSortBy}
 
       />
     </div>

@@ -1,7 +1,7 @@
 interface Props {
     items: { label: string; value: string }[];
     onSelect: (value: string) => void;
-    selectedItems: string[];
+    selectedItems: string;
   }
 
 export default function SortBySection({items = [], onSelect, selectedItems} : Props) {
