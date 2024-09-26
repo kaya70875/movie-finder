@@ -12,6 +12,7 @@ import { filterAndSortMovies } from "../utils/FilterAndSortMovies";
 import { useWatchList } from "../../context/WatchListContext";
 import StatsCard from "../cards/StatsCard";
 import useFetch from "../../hooks/useFetch";
+import { Movie, MovieListResponse } from "../../types";
 
 const API_KEY = import.meta.env.VITE_MOVIE_DATABASE_API;
 
@@ -36,13 +37,14 @@ function reducer(state, action) {
 
 export default function Watched() {
   const [state, dispatch] = useReducer(reducer, initialState);
-  const [filteredMovies, setFilteredMovies] = useState([]);
+  const [filteredMovies, setFilteredMovies] = useState<Movie[]>([]);
 
   const user = auth.currentUser;
   const { sortState } = useFilter();
-  const { watchList } = useWatchList();
+  const { watchList } = useWatchList()!;
 
-  const topRated = useFetch('/movie/top_rated?language=en-US&page=2&')?.results || [];
+  const {data} = useFetch<MovieListResponse>('/movie/top_rated?language=en-US&page=2&');
+  const topRated = data?.results;
 
   useEffect(() => {
     if (user && watchList.length) {
@@ -142,7 +144,7 @@ export default function Watched() {
                 showScrollButtons={false}
                 gridType={"fill"}
                 mainStyle={'single'}
-                showFilters={'true'}
+                showFilters={true}
               />
             </>
           )}
@@ -158,7 +160,7 @@ export default function Watched() {
       )}
         <div className="content__more">
             <MovieCard 
-            movies={topRated}
+            movies={topRated!}
             title="Discover More Content"
             content={'Add More Movies To Your Watchlist !'}
             showScrollButtons={true}
