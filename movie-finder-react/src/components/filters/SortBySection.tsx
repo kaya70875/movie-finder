@@ -1,6 +1,10 @@
-import React from 'react'
+interface Props {
+    items: { label: string; value: string }[];
+    onSelect: (value: string) => void;
+    selectedItems: string[];
+  }
 
-export default function SortBySection({items = [], onSelect, selectedItems}) {
+export default function SortBySection({items = [], onSelect, selectedItems} : Props) {
   return (
     <div className="sortby__section">
         {items.map(item => (
