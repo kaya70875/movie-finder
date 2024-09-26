@@ -20,7 +20,7 @@ interface MovieCardProps {
 }
 
 const MovieCard : FC<MovieCardProps> = ({ movies, title , content , mainStyle , showScrollButtons = true , gridType = '' , showFilters = false}) => {
-    const { titles, handleAddToFavorites } = useFavorites();
+    const { titles, handleAddToFavorites } = useFavorites()!;
     const scrollContainerRef = useRef(null);
     const navigate = useNavigate();
 
