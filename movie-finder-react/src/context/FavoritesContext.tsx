@@ -1,24 +1,33 @@
-import React, { createContext, useContext, useState, useEffect } from 'react';
+import { createContext, useContext, useState, useEffect } from 'react';
+import { Movie } from '../types';
 
-const FavoritesContext = createContext();
+interface ContextProps {
+    favorites : Movie[];
+    titles : {
+        [key : number] : string;
+    }
+    handleAddToFavorites : (event : React.MouseEvent<HTMLButtonElement>, movie : Movie) => void;
+}
+
+const FavoritesContext = createContext<ContextProps | null>(null);
 
 export function FavoritesProvider({ children }) {
-    const [favorites, setFavorites] = useState([]);
-    const [titles, setTitles] = useState('');
+    const [favorites, setFavorites] = useState<Movie[]>([]);
+    const [titles, setTitles] = useState({});
 
     useEffect(() => {
         // Initialize favorites and titles from localStorage
-        const savedFavorites = JSON.parse(localStorage.getItem('favorites')) || [];
+        const savedFavorites = JSON.parse(localStorage.getItem('favorites') || '[]');
         setFavorites(savedFavorites);
 
-        const savedTitles = savedFavorites.reduce((acc, movie) => {
+        const savedTitles = savedFavorites.reduce((acc: string[], movie : Movie) => {
             acc[movie.id] = '❤️';
             return acc;
         }, {});
         setTitles(savedTitles);
     }, []);
 
-    const handleAddToFavorites = (event , movie) => {
+    const handleAddToFavorites = (event : React.MouseEvent<HTMLButtonElement> , movie : Movie) => {
         event.stopPropagation();
 
         const movieId = movie.id;
