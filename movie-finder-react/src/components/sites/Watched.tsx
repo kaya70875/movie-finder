@@ -6,7 +6,7 @@ import axios from "axios";
 import Skeleton from "react-loading-skeleton";
 import "react-loading-skeleton/dist/skeleton.css";
 
-import { shuffleArray } from "../utils/Shuffle";
+import { shuffleMovies } from "../utils/Shuffle";
 import { useFilter } from "../../context/FilterContext";
 import { filterAndSortMovies } from "../utils/FilterAndSortMovies";
 import { useWatchList } from "../../context/WatchListContext";
@@ -16,19 +16,37 @@ import { Movie, MovieListResponse } from "../../types";
 
 const API_KEY = import.meta.env.VITE_MOVIE_DATABASE_API;
 
+type InitialState = {
+  movies: Movie[],
+  watchedMovieDetails: Movie[],
+  loading: boolean,
+};
+
 const initialState = {
   movies: [],
   watchedMovieDetails: [],
-  loading: true,
+  loading: false,
 };
 
-function reducer(state, action) {
+enum REDUCER_ACTION_TYPE {
+  SET_MOVIES,
+  SET_WATCHED_MOVIES,
+  SET_LOADING,
+}
+
+type ReducerAction = 
+ | {type : REDUCER_ACTION_TYPE.SET_MOVIES, payload : Movie[]}
+ | {type : REDUCER_ACTION_TYPE.SET_WATCHED_MOVIES, payload : Movie[]}
+ | {type : REDUCER_ACTION_TYPE.SET_LOADING, payload : boolean}
+
+
+const reducer = (state : InitialState, action : ReducerAction) : InitialState => {
   switch (action.type) {
-    case "SET_MOVIES":
+    case REDUCER_ACTION_TYPE.SET_MOVIES:
       return { ...state, movies: action.payload };
-    case "SET_WATCHED_MOVIES":
+    case REDUCER_ACTION_TYPE.SET_WATCHED_MOVIES:
       return { ...state, watchedMovieDetails: action.payload };
-    case "SET_LOADING":
+    case REDUCER_ACTION_TYPE.SET_LOADING:
       return { ...state, loading: action.payload };
     default:
       return state;
@@ -50,7 +68,7 @@ export default function Watched() {
     if (user && watchList.length) {
       const fetchHistory = async () => {
         try {
-          dispatch({ type: "SET_LOADING", payload: true });
+          dispatch({ type: REDUCER_ACTION_TYPE.SET_LOADING, payload: true });
 
           // Fetch movie details and similar movies
           const watchedMovieDetailsResponses = await Promise.all(
@@ -85,18 +103,18 @@ export default function Watched() {
           );
 
           // Shuffle
-          const shuffledList = shuffleArray(filteredMovies);
+          const shuffledList = shuffleMovies(filteredMovies);
 
           // Update states
           dispatch({
-            type: "SET_WATCHED_MOVIES",
+            type: REDUCER_ACTION_TYPE.SET_WATCHED_MOVIES,
             payload: watchedMovieDetailsData,
           });
-          dispatch({ type: "SET_MOVIES", payload: shuffledList });
+          dispatch({ type: REDUCER_ACTION_TYPE.SET_MOVIES, payload: shuffledList });
         } catch (error) {
           console.error("Error fetching movie data", error);
         } finally {
-          dispatch({ type: "SET_LOADING", payload: false });
+          dispatch({ type: REDUCER_ACTION_TYPE.SET_LOADING, payload: false });
         }
       };
 
@@ -159,14 +177,16 @@ export default function Watched() {
         </div>
       )}
         <div className="content__more">
-            <MovieCard 
-            movies={topRated!}
-            title="Discover More Content"
-            content={'Add More Movies To Your Watchlist !'}
-            showScrollButtons={true}
-            showFilters={false}
-
-            />
+            {topRated && (
+              <MovieCard 
+              movies={topRated}
+              title="Discover More Content"
+              content={'Add More Movies To Your Watchlist !'}
+              showScrollButtons={true}
+              showFilters={false}
+              />
+            )}
+            
         </div>
     </div>
   );
