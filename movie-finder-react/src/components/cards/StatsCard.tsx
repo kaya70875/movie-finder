@@ -1,11 +1,17 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import "./_StatsCard.scss";
 import { getStatsFromHistory } from "../../firebase/UserStats";
 import { useAuth } from '../../context/AuthContext';
 
+interface ReturnedStats {
+  label: string;
+  value: { genre: string; count: number }[] | number;
+}
+
+
 export default function StatsCard() {
-  const { currentUser } = useAuth();
-  const [stats, setStats] = useState(null);
+  const { currentUser } = useAuth()!;
+  const [stats, setStats] = useState<ReturnedStats[] | null>(null);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
@@ -14,8 +20,16 @@ export default function StatsCard() {
 
       try {
         const fetchedStats = await getStatsFromHistory(currentUser.uid);
+        console.log("Fetched stats:", fetchedStats);
         if (fetchedStats) {
-          setStats(fetchedStats);
+          console.log("Fetched stats:", fetchedStats);
+          const formattedStats: ReturnedStats[] = fetchedStats.map(stat => ({
+            label: stat.label,
+            value: Array.isArray(stat.value)
+              ? stat.value.map(item => ({ genre: item.genre, count: item.count.count }))
+              : stat.value
+          }));
+          setStats(formattedStats);
         }
       } catch (error) {
         console.error("Error fetching stats: ", error);
@@ -25,7 +39,7 @@ export default function StatsCard() {
     };
 
     fetchStats();
-  }, [currentUser.uid , stats]);
+  }, [currentUser.uid]);
 
   if (loading) {
     return <p>Loading...</p>;
@@ -46,7 +60,7 @@ export default function StatsCard() {
                   </div>
                 ))
               ) : (
-                <p>{stat.value}</p>
+                <p>{typeof stat.value === 'object' ? JSON.stringify(stat.value) : String(stat.value)}</p>
               )}
             </div>
           ))

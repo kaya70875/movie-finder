@@ -1,9 +1,8 @@
 import { useEffect, useState } from "react";
-import { Movie } from "../types";
 
 const API_KEY = import.meta.env.VITE_MOVIE_DATABASE_API;
 
-const useStats = (watchList : Movie[]) => {
+const useStats = (watchList : number[]) => {
   const [stats, setStats] = useState({
     movieCount: 0,
     averageRatingValue: 0,
@@ -14,6 +13,7 @@ const useStats = (watchList : Movie[]) => {
     const fetchStats = async () => {
       try {
         const movieCount = watchList?.length || 0;
+        console.log('watchlist type : ' , watchList);
 
         const movieDetailsResponses = await Promise.all(
           watchList.map(async (movieId) => {

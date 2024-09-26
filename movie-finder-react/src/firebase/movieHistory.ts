@@ -7,7 +7,7 @@ import {db} from "./FirebaseAuth";
  * @param {string} movieId - The ID of the movie to add.
  */
 
-export const addMovieToHistory = async(userId , movieId) => {
+export const addMovieToHistory = async(userId : string , movieId : number) => {
     const userDocRef = doc(db , "userHistory" , userId);
 
     const userDoc = await getDoc(userDocRef);
@@ -20,7 +20,7 @@ export const addMovieToHistory = async(userId , movieId) => {
     }
 }
 
-export const removeFromHistory = async(userId , movieId) => {
+export const removeFromHistory = async(userId : string , movieId : number) => {
     const userDocRef = doc(db , 'userHistory' , userId);
 
     try{
@@ -32,7 +32,7 @@ export const removeFromHistory = async(userId , movieId) => {
     }
 }
 
-export const getMovieHistory = async (userId) => {
+export const getMovieHistory = async (userId : string) => {
     const userDocRef = doc(db , 'userHistory' , userId);
     const userDoc = await getDoc(userDocRef);
 
