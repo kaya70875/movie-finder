@@ -1,4 +1,3 @@
-import React from "react";
 import "./_DiscoverFilter.scss";
 import GetGenreId from "../utils/GetGenreId";
 import createYearsList from "../utils/CreateYearsList";
@@ -13,12 +12,12 @@ export default function DiscoverFilter() {
   const { selectedGenres, selectedYear , selectedSortBy} = sortState;
 
   // Function to toggle genre selection
-  const handleGenreToggle = (genreId) => {
+  const handleGenreToggle = (genreId : number) => {
     handleSelectedGenres(genreId);
   };
 
   // Function to toggle year selection
-  const handleYearToggle = (year) => {
+  const handleYearToggle = (year : number) => {
     handleSelectedYear(year);
   };
 
@@ -36,8 +35,8 @@ export default function DiscoverFilter() {
           >
             <input
               type="checkbox"
-              id={genre.id}
-              checked={selectedGenres.includes(genre.id)}
+              id={genre.name}
+              checked={selectedGenres?.includes(genre.id)}
               onChange={() => handleGenreToggle(genre.id)}
             />
             <p className="small-normal--white">{genre.name}</p>
