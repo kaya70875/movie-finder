@@ -81,7 +81,7 @@ export const WatchListProvider = ({ children }) => {
   useEffect(() => {
     if (user && watchList.length > 0) {
       addStatsToHistory(user.uid, stats.mostWatchedGenresValue, watchList.length, stats.averageRatingValue);
-    } else{
+    } else if(user){
       removeStatsFromHistory(user?.uid);
     }
   }, [watchList, user, stats]);
