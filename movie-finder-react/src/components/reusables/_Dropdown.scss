@@ -26,21 +26,18 @@
     position: absolute;
     top: 100%;
     left: 0;
-    max-height: 0;
     opacity: 0;
-    overflow: hidden;
     visibility: hidden;
-    transition: max-height 0.4s ease, opacity 0.4s ease, visibility 0.4s ease;
+    padding: 1em;
+    transition: opacity 0.4s ease, visibility 0.4s ease;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    padding: 0;
     z-index: 200;
     background: var(--main-background);
     border-radius: 4px;
+    overflow: hidden;
 
     &.show{
-        max-height: 300px;
         opacity: 1;
-        padding: 10px;
         visibility: visible;
         overflow: auto;
     }
@@ -60,7 +57,7 @@
         cursor: pointer;
 
         color : var(--primary-font-color);
-        padding: .45rem;
+        padding: .45em;
         border-radius: 15px;
         transition: background-color 0.15s ease, color 0.15s ease, transform 0.3s ease;
         transform: scale(1);  // Ensure buttons start at normal scale
@@ -99,7 +96,7 @@
 
     li{
         width: 100%;
-        padding: .7rem;
+        padding: .7em;
         min-width: 100px;
         
         &.active{
