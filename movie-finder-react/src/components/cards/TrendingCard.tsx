@@ -39,7 +39,7 @@ export default function TrendingCard({ id }) {
             <MovieDetailsBlock id={id} />
           </div>
           <h2>{data?.tagline}</h2>
-          <h4>{data?.overview}</h4>
+          <p>{data?.overview}</p>
         </div>
         <div className="trending__buttons__section">
             <button className="primary-button" onClick={handlePopUp}>

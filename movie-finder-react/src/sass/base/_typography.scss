@@ -1,5 +1,5 @@
 // Font families
-$primary-font : 'Poppins' , sans-serif;
+$primary-font : 'Montserrat' , sans-serif;
 
 //Font sizes
 $font-size-xs : .7rem;
@@ -8,11 +8,16 @@ $font-size-md : 1rem;
 $font-size-lg : 1.2rem;
 $font-size-xl : 1.5rem;
 $font-size-xxl : 1.8rem;
+$font-size-big : 2.2rem;
 
 // Line heights
 
+// Letter Spacings
+$letter-spacing-normal : 0.05em;
+
 // Font weights
 $font-weight-normal : 400;
+$font-weight-medium : 500;
 $font-weight-thick : 600;
 $font-weight-bold : bold;
 $font-weight-light : 300;
@@ -22,12 +27,12 @@ $primary-text-color : white;
 
 h1 , .h1{
     font-weight: bold;
-    color : var(--primary-font-color);
-    font-size: $font-size-xxl;
+    color : $primary-font-color;
+    font-size: $font-size-big;
 }
 
 h2 , .h2{
-    font-weight: $font-weight-normal;
+    font-weight: $font-weight-medium;
 }
 
 h3 , .h3{
@@ -70,7 +75,8 @@ a{
 p{
     font-size: $font-size-md;
     color : var(--primary-font-color);
-    font-weight: $font-weight-normal;
+    font-weight: $font-weight-light;
+    opacity: 0.9;
 }
 
 .small-bold {
