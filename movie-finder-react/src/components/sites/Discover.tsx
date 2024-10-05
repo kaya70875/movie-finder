@@ -86,7 +86,7 @@ export default function Discover() {
         </div>
       </div>
 
-      <GenrePreview />
+      <GenrePreview shouldNavigate={false}/>
 
       <div className="discover__button__section" style={{marginTop : '70px'}}>
         <button className="primary-button" onClick={ScrollToBottom}>Discover Now!</button>
