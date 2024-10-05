@@ -8,7 +8,9 @@
 }
 
 .main__content{
-    @include flexCenter;
+    display: flex;
+    align-items: center;
+    justify-content: start;
     gap : 2rem;
     overflow-x: auto;
     min-height: 450px;
@@ -16,7 +18,7 @@
     padding-right: 10rem;
 
     &--column{
-        padding: 2rem;
+        padding: 0;
         .header__wrapper{
             width: auto;
             justify-content: space-around;
@@ -27,7 +29,7 @@
 
     &--single{
         display: block;
-        padding: 2rem;
+        padding: 0;
     }
 }
 

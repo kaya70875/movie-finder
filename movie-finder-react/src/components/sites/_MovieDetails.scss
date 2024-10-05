@@ -45,7 +45,8 @@
 .container-comment-similar{
     display: flex;
     flex-direction: column;
-    padding: 2rem;
+    padding-block: 2em;
+    padding-inline: 4em;
     gap : 3rem;
 }
 
