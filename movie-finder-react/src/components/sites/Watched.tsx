@@ -24,7 +24,7 @@ export default function Watched() {
   useEffect(() => {
     const applyFilters = filterAndSortMovies(state.movies, sortState);
     setFilteredMovies(applyFilters);
-  }, [sortState, state.movies]);
+  }, [sortState.isAdult , sortState.selectedGenres , sortState.selectedSortBy , sortState.selectedYear , state.movies]);
 
   return (
     <div className="main__wrapper">
