@@ -1,15 +1,11 @@
-import React, { useEffect, useReducer, useState } from "react";
+import { useEffect, useState } from "react";
 import "../sites/_Watched.scss";
 import MovieCard from "../cards/MovieCard";
-import { auth } from "../../firebase/FirebaseAuth";
-import axios from "axios";
 import Skeleton from "react-loading-skeleton";
 import "react-loading-skeleton/dist/skeleton.css";
 
-import { shuffleMovies } from "../utils/Shuffle";
 import { useFilter } from "../../context/FilterContext";
 import { filterAndSortMovies } from "../utils/FilterAndSortMovies";
-import { useWatchList } from "../../context/WatchListContext";
 import StatsCard from "../cards/StatsCard";
 import useFetch from "../../hooks/useFetch";
 import { Movie, MovieListResponse } from "../../types";
