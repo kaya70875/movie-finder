@@ -3,6 +3,7 @@ import useFetch from '../../hooks/useFetch';
 import MovieCard from '../cards/MovieCard';
 import TrendingCard from '../cards/TrendingCard';
 import { MovieListResponse } from '../../types';
+import useRecommendations from '../../hooks/byMovie/useRecommendations';
 
 const MAX_CONTENT = 21;
 
@@ -14,6 +15,9 @@ export default function MainContent() {
   const resultsPopular = popular?.results || [];
   const resultsTop = topRated?.results || [];
   const resultsTrending = trending?.results || [];
+
+  const {state} = useRecommendations();
+  const personelMovies = state.movies;
 
   if (loadingPopular || loadingTopRated || loadingTrending) return <div>Loading...</div>;
 
@@ -40,6 +44,13 @@ export default function MainContent() {
             movies={resultsTop.slice(0, MAX_CONTENT)}
             title={'Top Ratings'}
             content={'Discover cinematic masterpieces that have captivated audiences and critics alike.'}
+          />
+        </div>
+        <div className="personal__content">
+          <MovieCard
+            movies={personelMovies}
+            title={'Personalized Recommendations'}
+            content={'Discover movies that match your preferences and interests.'}
           />
         </div>
       </div>
