@@ -1,5 +1,4 @@
 import { createContext, useContext, useEffect, useState } from "react";
-import { auth } from "../firebase/FirebaseAuth";
 import { addMovieToHistory, removeFromHistory, getMovieHistory } from "../firebase/movieHistory";
 import { addStatsToHistory, removeStatsFromHistory } from "../firebase/UserStats";
 import useStats from "../hooks/useStats";

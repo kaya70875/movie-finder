@@ -48,7 +48,7 @@ export default function MainContent() {
         </div>
         <div className="personal__content">
           <MovieCard
-            movies={personelMovies}
+            movies={personelMovies.slice(0, MAX_CONTENT)}
             title={'Personalized Recommendations'}
             content={'Discover movies that match your preferences and interests.'}
           />
