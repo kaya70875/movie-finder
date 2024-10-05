@@ -6,6 +6,7 @@
     --secondary-background: #{$secondary-background};
     --third-background : #{$third-background};
     --primary-font-color: #{$primary-font-color};
+    --secondary-font-color: #{$secondary-font-color};
     --primary-button-color: #{$primary-button-color};
     --primary-hover-color: #{$primary-hover-color};
     --secondary-hover-color: #{$secondary-hover-color};
@@ -13,4 +14,6 @@
     --button-hover-color: #{$button-hover-color};
     
     --small-text-hover-color : #4BC5F1;
+
+    --charcoal-grey : #{$charcoal-grey};
 }
