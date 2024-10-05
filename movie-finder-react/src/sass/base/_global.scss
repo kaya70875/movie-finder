@@ -101,3 +101,11 @@
         background : #2A54A1;
     }
 }
+
+// Line
+.line{
+    width: 100%;
+    height: 1px;
+    background: var(--primary-font-color);
+    opacity: 0.2;
+}

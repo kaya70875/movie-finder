@@ -1,7 +1,8 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import "../sites/_CommentSection.scss";
 import useFetch from "../../hooks/useFetch";
 import { MovieReviewsResults } from "../../types";
+import CountStars from "../reusables/movies/CountStars";
 
 export default function CommentSection({ id }: { id: number }) {
   const { data: comments } = useFetch<MovieReviewsResults>(
@@ -26,38 +27,24 @@ export default function CommentSection({ id }: { id: number }) {
 
   return (
     <div className="container__comments">
-      <h1>See Comments</h1>
+      <p className="big-paragraph">Popular Reviews This Week</p>
       <div className="wrap__containers">
         {results.length !== 0 ? (
           results.map((result, index) => (
             <div className="comments__wrap" id={`comment-${index}`} key={index}>
+              <div className="line"></div>
               <div className="comments__top">
-                {result.author_details.avatar_path !== null && (
-                  <img
-                    src={`https://image.tmdb.org/t/p/original${result.author_details.avatar_path.toString()}`}
-                    style={{
-                      width: "64px",
-                      height: "64px",
-                      borderRadius: "20px",
-                    }}
-                  />
-                )}
-                <h2 className="user-name">{result.author}</h2>
-                <p
-                  className="published-date"
-                  style={{
-                    fontSize: "14px",
-                    fontWeight: "300",
-                    textAlign: "center",
-                  }}
-                >
-                  Published at{" "}
-                  {new Date(result.created_at).toLocaleDateString()}
-                </p>
-                {result.author_details.rating ? (
-                  <p className="rating" style={{ color: "red" }}>
-                    {result.author_details.rating} of 10
+                <div className="user-info">
+                  <h2 className="user-name">{result.author}</h2>
+                  <p
+                    className="published-date"
+                  >
+                    {new Date(result.created_at).getFullYear()}
                   </p>
+                </div>
+                
+                {result.author_details.rating ? (
+                  <CountStars rating={result.author_details.rating} />
                 ) : (
                   "No Rating"
                 )}
