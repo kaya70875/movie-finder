@@ -38,11 +38,12 @@
     width: 100%;
 }
 
-.scroll__content , .bottom__content , .movie__slider__main , .personal__content{
+.scroll__content , .bottom__content , .movie__slider__main , .personal__content , 
+.genre__preview__content , .coming__soon__content{
     width: 100%;
 }
 
-.bottom__content {
+.bottom__content , .coming__soon__content {
     background: #131722;
 }
 

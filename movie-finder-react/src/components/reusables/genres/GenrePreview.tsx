@@ -5,11 +5,18 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faFistRaised, faLaugh, faBinoculars ,faMountainSun,faUserSecret , faBook, faUsers, faMask } from '@fortawesome/free-solid-svg-icons';
 import { REDUCER_ACTION_TYPE } from "../../../context/FilterContext";
 import './_GenrePreview.scss';
+import { useNavigate } from "react-router";
 
-export default function GenrePreview() {
+interface GenrePreviewProps {
+    backgroundColor?: string;
+    shouldNavigate: boolean;
+}
+
+export default function GenrePreview({backgroundColor , shouldNavigate} : GenrePreviewProps) {
 
     const genres = GetGenreId();
     const { dispatch } = useFilter();
+    const navigate = useNavigate();
 
     const genreIcons = {
         Action: faFistRaised,
@@ -22,16 +29,23 @@ export default function GenrePreview() {
         Family: faUsers,
       };
 
+    const handleButtonClick = async (genreId: number) => {
+
+        if(shouldNavigate) {
+            await navigate(`/movie-finder/discover`);
+        }
+
+        dispatch({ type: REDUCER_ACTION_TYPE.SET_GENRES, payload: [genreId] });
+        ScrollToBottom();
+    }
+
 
   return (
-    <div className="discover__genres__preview">
+    <div className="discover__genres__preview" style={{backgroundColor}}>
         <h2>Explore Genres</h2>
         <div className="discover__genres__preview__items">
           {genres.slice(0, 8).map((genre) => (
-            <div key={genre.id} className="discover__genres__preview__item" onClick={() => {
-                dispatch({ type: REDUCER_ACTION_TYPE.SET_GENRES, payload: [genre.id] });
-                ScrollToBottom();
-            }}>
+            <div key={genre.id} className="discover__genres__preview__item" onClick={() => handleButtonClick(genre.id)}>
               <FontAwesomeIcon icon={genreIcons[genre.name]} />
               <p>{genre.name}</p>
             </div>

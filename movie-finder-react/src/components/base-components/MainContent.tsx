@@ -4,6 +4,7 @@ import MovieCard from '../cards/MovieCard';
 import TrendingCard from '../cards/TrendingCard';
 import { MovieListResponse } from '../../types';
 import useRecommendations from '../../hooks/byMovie/useRecommendations';
+import GenrePreview from '../reusables/genres/GenrePreview';
 
 const MAX_CONTENT = 21;
 
@@ -11,15 +12,17 @@ export default function MainContent() {
   const { data: popular, loading: loadingPopular } = useFetch<MovieListResponse>('/movie/popular?language=en-US&');
   const { data: topRated, loading: loadingTopRated } = useFetch<MovieListResponse>('/movie/top_rated?language=en-US&');
   const { data: trending, loading: loadingTrending } = useFetch<MovieListResponse>('/trending/movie/day?language=en-US&');
+  const { data: upcoming, loading: loadingUpcoming } = useFetch<MovieListResponse>('/movie/upcoming?language=en-US&');
 
   const resultsPopular = popular?.results || [];
   const resultsTop = topRated?.results || [];
   const resultsTrending = trending?.results || [];
+  const resultsUpcoming = upcoming?.results || [];
 
   const {state} = useRecommendations();
   const personelMovies = state.movies;
 
-  if (loadingPopular || loadingTopRated || loadingTrending) return <div>Loading...</div>;
+  if (loadingPopular || loadingTopRated || loadingTrending || loadingUpcoming) return <div>Loading...</div>;
 
   return (
     <div className="main">
@@ -52,6 +55,12 @@ export default function MainContent() {
             title={'Personalized Recommendations'}
             content={'Discover movies that match your preferences and interests.'}
           />
+        </div>
+        <div className="genre__preview__content">
+          <GenrePreview backgroundColor='var(--charcoal-grey)' shouldNavigate={true} />
+        </div>
+        <div className="coming__soon__content">
+          <MovieCard movies={resultsUpcoming.slice(0 , MAX_CONTENT)} title={'Coming Soon'} content={'Stay tuned for upcoming releases and exciting movie announcements.'} />
         </div>
       </div>
     </div>
