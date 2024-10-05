@@ -1,8 +1,9 @@
-import React, { createContext, useContext, useEffect, useState } from "react";
+import { createContext, useContext, useEffect, useState } from "react";
 import { auth } from "../firebase/FirebaseAuth";
 import { addMovieToHistory, removeFromHistory, getMovieHistory } from "../firebase/movieHistory";
 import { addStatsToHistory, removeStatsFromHistory } from "../firebase/UserStats";
 import useStats from "../hooks/useStats";
+import { useAuth } from "./AuthContext";
 
 interface ContextType {
   watchList : number[];
@@ -24,21 +25,21 @@ export function useWatchList() {
 
 export const WatchListProvider = ({ children }) => {
   const [watchList, setWatchList] = useState<number[]>([]);
-  const user = auth.currentUser;
+  const  { currentUser } = useAuth()!;
   const [buttonLabels, setButtonLabels] = useState({});
 
   const stats = useStats(watchList);
 
   const loadWatchList = async () => {
-    if (user) {
-      const movies = await getMovieHistory(user.uid);
+    if (currentUser) {
+      const movies = await getMovieHistory(currentUser.uid);
       setWatchList(movies);
     }
   };
 
   const addMovie = async (movieId : number) => {
-    if (user) {
-      await addMovieToHistory(user?.uid, movieId);
+    if (currentUser) {
+      await addMovieToHistory(currentUser?.uid, movieId);
       setWatchList((prevWatchList) => [...prevWatchList, movieId]);
 
       setButtonLabels((prev) => ({
@@ -55,8 +56,8 @@ export const WatchListProvider = ({ children }) => {
   };
 
   const deleteMovie = async (movieId : number) => {
-    if (user) { 
-      await removeFromHistory(user?.uid, movieId);
+    if (currentUser) { 
+      await removeFromHistory(currentUser?.uid, movieId);
       setWatchList((prevWatchList) =>
         prevWatchList.filter((id) => id !== movieId)
       );
@@ -76,15 +77,15 @@ export const WatchListProvider = ({ children }) => {
 
   useEffect(() => {
     loadWatchList();
-  }, [user]);
+  }, [currentUser]);
 
   useEffect(() => {
-    if (user && watchList.length > 0) {
-      addStatsToHistory(user.uid, stats.mostWatchedGenresValue, watchList.length, stats.averageRatingValue);
-    } else if(user){
-      removeStatsFromHistory(user?.uid);
+    if (currentUser && watchList.length > 0) {
+      addStatsToHistory(currentUser.uid, stats.mostWatchedGenresValue, watchList.length, stats.averageRatingValue);
+    } else if(currentUser){
+      removeStatsFromHistory(currentUser?.uid);
     }
-  }, [watchList, user, stats]);
+  }, [watchList, currentUser, stats]);
   
 
   return (

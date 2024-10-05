@@ -32,9 +32,9 @@ function AppWithLocation() {
     location.pathname !== "/movie-finder/register";
 
   return (
-    <WatchListProvider>
-      <FilterProvider>
-        <AuthProvider>
+    <AuthProvider>
+      <WatchListProvider>
+        <FilterProvider>
           <FavoritesProvider>
             <div className="app">
               {showNavbar && (
@@ -65,9 +65,9 @@ function AppWithLocation() {
               </div>
             </div>
           </FavoritesProvider>
-        </AuthProvider>
-      </FilterProvider>
-    </WatchListProvider>
+        </FilterProvider>
+      </WatchListProvider>
+    </AuthProvider>
   );
 }
 

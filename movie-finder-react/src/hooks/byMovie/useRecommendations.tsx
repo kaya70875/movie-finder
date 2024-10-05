@@ -47,6 +47,7 @@ const reducer = (state : InitialState, action : ReducerAction) : InitialState =>
 const useRecommendations = () => {
     const [state, dispatch] = useReducer(reducer, initialState);
     const { watchList } = useWatchList()!;
+    console.log('watchList :' , watchList);
 
     const user = auth.currentUser;
 

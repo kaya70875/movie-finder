@@ -13,6 +13,7 @@ import useRecommendations from "../../hooks/byMovie/useRecommendations";
 
 export default function Watched() {
   const { state } = useRecommendations();
+  console.log('state :' , state.movies);
   const [filteredMovies, setFilteredMovies] = useState<Movie[]>([]);
 
   const { sortState } = useFilter();
@@ -35,7 +36,7 @@ export default function Watched() {
         </div>
       </div> 
 
-      {state.movies.length !== 0 ? (
+      {state.movies.length > 0 ? (
         <div className="slide__container">
           {state.loading ? (
             <Skeleton
