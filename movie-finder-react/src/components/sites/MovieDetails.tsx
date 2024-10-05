@@ -26,7 +26,7 @@ export default function MovieDetails() {
   const producerNames = movieCreditsData?.crew.filter(member => member.job === 'Producer').
   map(producer => producer.name);
 
-  const { titles, handleAddToFavorites } = useFavorites();
+  const { titles, handleAddToFavorites } = useFavorites()!;
 
   const {data : similarMovies} = useFetch<MovieListResponse>(`/movie/${id}/similar?`);
   const resultSimilar = similarMovies?.results || [];
