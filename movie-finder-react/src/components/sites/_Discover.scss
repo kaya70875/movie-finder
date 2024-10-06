@@ -3,7 +3,7 @@
 
 .discover__header__wrapper{
     @include flexCenter;
-    width: 100vw;
+    width: 100%;
     @include gradient-background(#ff6b6b, #4ecdc4);
 }
 
