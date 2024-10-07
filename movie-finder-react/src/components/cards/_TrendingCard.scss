@@ -41,3 +41,22 @@
     display: flex;
     gap : 2rem;
 }
+
+@media (max-width : 1059px) {
+    .trending__section {
+        flex-direction: column;
+    }
+
+    .trending__info__section {
+        width: 100%;
+        padding: 2em;
+        justify-content: center;
+        gap : 3rem;
+    }
+
+    .trending__buttons__section {
+        flex-direction: column;
+        justify-content: center;
+        flex : 1;
+    }
+}
