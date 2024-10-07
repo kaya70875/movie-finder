@@ -1,5 +1,7 @@
 .cards__wrapper {
     display: grid;
+    align-content: center;
+    justify-items: center;
     grid-template-columns: repeat(auto-fit, minmax(200px , 1fr));
     grid-auto-flow: column;
     gap: 2rem;
@@ -46,7 +48,6 @@
   .item {
     display: grid;
     align-content: start;
-    justify-content: center;
     position: relative;
     overflow: hidden;
     border: none;
@@ -125,11 +126,55 @@
     border-radius: 5px;
   }
 
+/* Movie Cards */
+
 @media (max-width : 1059px) {
   .cards__wrapper {
     grid-template-columns: repeat(auto-fit , minmax(200px , 1fr));
     grid-auto-flow: row;
     width: 100%;
+  }
 }
+
+@media (max-width : 860px) {
+
+  .cards__wrapper {
+    grid-template-columns: repeat(auto-fit , minmax(170px , 1fr));
+  }
+
+  .item {
+    justify-items: center;
+    height: 350px;
+    img {
+      width: 80%;
+    }
+
+    h3 {
+      text-align: center;
+      text-wrap: wrap!important;
+    }
+
+    .movie__info {
+      justify-content: center;
+    }
+  }
+
+  .card-favorites  , .card-watchlist{
+    display: none;
+  }
+
+  .main__content {
+    padding: 2em;
+  }
+}
+
+@media (max-width : 638px) {
+  .cards__wrapper {
+    grid-template-columns: repeat(auto-fit , minmax(150px , 1fr));
+  }
+
+  .item img {
+    width: 65%;
+  }
 }
   
