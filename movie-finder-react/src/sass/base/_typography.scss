@@ -115,3 +115,15 @@ p{
 .dropdown-button{
     font-size: $font-size-md;
 }
+
+@media (max-width : 1172px) {
+    h2 {
+        font-size : $font-size-lg;
+        text-align: center;
+    }
+
+    p {
+        font-size : $font-size-s;
+        text-align: center;
+    }
+}
