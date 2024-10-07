@@ -8,12 +8,12 @@
     position: sticky;
     top: 0px;
     bottom: 0;
-    width: 400px;
-    height: 75vh;
+    width: 30%;
+    height: 100%;
     overflow-y: auto;
 
     border-radius: 15px;
-    padding: 2rem;
+    padding: 2em;
     &::-webkit-scrollbar {
         width: 8px;
       }
@@ -45,12 +45,10 @@
 .discover__filter__elements{
     display: flex;
     flex-wrap: wrap;
-    flex-direction: column;
+    align-items: center;
+    justify-content: start;
     gap : .75rem;
-
     margin-bottom: 20px;
-
-    max-height: 470px;
 
     input[type="checkbox"] {
         -webkit-appearance: none;
@@ -75,7 +73,7 @@
         left: 50%;
         transform: translate(-50%, -50%);
         color: #fff;
-        font-size: 14px;
+        font-size: .8rem
     }
     
 }
@@ -83,12 +81,12 @@
 .discover__filter__item{
     display: flex;
     align-items: center;
+    justify-content: start;
     gap : .75rem;
-    padding-left: .5rem;
-    padding-top: .35rem;
-    padding-bottom: .35rem;
-    padding-right: .75rem;
+    padding: .5em;
     cursor: pointer;
+    flex: 1 1 45%;
+    min-width: 150px;
 
     &:hover{
         background : var(--small-text-hover-color);

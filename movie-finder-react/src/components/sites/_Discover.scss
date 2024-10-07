@@ -10,9 +10,10 @@
 .discover-content{
     display: flex;
     gap : 5rem;
+    padding: 2em;
 
     margin-top: 100px;
-
+    width: 100%;
     height: 78vh;
 }
 
@@ -21,6 +22,11 @@
     overflow-y: auto;
 
     height: 75vh;
+
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    flex : 1;
 
     &::-webkit-scrollbar {
         width: 8px;
@@ -61,10 +67,6 @@
     text-align: center;
 
     max-width: 1000px;
-
-    background-size: cover;
-    background-position: center;
-
 }
 
 @media (max-width : 1253px){
