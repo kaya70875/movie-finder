@@ -111,3 +111,10 @@
     background: var(--primary-font-color);
     opacity: 0.2;
 }
+
+@media (max-width : 660px) {
+    .main__wrapper {
+        margin-left: 0;
+        width: 100%;
+    }
+}
