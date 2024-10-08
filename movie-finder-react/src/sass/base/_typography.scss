@@ -127,3 +127,10 @@ p{
         text-align: center;
     }
 }
+
+@media (max-width : 548px) {
+    h1 {
+        text-align: center;
+        font-size: $font-size-xl;
+    }
+}
