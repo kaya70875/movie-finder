@@ -177,4 +177,14 @@
     width: 65%;
   }
 }
+
+@media (max-width : 450px) {
+  .cards__wrapper {
+    grid-template-columns: repeat(auto-fit , minmax(80px , 1fr));
+  }
+
+  .item img {
+    width: 50%;
+  }
+}
   

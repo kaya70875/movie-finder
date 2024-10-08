@@ -229,7 +229,7 @@
     }
 
     .movie__info {
-        gap : 1rem;
+        gap : .5rem;
     }
 
     .overview p{
@@ -362,7 +362,4 @@
         text-align: center;
     }
 
-    .item__overlay{
-        display: none;
-    }
 }
