@@ -85,6 +85,7 @@
     justify-content: center;
     align-items: center;
     gap : 2.5rem;
+    flex-wrap: wrap;
 
     &--card{
         gap : 0.5rem;
@@ -227,7 +228,9 @@
         font-size: .8rem;
     }
 
-    
+    .movie__info {
+        gap : 1rem;
+    }
 
     .overview p{
         min-width: 300px;
