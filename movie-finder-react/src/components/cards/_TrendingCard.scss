@@ -60,3 +60,12 @@
         flex : 1;
     }
 }
+
+/* Mobile Responsive */
+
+@media (max-width : 450px) {
+    .trending__buttons__section {
+        flex-direction: row;
+        width: 100%;
+    }
+}
