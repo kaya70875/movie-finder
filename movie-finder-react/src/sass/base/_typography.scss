@@ -135,7 +135,9 @@ p{
     }
 
     h3 {
-        font-size: $font-size-md;
+        font-size: $font-size-s;
+        max-width: 100px;
+        min-width: 0!important;
     }
 
     p {

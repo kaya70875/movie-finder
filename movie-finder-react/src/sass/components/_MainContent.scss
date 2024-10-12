@@ -126,6 +126,8 @@
 
     }
 
+    /* Mobile Responsive */
+
     @media (max-width : 450px){
         .item{
             width: 90px;
@@ -152,5 +154,9 @@
             grid-auto-flow: column;
             gap : 1rem;
             
+        }
+
+        .header__wrapper {
+            min-height: 10vh;
         }
     }
