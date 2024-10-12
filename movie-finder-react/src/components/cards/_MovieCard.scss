@@ -173,18 +173,38 @@
     grid-template-columns: repeat(auto-fit , minmax(150px , 1fr));
   }
 
-  .item img {
-    width: 65%;
+  .item {
+    height: 300px;
+    img {
+          width: 65%;
+
+    } 
   }
 }
+
+/* Mobile Responsive */
 
 @media (max-width : 450px) {
   .cards__wrapper {
     grid-template-columns: repeat(auto-fit , minmax(80px , 1fr));
   }
 
-  .item img {
-    width: 50%;
+  .item {
+    height: 100%;
+    img {
+      width: 50%;
+    }
+    
   }
+
+  .movie__info--card {
+    display: none!important;
+  }
+}
+
+/* Extra Small Devices */
+
+@media (max-width : 320px) {
+  
 }
   
