@@ -64,6 +64,11 @@
 /* Mobile Responsive */
 
 @media (max-width : 450px) {
+
+    .trending__section {
+        min-height: 80vh;
+    }
+
     .trending__buttons__section {
         flex-direction: row;
         width: 100%;
