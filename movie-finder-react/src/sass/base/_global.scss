@@ -45,6 +45,7 @@
     background: var(--primary-button-color);
     color : var(--main-background);
     border : none;
+    text-wrap: nowrap;
 
     &:hover{
         background: var(--button-hover-color);
@@ -56,6 +57,7 @@
     background: none;
     color : var(--primary-font-color);
     border : 2px solid var(--primary-font-color);
+    text-wrap: nowrap;
 
     &:hover{
         background: var(--primary-hover-color);
