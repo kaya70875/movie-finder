@@ -7,39 +7,32 @@
     flex-direction: column;
     justify-content: space-between;
     width: 100%;
-
     margin-left: 100px;
-    overflow-x: auto;
-
     gap : 3rem;
+    overflow: auto;
 }
 
 .movie__slide{
+    display: flex;
     background-size: cover;
     width: 100%;
-    height: 450px;
+    height: 40vh;
     position: relative;
     background-repeat: no-repeat;
 }
 
 .movie__hero__section{
     display: flex;
+    align-items: center;
     gap : 4rem;
 }
 
 .details__container{
     display: flex;
-    flex-direction: row;
-    justify-content: space-around;
     align-items: center;
+    justify-content: space-around;
     width: 100%;
-    padding: 4rem;
-    position: relative;
-    margin-top: -100px;
-}
-
-.details__container > *{
-    height: 400px;
+    padding: 1em;
 }
 
 .container-comment-similar{
@@ -54,8 +47,11 @@
     display: flex;
     border : 3px solid #D99090;
     box-shadow: 2px 3px 1px rgba(0, 0, 0, 0.685);
-    width: 320px;
-    height: 500px;
+    width: 30%;
+    height: 60%;
+
+    min-width: 30%;
+    min-height: 40%;
 }
 
 .card img{
@@ -72,7 +68,6 @@
     align-items: start;
     justify-content: space-around;
     margin-top: 80px;
-    height: 400px;
 }
 
 .movie__info__hero{
@@ -107,13 +102,11 @@
 .header__section{
     display: flex;
     gap : 1.5rem;
-    min-width: 500px;
 }
 
 .overview{
     display: flex;
     flex-direction: column;
-    max-height: 200px;
     justify-content: space-evenly;
     overflow-y: auto;
     scrollbar-width: thin;
@@ -124,7 +117,6 @@
     font-weight: 300;
     letter-spacing: .25px;
     width: 100%;
-    min-width: 580px;
     overflow: hidden;
     overflow-y: auto;
 }
@@ -137,23 +129,16 @@
 }
 
 
-@media (max-width : 1420px){
-    .card , .card img{
-        width: 200px;
-        height: 300px;
-    }
-
-    .overview p{
-        min-width: 450px;
-        font-size: .9rem;
+@media (max-width : 1200px) {
+    .details__container {
+        flex-direction: column;
+        align-items: normal;
+        gap : 2rem;
     }
 }
 
 @media (max-width : 990px){
-    .card , .card img{
-        width: 150px;
-        height: 250px;
-    }
+    
 
     .release-date{
         font-size: 1rem !important;
@@ -167,10 +152,8 @@
         font-size: 1rem;
     }
 
-    .overview p{
-        min-width: 400px;
-        font-size: .7rem;
-        font-weight: 400;
+    .overview p {
+        text-align: start;
     }
 
     .rating__section header{
@@ -180,11 +163,6 @@
     .stars img{
         width: 16px !important;
         height: 16px !important;
-    }
-
-    .buttons__section-details{
-        align-items: center;
-        justify-content: start;
     }
 
     .button-play , .button-comments{
@@ -211,11 +189,6 @@
 }
 
 @media (max-width : 812px){
-    .card , .card img{
-        width: 120px;
-        height: 200px;
-    }
-
     .release-date{
         font-size: .8rem !important;
     }
@@ -228,14 +201,13 @@
         font-size: .8rem;
     }
 
-    .movie__info {
-        gap : .5rem;
+    .movie__details, .header__section h1,  .overview p{
+        align-items: center;
+        text-align: center;
     }
 
-    .overview p{
-        min-width: 300px;
-        font-size: .6rem;
-        font-weight: 400;
+    .movie__info {
+        gap : 1rem;
     }
 
     .rating__section header{
@@ -247,14 +219,8 @@
         height: 12px !important;
     }
 
-    .buttons__section-details{
-        align-items: center;
-        justify-content: start;
-    }
-
     .button-play , .button-comments{
         flex : 0;
-        min-width: 120px;
         height: 30px;
         font-size: .7rem;
     }
@@ -275,27 +241,26 @@
     }
 }
 
+@media (max-width : 660px) {
+    .details {
+        margin-left: 0;
+    }
+}
+
+/* Mobile Responsive */
+
 @media (max-width : 450px){
     .details{
         margin: 0;
         overflow-x: hidden;
     }
 
-    .details__container{
-        justify-content: space-evenly;
-        margin-top: 80px;
+    .movie__details {
+        margin: 0;
     }
 
-    .movie__details{
-        max-width: 220px;
-        justify-content: space-evenly;
-    }
-
-    .card , .card img{
-        width: 90px;
-        height: 160px;
-        box-shadow: none;
-        border : 1px solid #D99090;
+    .card {
+        display: none;
     }
 
     .release-date{
@@ -310,21 +275,7 @@
         font-size: .7rem;
     }
 
-    .overview{
-        width: 200px;
-    }
-
     .overview p{
-        min-width: 400px;
-        font-size: .5rem;
-        font-weight: 400;
-    }
-
-    .rating__section{
-        display: none;
-    }
-
-    .rating__section header{
         font-size: .9rem;
     }
 
@@ -333,14 +284,9 @@
         height: 10px !important;
     }
 
-    .buttons__section-details{
-        align-items: center;
-        justify-content: start;
-    }
-
     .primary-button , .secondary-button{
         flex : 1;
-        font-size: .5rem;
+        font-size: .8rem;
         border-width: 2px;
     }
 
