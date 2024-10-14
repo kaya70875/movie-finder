@@ -151,8 +151,10 @@
         opacity: 0;
         z-index: -1000;
         transition: opacity 0.3s ease;
+        pointer-events: none;
         &.active {
             opacity: 1;
+            pointer-events: all;
         }
     }
 
