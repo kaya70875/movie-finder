@@ -76,8 +76,7 @@
     }
 
     .comments__wrap{
-        width: 80%;
-        max-height: 100px;
+        width: 90%;
     }
 
     .user-name{
@@ -98,24 +97,19 @@
 }
 
 @media (max-width : 450px){
-    .comments__comment{
-        width: 350px;
-    }
 
     .container__comments h2{
         font-size: 1rem;
     }
 
     .comments__comment p{
-        width: 300px;
-        font-size: .5rem;
+        font-size: .8rem;
         
     }
 
     .comments__wrap{
-        width: 85%;
-        max-height: 130px;
-        padding: 1.5rem;
+        width: 100%;
+        padding: 1.5em;
         gap : 1rem;
     }
 
