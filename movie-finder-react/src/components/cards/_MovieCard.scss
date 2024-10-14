@@ -170,10 +170,13 @@
   }
 
   .item {
+
+    &::before {
+      display: none;
+    }
     height: 300px;
     img {
           width: 65%;
-
     } 
   }
 }
