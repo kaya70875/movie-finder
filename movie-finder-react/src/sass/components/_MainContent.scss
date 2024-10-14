@@ -120,7 +120,7 @@
             overflow-x: hidden;
         }
 
-        .next__icons {
+        .next__icons[data-type="movie"] {
             display: none;
         }
 
