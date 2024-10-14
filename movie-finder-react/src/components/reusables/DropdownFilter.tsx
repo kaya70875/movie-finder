@@ -15,10 +15,11 @@ export default function DropdownFilter({ label, items = [{value: 0, label: ''}],
     const isMobile = window.matchMedia('(max-width : 450px)').matches;
 
     const dropdownStyle = {
-      width : isMobile ? '120px' : '200px',
-      height : isMobile ? '180px' : '300px',
-      left : isMobile ? '-35px' : '-60px',
-    }
+        width: isMobile ? '120px' : '200px',
+        height: isMobile ? '180px' : '300px',
+        left: '50%',
+        transform: `translateX(${isMobile ? '-60px' : '-100px'})`,
+      };
 
     return (
         <Dropdown 

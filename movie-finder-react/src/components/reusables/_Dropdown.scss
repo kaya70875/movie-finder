@@ -16,6 +16,11 @@
     width: 100%;
 }
 
+.dropdown-filters {
+    display: flex;
+    gap : 2rem;
+}
+
 .dropdown-button {
     cursor: pointer;
     color : var(--primary-font-color);
