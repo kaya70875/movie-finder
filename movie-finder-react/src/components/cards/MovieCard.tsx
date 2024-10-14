@@ -17,9 +17,10 @@ interface MovieCardProps {
     showScrollButtons? : boolean;
     showFilters? : boolean;
     gridType? : string; 
+    headerStyle? : string;
 }
 
-const MovieCard : FC<MovieCardProps> = ({ movies, title , content , mainStyle , showScrollButtons = true , gridType = '' , showFilters = false}) => {
+const MovieCard : FC<MovieCardProps> = ({ movies, title , content , mainStyle , showScrollButtons = true , gridType = '' , showFilters = false , headerStyle = ''}) => {
     const { titles, handleAddToFavorites } = useFavorites()!;
     const scrollContainerRef = useRef(null);
     const navigate = useNavigate();
@@ -40,7 +41,7 @@ const MovieCard : FC<MovieCardProps> = ({ movies, title , content , mainStyle , 
     return (
         <div className={`main__content main__content--${mainStyle}`}>
             {title && title?.length > 0 && (
-                <div className="header__wrapper">
+                <div className={`header__wrapper header__wrapper--${headerStyle}`}>
                 <div className="header-filters">
                     <h2>{title}</h2>
                     <p>{content}</p>

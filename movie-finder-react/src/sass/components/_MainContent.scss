@@ -110,6 +110,14 @@
             align-items: center;
             justify-content: center;
             gap : 2rem;
+
+            &--forFilters {
+                align-items: start;
+
+                .header-filters h2 {
+                    text-align: start;
+                }
+            }
         }
     }
 

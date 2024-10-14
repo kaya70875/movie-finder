@@ -41,6 +41,7 @@ export default function Favorites() {
             showFilters={true}
             mainStyle={"single"}
             title={"Your Favorites"}
+            headerStyle="forFilters"
           ></MovieCard>
         </div>
     </div>
