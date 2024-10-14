@@ -65,7 +65,6 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    min-height: 400px;
     font-size: 24px;
     font-weight: 400;
 }
@@ -104,7 +103,7 @@
 
     .comments__comment p{
         font-size: .8rem;
-        
+        text-align: start;
     }
 
     .comments__wrap{
@@ -123,7 +122,7 @@
     }
 
     .published-date{
-        font-size: .5rem !important;
+        font-size: .7rem !important;
     }
 
     .rating{
