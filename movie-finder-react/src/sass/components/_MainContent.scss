@@ -114,8 +114,11 @@
             &--forFilters {
                 align-items: start;
 
-                .header-filters h2 {
-                    text-align: start;
+                .header-filters {
+                    gap : .75rem;
+                    h2 {
+                        text-align: start;
+                    }
                 }
             }
         }

@@ -9,6 +9,12 @@
 
 .favorites__header__wrapper{
     @include flexCenter;
-    width: 100vw;
+    width: 100%;
     @include gradient-background(#2c3e50, #4ca1af);
+}
+
+@media (max-width : 450px) {
+    .favorites__header__wrapper {
+        border-radius: 0%;
+    }
 }
