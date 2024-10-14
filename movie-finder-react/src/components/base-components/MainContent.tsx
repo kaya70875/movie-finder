@@ -6,7 +6,7 @@ import { MovieListResponse } from '../../types';
 import useRecommendations from '../../hooks/byMovie/useRecommendations';
 import GenrePreview from '../reusables/genres/GenrePreview';
 
-const MAX_CONTENT = 21;
+let MAX_CONTENT = 21;
 
 export default function MainContent() {
   const { data: popular, loading: loadingPopular } = useFetch<MovieListResponse>('/movie/popular?language=en-US&');
@@ -21,6 +21,13 @@ export default function MainContent() {
 
   const {state} = useRecommendations();
   const personelMovies = state.movies;
+
+  const isMobile = window.matchMedia('(max-width: 450px)').matches;
+
+  // RESTRICT MOVIES ON MOBILE
+  if(isMobile) {
+    MAX_CONTENT = 10;
+  }
 
   if (loadingPopular || loadingTopRated || loadingTrending || loadingUpcoming) return <div>Loading...</div>;
 

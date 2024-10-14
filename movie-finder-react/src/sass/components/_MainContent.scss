@@ -115,6 +115,10 @@
             justify-content: center;
             gap : 2rem;
 
+            .header-filters {
+                gap : 2rem;
+            }
+
             &--forFilters {
                 align-items: start;
 
@@ -122,6 +126,10 @@
                     gap : .75rem;
                     h2 {
                         text-align: start;
+
+                        @media (max-width : 450px) {
+                            text-align: center;
+                        }
                     }
                 }
             }
