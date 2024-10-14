@@ -74,7 +74,7 @@ export default function Navbar() {
                       <div className="item-image">
                         <img src={`https://image.tmdb.org/t/p/w500${movie.poster_path}`} alt={movie.title} />
                       </div>
-                      <div className="movie__info--card">
+                      <div className="navbar-movie-info">
                         <h3>{movie.title}</h3>
                         <MovieDetailsBlock id={movie.id} runtime={false} language={false} />
                       </div>

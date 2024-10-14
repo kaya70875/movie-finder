@@ -124,6 +124,12 @@
     display: none;
 }
 
+.navbar-movie-info {
+    display: flex;
+    flex-direction: column;
+    align-items: start;
+}
+
 @media (max-width : 1124px) {
     .items .list-items {
         gap : 2rem;
@@ -175,12 +181,17 @@
     }
 
     .dropdown[data-dropdown-type="navbar"] {
-        width: 70%;
+        width: 85%;
     }
 
     .navbar__left {
         flex-direction: column;
         align-items: start;
         gap : 1rem
+    }
+
+    .dropdown__item {
+        gap : 0;
+        padding: 0;
     }
 }
