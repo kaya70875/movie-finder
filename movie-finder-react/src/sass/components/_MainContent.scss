@@ -28,6 +28,10 @@
         &--single{
             display: block;
             padding: 0;
+            
+            @media (max-width : 450px) {
+                display: flex;
+            }
         }
     }
 
@@ -128,6 +132,7 @@
         .main__content{
             flex-direction: column;
             overflow-x: hidden;
+            margin-bottom: 4rem;
         }
 
         .next__icons[data-type="movie"] {
