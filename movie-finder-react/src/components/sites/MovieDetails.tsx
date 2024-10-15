@@ -11,7 +11,7 @@ import useClickOutside from "../../hooks/useClickOutside";
 import ActorsCard from "../cards/ActorsCard";
 import MovieButton from "../buttons/MovieButton";
 import MovieDetailsBlock from "../reusables/movies/MovieDetailsBlock";
-import {Movie , CrewResponse , MovieListResponse} from '../../types';
+import { Movie, CrewResponse, MovieListResponse } from '../../types';
 
 export default function MovieDetails() {
   const { id: idParam } = useParams<{ id: string }>();
@@ -20,15 +20,15 @@ export default function MovieDetails() {
   }
   const id = parseInt(idParam, 10);
 
-  const {data , loading  , error} = useFetch<Movie>(`/movie/${id}?language=en-US&`);
-  const {data : movieCreditsData} = useFetch<CrewResponse>(`/movie/${id}/credits?`);
-  
+  const { data, loading, error } = useFetch<Movie>(`/movie/${id}?language=en-US&`);
+  const { data: movieCreditsData } = useFetch<CrewResponse>(`/movie/${id}/credits?`);
+
   const producerNames = movieCreditsData?.crew.filter(member => member.job === 'Producer').
-  map(producer => producer.name);
+    map(producer => producer.name);
 
   const { titles, handleAddToFavorites } = useFavorites()!;
 
-  const {data : similarMovies} = useFetch<MovieListResponse>(`/movie/${id}/similar?`);
+  const { data: similarMovies } = useFetch<MovieListResponse>(`/movie/${id}/similar?`);
   const resultSimilar = similarMovies?.results || [];
 
   const [isTrailerVisible, setIsTrailerVisible] = useState(false);
@@ -46,12 +46,14 @@ export default function MovieDetails() {
   return (
     <>
       <div className="details">
-        <div
-          className="movie__slide"
-          style={{
-            backgroundImage: `linear-gradient(to bottom, rgba(0, 0, 0, 0) 80%, #000 100%), url(https://image.tmdb.org/t/p/original${data.backdrop_path})`,
-          }}
-        ></div>
+        {data.backdrop_path && (
+          <div
+            className="movie__slide"
+            style={{
+              backgroundImage: `linear-gradient(to bottom, rgba(0, 0, 0, 0) 80%, #000 100%), url(https://image.tmdb.org/t/p/original${data.backdrop_path})`,
+            }}
+          ></div>
+        )}
         <div className="details__container">
           <div className="movie__hero__section">
             <div className="card">
@@ -96,15 +98,15 @@ export default function MovieDetails() {
                   <h3>{data.vote_average}</h3>
                 </div>
                 <button
-                    className="ellipse-button ellipse-button--favorites"
-                    onClick={(e) => handleAddToFavorites(e, data)}
-                  >
-                    {titles[data.id] || '🤍'}
-                  </button>
+                  className="ellipse-button ellipse-button--favorites"
+                  onClick={(e) => handleAddToFavorites(e, data)}
+                >
+                  {titles[data.id] || '🤍'}
+                </button>
               </div>
 
               <div className="movie__info">
-                 <MovieDetailsBlock id={data.id} />
+                <MovieDetailsBlock id={data.id} />
               </div>
               <div className="overview">
                 <p>{data.overview}</p>
@@ -127,10 +129,10 @@ export default function MovieDetails() {
               onClose={handleCloseTrailer}
               ref={popUpRef}
             ></MovieTrailers>
-            <MovieButton 
-            id={id} 
-            button={'secondary-button'}
-            buttonType={'bigButton'}
+            <MovieButton
+              id={id}
+              button={'secondary-button'}
+              buttonType={'bigButton'}
             />
           </div>
         </div>
