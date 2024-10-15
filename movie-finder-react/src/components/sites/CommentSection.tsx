@@ -56,7 +56,7 @@ export default function CommentSection({ id }: { id: number }) {
                     .replaceAll("<em>", "")}
                 </p>
               </div>
-              {result.content.length > 400 && (
+              {result.content.length > 350 && (
                 <p className="see-more" onClick={() => handleClick(index)}>
                   {expand ? "collapse" : "see more"}
                 </p>
