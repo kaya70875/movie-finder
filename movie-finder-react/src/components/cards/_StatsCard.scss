@@ -6,21 +6,42 @@
 
 .stats__wrapper{
     display: flex;
-    justify-content: center;
-    align-items: center;
+    justify-content: space-between;
+    align-items: stretch;
     gap : 5rem;
 }
 
 .stats__card{
     display: flex;
+    flex : 1;
     align-items: center;
-    justify-content: center;
+    justify-content: start;
     flex-direction: column;
-    padding : 2rem;
+    text-align: center;
+    padding : 2em;
     gap : 2rem;
-    width: 500px;
-    height: 200px;
 
     background: #2c3e50;
     border-radius: 15px;
+
+    width: 100%;
+}
+
+@media (max-width : 1024px) {
+    .stats__wrapper {
+        gap : 3rem;
+    }
+}
+
+@media (max-width : 882px) {
+    .stats__wrapper {
+        flex-direction: column;
+    }
+
+    .stats__card h3 {
+        width: 100%;
+        text-wrap: nowrap;
+        text-align: center;
+        max-width: none;
+    }
 }
