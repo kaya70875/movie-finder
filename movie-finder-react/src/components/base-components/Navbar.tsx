@@ -43,14 +43,14 @@ export default function Navbar() {
     setIsOpen(!isOpen);
   }
 
+  // Display search results when only user writing something.
   useEffect(() => {
-    const dropdownContent = document.querySelector<HTMLElement>('.dropdown__content');
-    state.searchQuery && dropdownContent ? dropdownContent.style.display = 'block' : dropdownContent && dropdownContent.style.display === 'none';
-
-    if (!state.isFocus && dropdownContent) {
-      dropdownContent.style.display = 'none';
+    if(state.searchQuery !== '') {
+      dispatch({ type: REDUCER_ACTION_TYPE.TOGGLE_FOCUS, payload: true });
+    } else {
+      dispatch({ type: REDUCER_ACTION_TYPE.TOGGLE_FOCUS, payload: false });
     }
-  }, [state.searchQuery, state.isFocus])
+  } , [state.searchQuery])
 
   return (
     <nav className="navbar">
@@ -62,12 +62,12 @@ export default function Navbar() {
               dispatch({ type: REDUCER_ACTION_TYPE.TOGGLE_FOCUS, payload: false });
             }
           }}>
-            <input type="text" id='inputField' className='navbar-input' onFocus={() => dispatch({ type: REDUCER_ACTION_TYPE.TOGGLE_FOCUS, payload: true })} onChange={(e) => (
+            <input type="text" id='inputField' className='navbar-input' onChange={(e) => (
               dispatch({ type: REDUCER_ACTION_TYPE.SET_SEARCH_QUERY, payload: e.target.value })
             )} />
-            <div className="dropdown__content">
+            <div className={`dropdown__content ${state.isFocus ? 'active' : ''}`}>
               <h2>Top Results</h2>
-              <div className="dropdown__elements">
+              <div className="dropdown__elements" onClick={() => dispatch({ type: REDUCER_ACTION_TYPE.TOGGLE_FOCUS, payload: false })}>
                 {searchResults?.slice(0, 12).map(movie => movie.poster_path && (
                   <Link to={`/movie-finder/details/${movie.id}`} state={{ movie }}>
                     <div className="dropdown__item">
