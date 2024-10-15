@@ -94,6 +94,10 @@
         @include flexCenter;
         padding: 2rem;
     }
+
+    &.active {
+        display: block;
+    }
     
   }
 
@@ -175,7 +179,14 @@
     }
 }
 
+/* Mobile Responsive */
+
 @media (max-width : 568px) {
+
+    .container {
+        align-items: end;
+    }
+
     .navbar {
         padding: 1.8em;
     }
