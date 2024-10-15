@@ -26,6 +26,8 @@
 
 .dropdown[data-dropdown-type="navbar"] {
     width: 50%;
+    
+    max-width: 500px;
 }
 
 .navbar-input{
@@ -36,6 +38,8 @@
     font-size: .9rem;
     outline: none;
     color : black;
+
+    max-width: 500px;
 }
 
 .profile{
