@@ -8,6 +8,7 @@
     justify-content: space-between;
     width: 100%;
     margin-left: 100px;
+    margin-top: 140px;
     gap : 3rem;
     overflow: auto;
 }
@@ -257,6 +258,10 @@
 
     .movie__details {
         margin: 0;
+    }
+
+    .movie__slide {
+        height: 30svh;
     }
 
     .card {

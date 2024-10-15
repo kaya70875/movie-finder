@@ -4,7 +4,6 @@
     align-items: start;
     justify-content: space-between;
     width: 100%;
-    min-height: 400px;
     gap : 2.5rem;
 }
 
@@ -13,6 +12,7 @@
     align-items: start;
     flex-direction: column;
     gap : 2.5rem;
+    width: 100%;
 }
 
 .comments__wrap{
@@ -65,8 +65,9 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    font-size: 24px;
-    font-weight: 400;
+    font-size: 1.2rem;
+
+    width: 100%;
 }
 
 @media (max-width : 990px){
