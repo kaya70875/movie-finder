@@ -6,7 +6,7 @@
 
 .stats__wrapper{
     display: flex;
-    justify-content: space-between;
+    justify-content: space-evenly;
     align-items: stretch;
     gap : 5rem;
 }
@@ -15,7 +15,7 @@
     display: flex;
     flex : 1;
     align-items: center;
-    justify-content: start;
+    justify-content: center;
     flex-direction: column;
     text-align: center;
     padding : 2em;
@@ -25,6 +25,8 @@
     border-radius: 15px;
 
     width: 100%;
+    max-width: 400px;
+    aspect-ratio: 1/1;
 }
 
 @media (max-width : 1024px) {
@@ -36,6 +38,10 @@
 @media (max-width : 882px) {
     .stats__wrapper {
         flex-direction: column;
+    }
+
+    .stats__card {
+        aspect-ratio: initial;
     }
 
     .stats__card h3 {
