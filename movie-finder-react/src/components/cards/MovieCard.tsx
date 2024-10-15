@@ -85,7 +85,7 @@ const MovieCard : FC<MovieCardProps> = ({ movies, title , content , mainStyle , 
                         </div>
                         
                     )
-                ))) : (<h3>There is no results for current filter!</h3>)}
+                ))) : (<div className='no-movies'>No Movies Found</div>)}
                 {isSingleCard && moviesArray[0] && moviesArray[0].poster_path &&(
                     moviesArray[0].poster_path && (
                         <div key={moviesArray[0].id} className="item" onClick={() => handleNavigate(moviesArray[0].id)}>
