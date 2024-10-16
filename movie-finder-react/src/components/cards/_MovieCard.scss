@@ -199,13 +199,14 @@
 
 @media (max-width : 450px) {
   .cards__wrapper {
-    grid-template-columns: repeat(auto-fit , minmax(80px , 1fr));
+    grid-template-columns: repeat(auto-fit , minmax(70px , 1fr));
   }
 
   .item {
     height: 100%;
+    width: 100%;
     img {
-      width: 50%;
+      width: 100%;
     }
     
   }
