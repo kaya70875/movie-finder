@@ -18,6 +18,11 @@
 
     padding-top: 2rem;
     z-index: 1;
+
+    /* When hamburger menu activeted */
+    @media (max-width : 768px) {
+        margin-top: 116px;
+    }
 }
 
 .sidebar__items{
