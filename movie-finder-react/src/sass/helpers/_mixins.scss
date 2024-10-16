@@ -18,8 +18,16 @@
 @mixin gradient-background($start-color, $end-color) {
     background: linear-gradient(135deg, $start-color 0%, $end-color 100%);
     color: white;
-    padding: 2rem;
+    padding: 4em;
     border-radius: 8px;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+
+    @media (max-width: 768px) {
+        padding: 3em;
+    }
+
+    @media (max-width: 480px) {
+        padding: 1em;
+    }
 }
   

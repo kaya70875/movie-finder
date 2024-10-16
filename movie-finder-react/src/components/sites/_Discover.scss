@@ -5,16 +5,29 @@
     @include flexCenter;
     width: 100%;
     @include gradient-background(#ff6b6b, #4ecdc4);
+    border-radius: 0%;
 }
 
 .discover-content{
     display: flex;
+    flex-direction: column;
+    align-items: center;
     gap : 5rem;
     padding: 2em;
 
-    margin-top: 100px;
+    margin-top: 2rem;
     width: 100%;
     height: 78vh;
+}
+
+.discover-main-header {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: start;
+
+    width: 100%;
+    min-height: 100svh;
 }
 
 .discover-movie-section{
@@ -22,6 +35,7 @@
     overflow-y: auto;
 
     height: 75vh;
+    width: 100%;
 
     display: flex;
     justify-content: center;
@@ -133,6 +147,10 @@
         margin-top: 80px;
     }
 
+    .discover__header__wrapper {
+        display: none;
+    }
+
     .discover-filter-section{
         width: 300px;
         display: flex;
@@ -140,6 +158,8 @@
         align-items: center;
         text-align: center;
     }
+
+    /* If you sure to remove header section for mobile devices just remove discover-header sections code */
 
     .discover-header-section h2{
         font-size: 1rem;
@@ -165,6 +185,12 @@
         text-align: center;
         font-size: .8rem;
         text-wrap: nowrap;
+    }
+
+    .discover-content {
+        padding: 0;
+        margin: 0;
+        gap : 2rem;
     }
 
 }

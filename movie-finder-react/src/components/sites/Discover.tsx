@@ -5,8 +5,9 @@ import MovieCard from "../cards/MovieCard";
 import { useFilter } from "../../context/FilterContext";
 import DiscoverFilter from "../filters/DiscoverFilter";
 import ScrollToBottom from "../utils/scroll/ScrollToBottom";
-import { MovieListResponse , Movie} from "../../types";
+import { MovieListResponse, Movie } from "../../types";
 import GenrePreview from "../reusables/genres/GenrePreview";
+import FilterComponent from "../filters/FilterComponent";
 
 
 export default function Discover() {
@@ -16,10 +17,10 @@ export default function Discover() {
   const [baseQuery, setBaseQuery] = useState("/discover/movie?language=en-US&");
   const [query, setQuery] = useState(`${baseQuery}page=${page}&`);
 
-  const { sortState, resetFilters} = useFilter();
+  const { sortState, resetFilters } = useFilter();
   const movieCardRef = useRef(null);
 
-  const {data} = useFetch<MovieListResponse>(query);
+  const { data } = useFetch<MovieListResponse>(query);
   const results = data?.results || [];
 
   useEffect(() => {
@@ -41,21 +42,20 @@ export default function Discover() {
 
     const newBaseQuery = `/discover/movie?with_genres=${sortState?.selectedGenres?.join(
       ","
-    )}&year=${sortState.selectedYear}&sort_by=${
-      sortState.selectedSortBy
-    }&language=en-US&include_adult=${sortState.isAdult}&`;
+    )}&year=${sortState.selectedYear}&sort_by=${sortState.selectedSortBy
+      }&language=en-US&include_adult=${sortState.isAdult}&`;
     setBaseQuery(newBaseQuery);
 
     setQuery(`${newBaseQuery}page=1&`);
   }, [sortState]);
 
   useEffect(() => {
-    const movieCardContainer : HTMLElement = movieCardRef.current!;
+    const movieCardContainer: HTMLElement = movieCardRef.current!;
 
     const handleScroll = () => {
       if (
         movieCardContainer.scrollTop + movieCardContainer.clientHeight >=
-          movieCardContainer.scrollHeight - 10 &&
+        movieCardContainer.scrollHeight - 10 &&
         !isFetching
       ) {
         setPage((prevPage) => prevPage + 1);
@@ -75,31 +75,35 @@ export default function Discover() {
 
   return (
     <div className="main__wrapper">
-      <div className="discover__header__wrapper">
-        <div className="discover__header">
-          <h1>Explore the Cinematic Universe</h1>
-          <p>
-            Dive into a world of movies tailored to your tastes. Use our powerful
-            filters to discover films by genre, year, and popularity. Your next
-            favorite movie is just a click away!
-          </p>
+      <section className="discover-main-header">
+        <div className="discover__header__wrapper">
+          <div className="discover__header">
+            <h1>Explore the Cinematic Universe</h1>
+            <p>
+              Dive into a world of movies tailored to your tastes. Use our powerful
+              filters to discover films by genre, year, and popularity. Your next
+              favorite movie is just a click away!
+            </p>
+          </div>
         </div>
-      </div>
 
-      <GenrePreview shouldNavigate={false}/>
+        <GenrePreview shouldNavigate={false} />
 
-      <div className="discover__button__section" style={{marginTop : '70px'}}>
-        <button className="primary-button" onClick={ScrollToBottom}>Discover Now!</button>
-      </div>
+        <div className="discover__button__section" style={{ marginTop: '20px' }}>
+          <button className="primary-button" onClick={ScrollToBottom}>Discover Now!</button>
+        </div>
+      </section>
 
       <div className="discover-content">
-        <DiscoverFilter />
+        <FilterComponent />
         <div className="discover-movie-section" ref={movieCardRef}>
           <MovieCard
             movies={movies}
             showScrollButtons={false}
-            gridType={"discover"}
-            mainStyle={"single"}
+            title="Discover Movies"
+            gridType={"fill"}
+            mainStyle="single"
+            headerStyle="forFilters"
           />
         </div>
       </div>
