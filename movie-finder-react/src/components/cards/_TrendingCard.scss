@@ -67,8 +67,11 @@
 @media (max-width : 450px) {
 
     .trending__buttons__section {
-        flex-direction: row;
         width: 100%;
+
+        button {
+            font-size: .7rem;
+        }
     }
 
     .hero__slider__section {
