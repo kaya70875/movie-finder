@@ -61,7 +61,7 @@
         cursor: pointer;
 
         color : var(--primary-font-color);
-        padding: .45em;
+        padding: .75em;
         border-radius: 15px;
         transition: background-color 0.15s ease, color 0.15s ease, transform 0.3s ease;
         transform: scale(1);  // Ensure buttons start at normal scale
@@ -136,6 +136,7 @@
 
     .sortby__section {
         gap : 1rem;
+        padding: .5em;
 
         button {
             font-size: .6rem;
