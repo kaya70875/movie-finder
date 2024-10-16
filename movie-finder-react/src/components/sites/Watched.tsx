@@ -67,7 +67,6 @@ export default function Watched() {
             </>
           )}
           <StatsCard />
-          <h1 style={{display : 'flex', alignItems : 'center' , justifyContent : 'center' , padding : '2rem'}}>Discover More</h1>
         </div>
 
       ) : (
