@@ -103,6 +103,10 @@
 .header__section{
     display: flex;
     gap : 1.5rem;
+
+    h1 {
+        text-align: start;
+    }
 }
 
 .overview{
