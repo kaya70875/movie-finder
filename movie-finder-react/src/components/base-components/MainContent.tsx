@@ -26,7 +26,7 @@ export default function MainContent() {
 
   // RESTRICT MOVIES ON MOBILE
   if(isMobile) {
-    MAX_CONTENT = 10;
+    MAX_CONTENT = 9;
   }
 
   if (loadingPopular || loadingTopRated || loadingTrending || loadingUpcoming) return <div>Loading...</div>;
