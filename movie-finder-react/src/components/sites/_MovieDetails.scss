@@ -124,9 +124,11 @@
 
 .buttons__section-details{
     display: flex;
+    flex : 1;
     flex-direction: column;
     justify-content: center;
     gap : 1.8rem;
+    max-width: 300px;
 }
 
 
@@ -135,6 +137,10 @@
         flex-direction: column;
         align-items: normal;
         gap : 2rem;
+    }
+
+    .buttons__section-details {
+        max-width: none;
     }
 }
 
