@@ -22,7 +22,7 @@
 
 // Containers
 .slide__container {
-    padding: 2rem;
+    padding: 2em;
     width: 100%;
 }
 
@@ -41,12 +41,7 @@
     @media (max-width : 768px) {
         margin-top: 116px;
     }
-
-    @media (max-width : 450px) {
-        margin-top: 128px;
-    }
 }
-
 
 // Buttons
 .primary-button{
