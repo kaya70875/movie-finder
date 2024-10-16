@@ -19,15 +19,15 @@
       grid-template-columns: repeat(4 , auto);
       grid-auto-flow: row;
       align-items: center;
-      position: relative;
       gap: 2rem;
+      width: 100%;
 
       @media (max-width : 1600px) {
-        grid-template-columns: repeat(3 , auto);
+        grid-template-columns: repeat(auto-fit , minmax(200px , 1fr));
       }
 
-      @media (max-width : 1280px) {
-        grid-template-columns: repeat(2 , auto);
+      @media (max-width : 1268px) {
+        grid-template-columns: repeat(auto-fit , minmax(160px , 1fr));
       }
     }
   }
@@ -207,6 +207,10 @@
     width: 100%;
     img {
       width: 100%;
+    }
+
+    h3 {
+      font-size: .7rem;
     }
     
   }
