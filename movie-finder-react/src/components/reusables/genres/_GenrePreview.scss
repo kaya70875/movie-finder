@@ -5,7 +5,7 @@
     align-items: center;
     
     gap : 3rem;
-    padding-block: 5em;
+    padding-block: 3em;
     width: 100%;
 
     &__items {
@@ -39,7 +39,14 @@
           }
       }
 
-      
-
     }
+  }
+
+  /* For Mobile Devices */
+  @media (max-width : 450px) {
+    .discover__genres__preview {
+      padding-block: 1.5em;
+      gap : 1rem;
+    }
+
   }
