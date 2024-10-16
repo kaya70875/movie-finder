@@ -40,7 +40,14 @@
 
 .trending__buttons__section{
     display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 60%;
     gap : 2rem;
+
+    button {
+        width: 100%;
+    }
 }
 
 @media (max-width : 1059px) {
