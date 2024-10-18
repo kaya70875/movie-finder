@@ -34,7 +34,7 @@
     position: sticky;
     overflow-y: auto;
 
-    height: 75vh;
+    height: 75svh; // try changing this to svh to make it responsive for mobile devices.
     width: 100%;
 
     display: flex;

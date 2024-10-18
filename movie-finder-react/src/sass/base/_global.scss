@@ -72,14 +72,13 @@
 .ellipse-button{
     max-width: 48px;
     max-height: 48px;
-
     border: none;
-    border-radius: 100%;
+    border-radius: 50%;
     background: var(--primary-button-color);
     cursor: pointer;
 
-    @include flexCenter;
 
+    @include flexCenter;
     &:hover{
         background: $third-hover-color;
     }
@@ -89,7 +88,7 @@
     }
 
     &--favorites {
-        padding: .7rem;
+        padding : .8rem;
         background: #2A54A1;
 
         &:active{
