@@ -23,6 +23,7 @@ import "./sass/base/_global.scss";
 import { FilterProvider } from "./context/FilterContext";
 import ErrorBoundry from "./components/errors/ErrorBoundry";
 import { WatchListProvider } from "./context/WatchListContext";
+import { Toaster } from "sonner";
 
 function AppWithLocation() {
   const location = useLocation();
@@ -37,6 +38,7 @@ function AppWithLocation() {
         <FilterProvider>
           <FavoritesProvider>
             <div className="app">
+              <Toaster />
               {showNavbar && (
                 <>
                   <Navbar />
