@@ -142,7 +142,6 @@
         .main__content{
             flex-direction: column;
             overflow-x: hidden;
-            margin-bottom: 4rem;
         }
 
         .next__icons[data-type="movie"] {
@@ -154,6 +153,7 @@
     /* Mobile Design */
     @media (max-width : 450px) {
         .main__content {
-            padding: 1em;
+            padding-inline: 1em;
+            padding-block: 3em;
         }
     }
