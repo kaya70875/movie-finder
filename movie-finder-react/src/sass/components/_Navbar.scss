@@ -157,26 +157,27 @@
 
     .list-items {
         position: fixed;
-        inset : 0 0 0 40%;
+        inset: 0 0 0 40%;
         background-color: var(--secondary-background);
-
         display: flex;
         flex-direction: column;
-        opacity: 0;
+        transform: translateX(100%);
         z-index: -1000;
-        transition: opacity 0.3s ease;
+        transition: transform 0.3s ease;
         pointer-events: none;
+    
         &.active {
-            opacity: 1;
+            transform: translateX(0);
             pointer-events: all;
         }
     }
-
+    
     .mobile-navbar-menu-list {
         display: flex;
         flex-direction: column;
-        gap : 2rem;
+        gap: 2rem;
     }
+    
 }
 
 /* Mobile Responsive */
@@ -228,5 +229,9 @@
             width: 96px;
             height: 96px;
         }
+    }
+
+    .mobile-navbar-menu-list li a {
+        font-size: 1rem!important;
     }
 }
