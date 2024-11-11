@@ -1,9 +1,14 @@
+.dropdown__trending__movies {
+    width: 100%;
+}
+
 .dropdown__trending__movies__item{
     display: flex;
     justify-content: start;
     align-items: start;
     gap: 2rem;
     padding: 1rem;
+    width: 100%;
 
     img{
         width: 64px;
@@ -24,6 +29,7 @@
 
 .dropdown__trending__movies__item__info{
     text-align: start;
+    width: 100%;
 }
 
 .dropdown__trending__movies__item__details{
