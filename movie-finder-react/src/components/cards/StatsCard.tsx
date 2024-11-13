@@ -53,15 +53,16 @@ export default function StatsCard() {
           stats.map((stat, index) => (
             <div className="stats__card" key={index}>
               <h3>{stat.label}</h3>
-              {stat.label === "Most Watched Genres" && Array.isArray(stat.value) ? (
-                stat.value.map((genreStat, genreIndex) => (
-                  <div key={genreIndex}>
-                    <p>{genreStat.genre}</p>
-                  </div>
-                ))
-              ) : (
-                <p>{typeof stat.value === 'object' ? JSON.stringify(stat.value) : String(stat.value)}</p>
-              )}
+              <div className="most-watched-genres-wrapper">
+                {stat.label === "Most Watched Genres" && Array.isArray(stat.value) ? (
+                  stat.value.map((genreStat, genreIndex) => (
+                    <p key={genreIndex}>{genreStat.genre},</p>
+                  ))
+                ) : (
+                  <p>{typeof stat.value === 'object' ? JSON.stringify(stat.value) : String(stat.value)}</p>
+                )}
+              </div>
+
             </div>
           ))
         ) : (
@@ -70,5 +71,5 @@ export default function StatsCard() {
       </div>
     </div>
   );
-  
+
 }
